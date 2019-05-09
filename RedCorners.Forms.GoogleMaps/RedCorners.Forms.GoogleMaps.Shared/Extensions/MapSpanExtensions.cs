@@ -1,5 +1,5 @@
 ﻿using System;
-namespace RedCorners.Forms.GoogleMaps.Extensions
+namespace RedCorners.Forms.GoogleMaps
 {
     public static class MapSpanExtensions
     {
@@ -12,6 +12,18 @@ namespace RedCorners.Forms.GoogleMaps.Extensions
             var northEast = new Position(self.Center.Latitude + halfLat, self.Center.Longitude + halfLong);
 
             return new Bounds(southWest, northEast);
+        }
+
+        public static void CenterMap(this Map map,
+            double lat,
+            double lng,
+            double km,
+            bool animate = false)
+        {
+            map.MoveToRegion(MapSpan.FromCenterAndRadius(
+                new Position(lat, lng),
+                Distance.FromKilometers(km)),
+                animate: animate);
         }
     }
 }

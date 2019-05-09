@@ -21,14 +21,23 @@ using RedCorners.Forms.GoogleMaps.Internals;
 using Color = Xamarin.Forms.Color;
 using Xamarin.Forms;
 using Xamarin;
+using Android.Locations;
 
 namespace RedCorners.Forms.GoogleMaps.Android
 {
     public class MapRenderer : ViewRenderer<Map, global::Android.Views.View>,
         GoogleMap.IOnMapClickListener,
         GoogleMap.IOnMapLongClickListener,
-        GoogleMap.IOnMyLocationButtonClickListener
+        GoogleMap.IOnMyLocationButtonClickListener,
+        GoogleMap.IOnMyLocationChangeListener
     {
+
+        public void OnMyLocationChange(Location location)
+        {
+            if (location != null)
+                MapLocationSystem.Instance.InjectMapModel(location.Latitude, location.Longitude);
+        }
+
         readonly CameraLogic _cameraLogic;
         readonly UiSettingsLogic _uiSettingsLogic = new UiSettingsLogic();
         
@@ -172,6 +181,7 @@ namespace RedCorners.Forms.GoogleMaps.Android
                 nativeMap.SetOnMapClickListener(this);
                 nativeMap.SetOnMapLongClickListener(this);
                 nativeMap.SetOnMyLocationButtonClickListener(this);
+                nativeMap.SetOnMyLocationChangeListener(this);
 
                 UpdateIsShowingUser(_uiSettingsLogic.MyLocationButtonEnabled);
                 UpdateHasScrollEnabled(_uiSettingsLogic.ScrollGesturesEnabled);

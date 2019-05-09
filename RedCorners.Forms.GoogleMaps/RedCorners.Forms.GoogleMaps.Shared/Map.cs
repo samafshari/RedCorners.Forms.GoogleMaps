@@ -8,7 +8,6 @@ using System.Linq;
 using RedCorners.Forms.GoogleMaps.Internals;
 using RedCorners.Forms.GoogleMaps.Helpers;
 using System.Threading.Tasks;
-using RedCorners.Forms.GoogleMaps.Extensions;
 using System.ComponentModel;
 using System.Windows.Input;
 using Xamarin.Forms;

@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>b04ae06f-be71-419b-b501-a5433e05c3bf</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>RedCorners.Forms.GoogleMaps</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)AnimationStatus.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Assembly.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)BitmapDescriptor.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)BitmapDescriptorFactory.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)BitmapDescriptorType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Bounds.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CameraChangedEventArgs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CameraIdledEventArgs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CameraMoveStartedEventArgs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CameraMovingEventArgs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CameraPosition.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CameraUpdate.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CameraUpdateFactory.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Circle.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Distance.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\MapSpanExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Geocoder.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GroundOverlay.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\CameraUpdateConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)InfoWindowClickedEventArgs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)InfoWindowLongClickedEventArgs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internals\CameraUpdateMessage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internals\CameraUpdateType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internals\DelegateAnimationCallback.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internals\GeoConstants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internals\IAnimationCallback.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internals\IMapRequestDelegate.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internals\MoveToRegionMessage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internals\ProductInformation.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internals\TakeSnapshotMessage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Logics\BaseCameraLogic.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Logics\BaseLogic.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Logics\BaseUiSettingsLogic.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Logics\DefaultCircleLogic.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Logics\DefaultGroundOverlayLogic.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Logics\DefaultLogic.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Logics\DefaultPinLogic.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Logics\DefaultPolygonLogic.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Logics\DefaultPolylineLogic.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Map.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapClickedEventArgs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapLongClickedEventArgs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapRegion.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapSpan.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapStyle.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MyLocationButtonClickedEventArgs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Pin.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PinClickedEventArgs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PinDragEventArgs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PinType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Polygon.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Polyline.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Position.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SelectedPinChangedEventArgs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Systems\MapLocationSystem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)TileLayer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)UiSettings.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\LocationPickerView.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\MapDrawView.cs" />
+  </ItemGroup>
+</Project>

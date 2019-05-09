@@ -20,6 +20,15 @@ namespace RedCorners.Forms.GoogleMaps.iOS
 {
     public class MapRenderer : ViewRenderer
     {
+        public override void ObserveValue(NSString keyPath, NSObject ofObject, NSDictionary change, IntPtr context)
+        {
+            var mkMapView = ofObject as MapView;
+            if (mkMapView?.MyLocation != null)
+                MapLocationSystem.Instance.InjectMapModel(
+                    mkMapView.MyLocation.Coordinate.Latitude,
+                    mkMapView.MyLocation.Coordinate.Longitude);
+        }
+
         bool _shouldUpdateRegion = true;
 
         // ReSharper disable once MemberCanBePrivate.Global
@@ -133,6 +142,7 @@ namespace RedCorners.Forms.GoogleMaps.iOS
                     mkMapView.CoordinateTapped += CoordinateTapped;
                     mkMapView.CoordinateLongPressed += CoordinateLongPressed;
                     mkMapView.DidTapMyLocationButton = DidTapMyLocation;
+                    InvokeOnMainThread(() => mkMapView.AddObserver(this, new NSString("myLocation"), NSKeyValueObservingOptions.New, IntPtr.Zero));
                 }
 
                 _cameraLogic.Register(Map, NativeMap);
