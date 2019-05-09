@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0</TargetFrameworks>
+    <Authors>Saeed Afshari and NeatCapital OU</Authors>
+    <Product>RedCorners.Forms.GoogleMaps</Product>
+    <FileVersion>4.0.1</FileVersion>
+    <AssemblyVersion>4.0.1</AssemblyVersion>
+    <Version>4.0.1</Version>
+    <Copyright>Copyright © NeatCapital OU</Copyright>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Xamarin.Forms" Version="3.6.0" />
+  </ItemGroup>
+</Project>

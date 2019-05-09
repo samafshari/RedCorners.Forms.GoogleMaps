@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+	<metadata minClientVersion="2.8.3">
+		<id>RedCorners.Forms.GoogleMaps</id>
+		<title>RedCorners.Forms.GoogleMaps</title>
+		<version>4.0.1</version>
+		<releaseNotes>	</releaseNotes>
+		<authors>Saeed Afshari and NeatCapital OÜ</authors>
+		<owners>NeatCapital OÜ</owners>
+		<copyright>Copyright 2019 NeatCapital OÜ</copyright>
+		<iconUrl>http://ooze.redcorners.com/redcorners_forms_googlemaps_logo.png</iconUrl>
+		<license type="file">LICENSE.txt</license>
+    <projectUrl>http://redcorners.com</projectUrl>
+  	<description>Enhanced Google Maps for Xamarin Forms. Xamarin.Forms.GoogleMaps fork.</description>
+		<summary>Enhanced Google Maps for Xamarin Forms. Xamarin.Forms.GoogleMaps fork.</summary>
+		<tags>xamarin forms maps xamarinforms xamarinformsmaps xamarin.forms.maps xamarinformsgooglemaps RedCorners.Forms.GoogleMaps google googlemap redcorners</tags>
+	<dependencies>
+      <group>
+        <dependency id="Xamarin.Forms" version="3.6.0" />
+      </group>
+      <group targetFramework="MonoAndroid80">
+        <dependency id="Xamarin.GooglePlayServices.Maps" version="60.1142.1"/>
+        <dependency id="Xamarin.Android.Support.v7.AppCompat" version="25.1.0"/>
+      </group>
+      <group targetFramework="Xamarin.iOS10">
+        <dependency id="Xamarin.Google.iOS.Maps" version="2.5.0"/>
+      </group>
+	</dependencies>
+	</metadata>
+	<files>
+		<!--License-->
+		<file src="..\LICENSE.txt" target="" />
+
+		<!--Core-->
+		<file src="RedCorners.Forms.GoogleMaps\bin\Release\netstandard2.0\RedCorners.Forms.GoogleMaps.dll" target="lib\netstandard2.0" />
+
+    	<!--Xamarin.Android-->
+		<file src="RedCorners.Forms.GoogleMaps\bin\Release\netstandard2.0\RedCorners.Forms.GoogleMaps.dll" target="lib\MonoAndroid70\RedCorners.Forms.GoogleMaps.dll" />
+
+		<!--Xamarin.iOS-->
+		<file src="RedCorners.Forms.GoogleMaps\bin\Release\netstandard2.0\RedCorners.Forms.GoogleMaps.dll" target="lib\Xamarin.iOS10\RedCorners.Forms.GoogleMaps.dll" />
+	</files>
+</package>
