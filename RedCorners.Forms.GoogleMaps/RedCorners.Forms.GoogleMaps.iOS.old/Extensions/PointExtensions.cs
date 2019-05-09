@@ -1,5 +1,7 @@
 ﻿using System;
 using CoreGraphics;
+using Xamarin.Forms;
+
 namespace RedCorners.Forms.GoogleMaps.iOS.Extensions
 {
     internal static class PointExtensions

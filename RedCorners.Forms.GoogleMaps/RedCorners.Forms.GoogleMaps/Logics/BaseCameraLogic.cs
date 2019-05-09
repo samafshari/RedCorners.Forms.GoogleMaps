@@ -11,18 +11,8 @@ namespace RedCorners.Forms.GoogleMaps.Logics
 
         public virtual void Register(Map map, TNativeMap nativeMap)
         {
-            if (map == null)
-            {
-                throw new System.ArgumentNullException(nameof(map));
-            }
-
-            if (nativeMap == null)
-            {
-                throw new System.ArgumentNullException(nameof(nativeMap));
-            }
-
-            _map = map;
-            _nativeMap = nativeMap;
+            _map = map ?? throw new System.ArgumentNullException(nameof(map));
+            _nativeMap = nativeMap ?? throw new System.ArgumentNullException(nameof(nativeMap));
 
             _map.OnMoveToRegion = OnMoveToRegionRequest;
             _map.OnMoveCamera = OnMoveCameraRequest;

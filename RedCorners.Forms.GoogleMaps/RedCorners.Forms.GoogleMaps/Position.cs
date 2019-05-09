@@ -16,12 +16,14 @@ namespace RedCorners.Forms.GoogleMaps
 
         public override bool Equals(object obj)
         {
-            if (ReferenceEquals(null, obj))
+            if (obj is null)
                 return false;
-            if (!(obj is Position) || ReferenceEquals(null, this))
-                return false;
-            var other = (Position)obj;
-            return Latitude == other.Latitude && Longitude == other.Longitude;
+            if (obj is Position other)
+            {
+                return Latitude == other.Latitude && Longitude == other.Longitude;
+            }
+
+            return false;
         }
 
         public override int GetHashCode()

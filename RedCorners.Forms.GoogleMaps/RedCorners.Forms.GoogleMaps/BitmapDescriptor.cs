@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using Xamarin.Forms;
 
 namespace RedCorners.Forms.GoogleMaps
 {

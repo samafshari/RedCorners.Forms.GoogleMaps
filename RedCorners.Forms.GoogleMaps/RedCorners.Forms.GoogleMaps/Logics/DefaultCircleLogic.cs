@@ -12,9 +12,8 @@ namespace RedCorners.Forms.GoogleMaps.Logics
         {
             base.OnItemPropertyChanged(sender, e);
             var outerItem = sender as Circle;
-            var nativeItem = outerItem?.NativeObject as TNative;
 
-            if (nativeItem == null)
+            if (!(outerItem?.NativeObject is TNative nativeItem))
                 return;
 
             if (e.PropertyName == Circle.StrokeWidthProperty.PropertyName) OnUpdateStrokeWidth(outerItem, nativeItem);

@@ -28,13 +28,17 @@ namespace RedCorners.Forms.GoogleMaps.Logics.iOS
             }
             else if (outerItem.TileImageSync != null)
             {
-                nativeTileLayer = new TouchSyncTileLayer(outerItem.TileImageSync);
-                nativeTileLayer.TileSize = (nint)outerItem.TileSize;
+                nativeTileLayer = new TouchSyncTileLayer(outerItem.TileImageSync)
+                {
+                    TileSize = (nint)outerItem.TileSize
+                };
             }
             else
             {
-                nativeTileLayer = new TouchAsyncTileLayer(outerItem.TileImageAsync);
-                nativeTileLayer.TileSize = (nint)outerItem.TileSize;
+                nativeTileLayer = new TouchAsyncTileLayer(outerItem.TileImageAsync)
+                {
+                    TileSize = (nint)outerItem.TileSize
+                };
             }
 
             nativeTileLayer.ZIndex = outerItem.ZIndex;
@@ -56,9 +60,8 @@ namespace RedCorners.Forms.GoogleMaps.Logics.iOS
         {
             base.OnItemPropertyChanged(sender, e);
             var outerItem = sender as TileLayer;
-            var nativeItem = outerItem?.NativeObject as NativeTileLayer;
 
-            if (nativeItem == null)
+            if (!(outerItem?.NativeObject is NativeTileLayer nativeItem))
                 return;
 
             if (e.PropertyName == TileLayer.ZIndexProperty.PropertyName) OnUpdateZIndex(outerItem, nativeItem);

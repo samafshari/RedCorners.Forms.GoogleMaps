@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Collections.Concurrent;
+using Xamarin.Forms;
 
 namespace RedCorners.Forms.GoogleMaps
 {
@@ -16,7 +17,7 @@ namespace RedCorners.Forms.GoogleMaps
     {
         public static UIView ConvertFormsToNative(View view, CGRect size)
         {
-            var renderer = Platform.iOS.Platform.CreateRenderer(view);
+            var renderer = Platform.CreateRenderer(view);
 
             renderer.NativeView.Frame = size;
 
@@ -32,8 +33,8 @@ namespace RedCorners.Forms.GoogleMaps
             return nativeView;
         }
 
-        private static LinkedList<string> lruTracker = new LinkedList<string>();
-        private static ConcurrentDictionary<string, UIImage> cache = new ConcurrentDictionary<string, UIImage>();
+        private static readonly LinkedList<string> lruTracker = new LinkedList<string>();
+        private static readonly ConcurrentDictionary<string, UIImage> cache = new ConcurrentDictionary<string, UIImage>();
 
         public static UIImage ConvertViewToImage(UIView view)
         {
@@ -56,8 +57,7 @@ namespace RedCorners.Forms.GoogleMaps
             }
             if (lruTracker.Count > 10) // O(1)
             {
-                UIImage tmp;
-                cache.TryRemove(lruTracker.First.Value, out tmp);
+                cache.TryRemove(lruTracker.First.Value, out UIImage _);
                 lruTracker.RemoveFirst();
             }
             cache.GetOrAdd(hash, img);

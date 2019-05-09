@@ -1,5 +1,6 @@
 ﻿﻿using System;
 using System.Collections.Generic;
+using Xamarin.Forms;
 
 namespace RedCorners.Forms.GoogleMaps.Helpers
 {
@@ -22,8 +23,7 @@ namespace RedCorners.Forms.GoogleMaps.Helpers
             var nums = new List<double>();
             foreach (var v in values)
             {
-                double ret;
-                if (!double.TryParse(v, System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture, out ret))
+                if (!double.TryParse(v, System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture, out var ret))
                 {
                     throw new ArgumentException(err);
                 }

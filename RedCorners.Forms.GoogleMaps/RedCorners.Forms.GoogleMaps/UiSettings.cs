@@ -1,4 +1,6 @@
 ﻿using System;
+using Xamarin.Forms;
+
 namespace RedCorners.Forms.GoogleMaps
 {
     public sealed class UiSettings : BindableObject

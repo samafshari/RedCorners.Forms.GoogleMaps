@@ -6,7 +6,6 @@ namespace RedCorners.Forms.GoogleMaps
 {
     public sealed class MapSpan
     {
-        const double EarthRadiusKm = GeoConstants.EarthRadiusKm;
         const double EarthCircumferenceKm = GeoConstants.EarthCircumferenceKm;
         const double MinimumRangeDegrees = 0.001 / EarthCircumferenceKm * 360; // 1 meter
 
@@ -44,11 +43,9 @@ namespace RedCorners.Forms.GoogleMaps
 
         public override bool Equals(object obj)
         {
-            if (ReferenceEquals(null, obj))
+            if (obj is null)
                 return false;
-            if (ReferenceEquals(this, obj))
-                return true;
-            return obj is MapSpan && Equals((MapSpan)obj);
+            return ReferenceEquals(this, obj) ? true : obj is MapSpan && Equals((MapSpan)obj);
         }
 
         public static MapSpan FromCenterAndRadius(Position center, Distance radius)

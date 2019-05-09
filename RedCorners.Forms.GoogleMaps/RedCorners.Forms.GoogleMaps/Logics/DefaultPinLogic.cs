@@ -11,9 +11,8 @@ namespace RedCorners.Forms.GoogleMaps.Logics
         {
             base.OnItemPropertyChanged(sender, e);
             var outerItem = sender as Pin;
-            var nativeItem = outerItem?.NativeObject as TNative;
 
-            if (nativeItem == null)
+            if (!(outerItem?.NativeObject is TNative nativeItem))
                 return;
 
             if (e.PropertyName == Pin.AddressProperty.PropertyName) OnUpdateAddress(outerItem, nativeItem);

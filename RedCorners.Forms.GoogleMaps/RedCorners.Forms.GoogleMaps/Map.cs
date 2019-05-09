@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using RedCorners.Forms.GoogleMaps.Extensions;
 using System.ComponentModel;
 using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace RedCorners.Forms.GoogleMaps
 {
@@ -175,7 +176,7 @@ namespace RedCorners.Forms.GoogleMaps
             set { SetValue(SelectedPinProperty, value); }
         }
 
-        [TypeConverter(typeof(CameraUpdateConverter))]
+        [Xamarin.Forms.TypeConverter(typeof(CameraUpdateConverter))]
         public CameraUpdate InitialCameraUpdate
         {
             get { return (CameraUpdate)GetValue(InitialCameraUpdateProperty); }
@@ -250,10 +251,8 @@ namespace RedCorners.Forms.GoogleMaps
             {
                 if (_visibleRegion == value)
                     return;
-                if (value == null)
-                    throw new ArgumentNullException(nameof(value));
                 OnPropertyChanging();
-                _visibleRegion = value;
+                _visibleRegion = value ?? throw new ArgumentNullException(nameof(value));
                 OnPropertyChanged();
             }
         }
@@ -265,10 +264,8 @@ namespace RedCorners.Forms.GoogleMaps
             {
                 if (_region == value)
                     return;
-                if (value == null)
-                    throw new ArgumentNullException(nameof(value));
                 OnPropertyChanging();
-                _region = value;
+                _region = value ?? throw new ArgumentNullException(nameof(value));
                 OnPropertyChanged();
             }
         }
@@ -478,7 +475,7 @@ namespace RedCorners.Forms.GoogleMaps
             CreatePinItems();
         }
 
-        void OnItemTemplatePropertyChanged(DataTemplate oldItemTemplate, DataTemplate newItemTemplate)
+        void OnItemTemplatePropertyChanged(DataTemplate _, DataTemplate newItemTemplate)
         {
             if (newItemTemplate is DataTemplateSelector)
             {

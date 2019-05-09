@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using Xamarin.Forms;
 
 namespace RedCorners.Forms.GoogleMaps.Logics
 {

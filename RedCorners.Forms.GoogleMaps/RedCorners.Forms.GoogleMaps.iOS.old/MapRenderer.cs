@@ -13,6 +13,8 @@ using GCameraUpdate = Google.Maps.CameraUpdate;
 using GCameraPosition = Google.Maps.CameraPosition;
 using System.Threading.Tasks;
 using Foundation;
+using Xamarin.Forms;
+using Xamarin;
 
 namespace RedCorners.Forms.GoogleMaps.iOS
 {

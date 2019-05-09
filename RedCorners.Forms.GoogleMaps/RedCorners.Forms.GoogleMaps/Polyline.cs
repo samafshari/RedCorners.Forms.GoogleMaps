@@ -2,16 +2,12 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using Xamarin.Forms;
 
 namespace RedCorners.Forms.GoogleMaps
 {
     public sealed class Polyline : BindableObject
     {
-        void HandleAction(GoogleMaps.Polygon arg1, NotifyCollectionChangedEventArgs arg2)
-        {
-
-        }
-
         public static readonly BindableProperty StrokeWidthProperty = BindableProperty.Create(nameof(StrokeWidth), typeof(float), typeof(Polyline), 1f);
         public static readonly BindableProperty StrokeColorProperty = BindableProperty.Create(nameof(StrokeColor), typeof(Color), typeof(Polyline), Color.Blue);
         public static readonly BindableProperty IsClickableProperty = BindableProperty.Create(nameof(IsClickable), typeof(bool), typeof(Polyline), false);

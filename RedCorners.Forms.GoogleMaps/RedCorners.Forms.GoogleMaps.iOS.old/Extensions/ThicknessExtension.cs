@@ -1,5 +1,6 @@
 ﻿using System;
 using UIKit;
+using Xamarin.Forms;
 
 namespace RedCorners.Forms.GoogleMaps.iOS.Extensions
 {

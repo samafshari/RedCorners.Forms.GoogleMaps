@@ -11,9 +11,8 @@ namespace RedCorners.Forms.GoogleMaps.Logics
         {
             base.OnItemPropertyChanged(sender, e);
             var outerItem = sender as GroundOverlay;
-            var nativeItem = outerItem?.NativeObject as TNative;
 
-            if (nativeItem == null)
+            if (!(outerItem?.NativeObject is TNative nativeItem))
                 return;
 
             if (e.PropertyName == GroundOverlay.BearingProperty.PropertyName) OnUpdateBearing(outerItem, nativeItem);

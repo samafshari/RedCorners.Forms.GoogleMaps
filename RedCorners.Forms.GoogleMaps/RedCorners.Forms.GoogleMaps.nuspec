@@ -16,7 +16,7 @@
 		<tags>xamarin forms maps xamarinforms xamarinformsmaps xamarin.forms.maps xamarinformsgooglemaps RedCorners.Forms.GoogleMaps google googlemap redcorners</tags>
 	<dependencies>
       <group>
-        <dependency id="Xamarin.Forms" version="3.6.0" />
+        <dependency id="Xamarin.Forms" version="3.6.0.344457" />
       </group>
       <group targetFramework="MonoAndroid80">
         <dependency id="Xamarin.GooglePlayServices.Maps" version="60.1142.1"/>

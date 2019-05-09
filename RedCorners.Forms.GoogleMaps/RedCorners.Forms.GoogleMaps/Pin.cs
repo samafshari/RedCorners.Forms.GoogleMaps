@@ -1,4 +1,5 @@
 ﻿using System;
+using Xamarin.Forms;
 
 namespace RedCorners.Forms.GoogleMaps
 {
@@ -117,13 +118,16 @@ namespace RedCorners.Forms.GoogleMaps
 
         public override bool Equals(object obj)
         {
-            if (ReferenceEquals(null, obj))
+            if (obj is null)
                 return false;
-            if (ReferenceEquals(this, obj))
-                return true;
-            if (obj.GetType() != GetType())
-                return false;
-            return Equals((Pin)obj);
+            if (!ReferenceEquals(this, obj))
+            {
+                if (obj.GetType() != GetType())
+                    return false;
+                return Equals((Pin)obj);
+            }
+
+            return true;
         }
 
         public override int GetHashCode()
