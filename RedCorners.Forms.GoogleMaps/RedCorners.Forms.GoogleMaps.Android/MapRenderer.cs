@@ -18,6 +18,9 @@ using Android.Widget;
 using Android.Views;
 using RedCorners.Forms.GoogleMaps.Android.Logics;
 using RedCorners.Forms.GoogleMaps.Internals;
+using Color = Xamarin.Forms.Color;
+using Xamarin.Forms;
+using Xamarin;
 
 namespace RedCorners.Forms.GoogleMaps.Android
 {

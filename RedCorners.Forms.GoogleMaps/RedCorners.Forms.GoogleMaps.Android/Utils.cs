@@ -11,6 +11,7 @@ using System.Security.Cryptography;
 using Android.Runtime;
 using System.Threading.Tasks;
 using System.Collections.Concurrent;
+using Xamarin.Forms;
 
 namespace RedCorners.Forms.GoogleMaps.Android
 {
@@ -36,7 +37,7 @@ namespace RedCorners.Forms.GoogleMaps.Android
             return px / metrics.Density;
         }
 
-        public static Task<ViewGroup> ConvertFormsToNative(View view, Rectangle size, IVisualElementRenderer vRenderer)
+        public static Task<ViewGroup> ConvertFormsToNative(Xamarin.Forms.View view, Rectangle size, IVisualElementRenderer vRenderer)
         {
             return Task.Run(() => {
                 var viewGroup = vRenderer.ViewGroup;

@@ -9,6 +9,8 @@ using Android.Widget;
 using System;
 using Android.Content;
 using RedCorners.Forms.GoogleMaps.Android.Factories;
+using Xamarin.Forms.Platform.Android;
+using Xamarin.Forms;
 
 namespace RedCorners.Forms.GoogleMaps.Logics.Android
 {
@@ -322,7 +324,7 @@ namespace RedCorners.Forms.GoogleMaps.Logics.Android
                 var nativeView = await Utils.ConvertFormsToNative(
                     iconView, 
                     new Rectangle(0, 0, (double)Utils.DpToPx((float)iconView.WidthRequest), (double)Utils.DpToPx((float)iconView.HeightRequest)), 
-                    Platform.Android.Platform.CreateRendererWithContext(iconView, _context));
+                    Platform.CreateRendererWithContext(iconView, _context));
                 var otherView = new FrameLayout(nativeView.Context);
                 nativeView.LayoutParameters = new FrameLayout.LayoutParams(Utils.DpToPx((float)iconView.WidthRequest), Utils.DpToPx((float)iconView.HeightRequest));
                 otherView.AddView(nativeView);

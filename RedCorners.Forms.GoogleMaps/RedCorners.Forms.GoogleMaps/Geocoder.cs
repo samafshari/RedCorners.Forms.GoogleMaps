@@ -6,9 +6,9 @@ namespace RedCorners.Forms.GoogleMaps
 {
     public sealed class Geocoder
     {
-        internal static Func<string, Task<IEnumerable<Position>>> GetPositionsForAddressAsyncFunc;
+        internal static Func<string, Task<IEnumerable<Position>>> GetPositionsForAddressAsyncFunc = null;
 
-        internal static Func<Position, Task<IEnumerable<string>>> GetAddressesForPositionFuncAsync;
+        internal static Func<Position, Task<IEnumerable<string>>> GetAddressesForPositionFuncAsync = null;
 
         public Task<IEnumerable<string>> GetAddressesForPositionAsync(Position position)
         {
