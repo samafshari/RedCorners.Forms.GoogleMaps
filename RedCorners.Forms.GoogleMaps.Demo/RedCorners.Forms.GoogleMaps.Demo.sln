@@ -21,8 +21,8 @@ Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		..\RedCorners.Forms.GoogleMaps\RedCorners.Forms.GoogleMaps.Shared\RedCorners.Forms.GoogleMaps.Shared.projitems*{03f8d9b4-decd-462e-a845-f947f6976fbb}*SharedItemsImports = 4
 		RedCorners.Forms.GoogleMaps.Demo.Shared\RedCorners.Forms.GoogleMaps.Demo.Shared.projitems*{185a383b-c8f6-410d-bd0f-c3078812558b}*SharedItemsImports = 13
+		RedCorners.Forms.GoogleMaps.Demo.Shared\RedCorners.Forms.GoogleMaps.Demo.Shared.projitems*{354e0ab7-0b05-4d92-8672-4c504453401e}*SharedItemsImports = 4
 		RedCorners.Forms.GoogleMaps.Demo.Shared\RedCorners.Forms.GoogleMaps.Demo.Shared.projitems*{567c21da-b53b-4816-8bdf-a9e210f4974d}*SharedItemsImports = 4
-		RedCorners.Forms.GoogleMaps.Demo.Shared\RedCorners.Forms.GoogleMaps.Demo.Shared.projitems*{657a6f1b-5fcc-4961-882b-82ea6bd0f6de}*SharedItemsImports = 4
 		..\RedCorners.Forms.GoogleMaps\RedCorners.Forms.GoogleMaps.Shared\RedCorners.Forms.GoogleMaps.Shared.projitems*{b04ae06f-be71-419b-b501-a5433e05c3bf}*SharedItemsImports = 13
 		..\RedCorners.Forms.GoogleMaps\RedCorners.Forms.GoogleMaps.Shared\RedCorners.Forms.GoogleMaps.Shared.projitems*{fcfa8f9a-6e8e-4f9b-9026-e562c9b6473b}*SharedItemsImports = 4
 	EndGlobalSection
@@ -79,6 +79,7 @@ Global
 		{FCFA8F9A-6E8E-4F9B-9026-E562C9B6473B}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 		{354E0AB7-0B05-4D92-8672-4C504453401E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{354E0AB7-0B05-4D92-8672-4C504453401E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{354E0AB7-0B05-4D92-8672-4C504453401E}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
 		{354E0AB7-0B05-4D92-8672-4C504453401E}.Debug|iPhone.ActiveCfg = Debug|Any CPU
 		{354E0AB7-0B05-4D92-8672-4C504453401E}.Debug|iPhone.Build.0 = Debug|Any CPU
 		{354E0AB7-0B05-4D92-8672-4C504453401E}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
