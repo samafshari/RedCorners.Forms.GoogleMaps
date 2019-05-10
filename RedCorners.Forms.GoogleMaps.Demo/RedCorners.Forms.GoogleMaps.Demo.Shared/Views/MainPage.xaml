@@ -6,8 +6,8 @@
              xmlns:rf="clr-namespace:RedCorners.Forms;assembly=RedCorners.Forms"
              x:Class="RedCorners.Forms.GoogleMaps.Demo.Views.MainPage">
 
-    <StackLayout Spacing="10" Padding="10" HorizontalOptions="Center">
-        <Label Text="RedCorners.Forms.GoogleMaps" HorizontalOptions="Center" HorizontalTextAlignment="Center" FontSize="Large" />
+    <StackLayout Spacing="10" Padding="10" VerticalOptions="Center">
+        <Label Text="RedCorners.Forms.GoogleMaps" HorizontalOptions="Center" HorizontalTextAlignment="Center" FontSize="Large" FontAttributes="Bold" />
         
         <Button Text="Location Picker Page">
             <Button.Command>
