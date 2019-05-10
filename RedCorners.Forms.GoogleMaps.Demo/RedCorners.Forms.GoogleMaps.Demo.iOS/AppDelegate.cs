@@ -4,6 +4,7 @@ using System.Linq;
 
 using Foundation;
 using UIKit;
+using Xamarin.Forms;
 
 namespace RedCorners.Forms.GoogleMaps.Demo.iOS
 {
@@ -23,6 +24,8 @@ namespace RedCorners.Forms.GoogleMaps.Demo.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
+            FormsMaterial.Init();
+
             Xamarin.FormsGoogleMaps.Init("AIzaSyD8-o87CrfrYJDyvdwKrovfBkR3gMBkNyQ");
 
             LoadApplication(new App());

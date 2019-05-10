@@ -136,6 +136,9 @@
     <PackageReference Include="Xamarin.Google.iOS.Maps">
       <Version>3.0.3</Version>
     </PackageReference>
+    <PackageReference Include="Xamarin.Forms.Visual.Material">
+      <Version>3.6.0.344457</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\RedCorners.Forms.GoogleMaps\RedCorners.Forms.GoogleMaps.iOS\RedCorners.Forms.GoogleMaps.iOS.csproj">

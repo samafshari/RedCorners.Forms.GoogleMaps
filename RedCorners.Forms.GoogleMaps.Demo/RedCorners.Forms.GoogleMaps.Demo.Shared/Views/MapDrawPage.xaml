@@ -4,15 +4,16 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
     xmlns:rf="clr-namespace:RedCorners.Forms;assembly=RedCorners.Forms"
     xmlns:map="clr-namespace:RedCorners.Forms.GoogleMaps;assembly=RedCorners.Forms.GoogleMaps"
-    x:Class="RedCorners.Forms.GoogleMaps.Demo.Views.LocationPickerPage">
+    x:Class="RedCorners.Forms.GoogleMaps.Demo.Views.MapDrawPage">
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <Label Text="Location Picker View" HorizontalOptions="Center" Grid.Row="0" />
-        <map:LocationPickerView Grid.Row="1" />
+        <Label Text="Map Draw View" HorizontalOptions="Center" Grid.Row="0" />
+        <map:MapDrawView Grid.Row="1" />
         <Button Grid.Row="2" Text="Back">
             <Button.Command>
                 <rf:PopCommand />
