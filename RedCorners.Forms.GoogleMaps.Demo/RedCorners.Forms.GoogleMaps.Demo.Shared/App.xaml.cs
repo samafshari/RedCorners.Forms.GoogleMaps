@@ -4,54 +4,45 @@ using Xamarin.Forms.Xaml;
 using RedCorners.Forms.Views;
 using RedCorners.Forms.Systems;
 using System.Threading.Tasks;
+using RedCorners.Forms;
 
 namespace RedCorners.Forms.GoogleMaps.Demo
 {
-    public partial class App : Application
+    public partial class App : AppBase
     {
         public App()
         {
             InitializeComponent();
-
-            ShowFirstPage();
         }
 
         async void ShowFirstPage()
         {
-            if (Device.RuntimePlatform == Device.iOS)
+            var grid = new Grid();
+            grid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
+            grid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Star });
+
+            var text = new Label
             {
-                MainPage = new ContentPage
-                {
-                    Content = new ActivityIndicator
-                    {
-                        HorizontalOptions = LayoutOptions.Center,
-                        VerticalOptions = LayoutOptions.Center,
-                        IsRunning = true,
-                        WidthRequest = 32,
-                        HeightRequest = 32
-                    }
-                };
+                Text = "Hello World"
+            };
+            grid.Children.Add(text);
+            Grid.SetRow(text, 0);
 
-                while (!NotchSystem.Instance.HasWindowInformation)
-                    await Task.Delay(50);
-            }
+            var map = new Map
+            {
+                BackgroundColor = Color.Red,
+                HorizontalOptions = LayoutOptions.Fill,
+                VerticalOptions = LayoutOptions.Fill
+            };
+            grid.Children.Add(map);
+            Grid.SetRow(map, 1);
 
-            MainPage = new MainPage();
-        }
-
-        protected override void OnStart()
-        {
-            // Handle when your app starts
-        }
-
-        protected override void OnSleep()
-        {
-            // Handle when your app sleeps
-        }
-
-        protected override void OnResume()
-        {
-            // Handle when your app resumes
+            MainPage = new AliveContentPage
+            {
+                Content = grid,
+                FixPadding = true,
+                FixBottomPadding = true
+            };
         }
     }
 }

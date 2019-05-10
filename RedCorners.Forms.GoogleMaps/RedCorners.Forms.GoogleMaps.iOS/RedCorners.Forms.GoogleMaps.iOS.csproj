@@ -11,7 +11,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>RedCorners.Forms.GoogleMaps.iOS</RootNamespace>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
-    <AssemblyName>RedCorners.Forms.GoogleMaps.iOS</AssemblyName>
+    <AssemblyName>RedCorners.Forms.GoogleMaps</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>

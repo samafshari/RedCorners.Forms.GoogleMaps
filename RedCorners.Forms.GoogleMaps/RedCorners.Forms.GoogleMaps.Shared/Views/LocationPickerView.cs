@@ -112,7 +112,7 @@ namespace RedCorners.Forms.GoogleMaps.Views
                 isFirstTime = false;
 
                 if (Latitude == null && Longitude == null)
-                    MapLocationSystem.Instance.OnMapLocationChanged += Instance_OnMapLocationChanged; ;
+                    MapLocationSystem.Instance.OnMapLocationChanged += Instance_OnMapLocationChanged;
 
                 UpdatePin();
             }
