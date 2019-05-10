@@ -1,5 +1,4 @@
 ﻿using RedCorners.Forms.Systems;
-using RedCorners.Forms.Views;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -7,7 +6,7 @@ using System.Windows.Input;
 using Xamarin.Forms;
 using System.Linq;
 
-namespace RedCorners.Forms.GoogleMaps.Views
+namespace RedCorners.Forms.GoogleMaps
 {
     public class LocationPickerView : AliveContentView
     {

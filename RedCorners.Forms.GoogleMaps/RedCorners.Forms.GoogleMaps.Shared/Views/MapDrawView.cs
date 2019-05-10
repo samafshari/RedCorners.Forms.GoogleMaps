@@ -1,5 +1,4 @@
-﻿using RedCorners.Forms.Views;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
@@ -8,7 +7,7 @@ using Xamarin.Forms;
 using System.Linq;
 using RedCorners.Forms.Systems;
 
-namespace RedCorners.Forms.GoogleMaps.Views
+namespace RedCorners.Forms.GoogleMaps
 {
     public class MapDrawView : AliveContentView
     {

@@ -16,6 +16,8 @@ using Foundation;
 using Xamarin.Forms;
 using Xamarin;
 
+[assembly: ExportRenderer(typeof(RedCorners.Forms.GoogleMaps.Map), typeof(RedCorners.Forms.GoogleMaps.iOS.MapRenderer))]
+[assembly: Preserve]
 namespace RedCorners.Forms.GoogleMaps.iOS
 {
     public class MapRenderer : ViewRenderer

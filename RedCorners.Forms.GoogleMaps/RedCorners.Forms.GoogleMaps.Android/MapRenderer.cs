@@ -22,7 +22,10 @@ using Color = Xamarin.Forms.Color;
 using Xamarin.Forms;
 using Xamarin;
 using Android.Locations;
+using Xamarin.Forms.Internals;
 
+[assembly: ExportRenderer(typeof(RedCorners.Forms.GoogleMaps.Map), typeof(RedCorners.Forms.GoogleMaps.Android.MapRenderer))]
+[assembly: Preserve]
 namespace RedCorners.Forms.GoogleMaps.Android
 {
     public class MapRenderer : ViewRenderer<Map, global::Android.Views.View>,
