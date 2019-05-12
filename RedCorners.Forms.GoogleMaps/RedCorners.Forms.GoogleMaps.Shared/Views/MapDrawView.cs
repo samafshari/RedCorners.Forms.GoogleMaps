@@ -38,6 +38,18 @@ namespace RedCorners.Forms.GoogleMaps
             set => SetValue(PositionsProperty, value);
         }
 
+        public int CameraUpdateZoomLevel
+        {
+            get => (int)GetValue(CameraUpdateZoomLevelProperty);
+            set => SetValue(CameraUpdateZoomLevelProperty, value);
+        }
+
+        public double CameraPathDefaultDistance
+        {
+            get => (double)GetValue(CameraPathDefaultDistanceProperty);
+            set => SetValue(CameraPathDefaultDistanceProperty, value);
+        }
+
         public ICommand PositionAddedCommand
         {
             get => (ICommand)GetValue(PositionAddedCommandProperty);
@@ -50,17 +62,41 @@ namespace RedCorners.Forms.GoogleMaps
             set => SetValue(IsInteractiveProperty, value);
         }
 
+        public Color CircleFillColor
+        {
+            get => (Color)GetValue(CircleFillColorProperty);
+            set => SetValue(CircleFillColorProperty, value);
+        }
+
+        public Color StrokeColor
+        {
+            get => (Color)GetValue(StrokeColorProperty);
+            set => SetValue(StrokeColorProperty, value);
+        }
+
+        public double CircleRadiusMeters
+        {
+            get => (double)GetValue(CircleRadiusMetersProperty);
+            set => SetValue(CircleRadiusMetersProperty, value);
+        }
+
+        public double LastCircleRadiusMeters
+        {
+            get => (double)GetValue(LastCircleRadiusMetersProperty);
+            set => SetValue(LastCircleRadiusMetersProperty, value);
+        }
+
+        public float StrokeWidth
+        {
+            get => (float)GetValue(StrokeWidthProperty);
+            set => SetValue(StrokeWidthProperty, value);
+        }
+
         public static readonly BindableProperty IsInteractiveProperty = BindableProperty.Create(
             nameof(IsInteractive),
             typeof(bool),
             typeof(MapDrawView),
-            propertyChanged: (bindable, oldVal, newVal) =>
-            {
-                if (bindable is MapDrawView view)
-                {
-                    view.UpdatePath();
-                }
-            });
+            propertyChanged: UpdatePath);
 
         bool freeCamera = false;
 
@@ -92,11 +128,73 @@ namespace RedCorners.Forms.GoogleMaps
                 }
             });
 
+        public static readonly BindableProperty CameraUpdateZoomLevelProperty = BindableProperty.Create(
+            nameof(CameraUpdateZoomLevel),
+            typeof(int),
+            typeof(MapDrawView),
+            14,
+            defaultBindingMode: BindingMode.TwoWay,
+            propertyChanged: UpdatePath);
+
+        public static readonly BindableProperty CameraPathDefaultDistanceProperty = BindableProperty.Create(
+            nameof(CameraPathDefaultDistance),
+            typeof(double),
+            typeof(MapDrawView),
+            0.5,
+            BindingMode.TwoWay,
+            propertyChanged: UpdatePath);
+
+        public static readonly BindableProperty CircleFillColorProperty = BindableProperty.Create(
+            nameof(CircleFillColor),
+            typeof(Color),
+            typeof(MapDrawView),
+            Color.Red,
+            BindingMode.TwoWay,
+            propertyChanged: UpdatePath);
+
+        public static readonly BindableProperty StrokeColorProperty = BindableProperty.Create(
+            nameof(StrokeColor),
+            typeof(Color),
+            typeof(MapDrawView),
+            Color.Red,
+            BindingMode.TwoWay,
+            propertyChanged: UpdatePath);
+
+        public static readonly BindableProperty CircleRadiusMetersProperty = BindableProperty.Create(
+            nameof(CircleRadiusMeters),
+            typeof(double),
+            typeof(MapDrawView),
+            10.0,
+            BindingMode.TwoWay,
+            propertyChanged: UpdatePath);
+
+        public static readonly BindableProperty LastCircleRadiusMetersProperty = BindableProperty.Create(
+            nameof(LastCircleRadiusMeters),
+            typeof(double),
+            typeof(MapDrawView),
+            20.0,
+            BindingMode.TwoWay,
+            propertyChanged: UpdatePath);
+
+        public static readonly BindableProperty StrokeWidthProperty = BindableProperty.Create(
+            nameof(StrokeWidth),
+            typeof(float),
+            typeof(MapDrawView),
+            2.0f,
+            BindingMode.TwoWay,
+            propertyChanged: UpdatePath);
+
+        static void UpdatePath(BindableObject bindable, object oldVal, object newVal)
+        {
+            if (bindable is MapDrawView view)
+                view.UpdatePath();
+        }
+
         public static readonly BindableProperty PositionsProperty = BindableProperty.Create(
             nameof(Positions),
             typeof(ObservableCollection<Position>),
             typeof(MapDrawView),
-            defaultValue: new ObservableCollection<Position>(),
+            null,
             defaultBindingMode: BindingMode.TwoWay,
             propertyChanged: (bindable, oldVal, newVal) =>
             {
@@ -163,18 +261,18 @@ namespace RedCorners.Forms.GoogleMaps
 
                         Circle circle = new Circle();
                         circle.Center = item;
-                        circle.FillColor = Color.Red;
-                        circle.Radius = Distance.FromMeters(10);
+                        circle.FillColor = CircleFillColor;
+                        circle.Radius = Distance.FromMeters(CircleRadiusMeters);
 
                         if (lastPosition == item)
                         {
-                            circle.Radius = Distance.FromMeters(20);
+                            circle.Radius = Distance.FromMeters(LastCircleRadiusMeters);
                         }
 
                         map.Circles.Add(circle);
                     }
-                    polyline.StrokeColor = Color.Red;
-                    polyline.StrokeWidth = 2;
+                    polyline.StrokeColor = StrokeColor;
+                    polyline.StrokeWidth = StrokeWidth;
 
                     if (polyline.Positions.Count > 1)
                         map.Polylines.Add(polyline);
@@ -194,8 +292,8 @@ namespace RedCorners.Forms.GoogleMaps
 
             var viewLatitude = CameraLatitude;
             var viewLongitude = CameraLongitude;
-            var cameraUpdate = new CameraUpdate(new Position(viewLatitude, viewLongitude), 14.0);
-            var distance = 0.5;
+            var cameraUpdate = new CameraUpdate(new Position(viewLatitude, viewLongitude), CameraUpdateZoomLevel);
+            var distance = CameraPathDefaultDistance;
 
             if (map.UiSettings.MyLocationButtonEnabled != IsInteractive)
             {

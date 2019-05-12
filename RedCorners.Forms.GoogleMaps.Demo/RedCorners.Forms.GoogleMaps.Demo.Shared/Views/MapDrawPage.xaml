@@ -13,7 +13,14 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Label Text="Map Draw View" HorizontalOptions="Center" Grid.Row="0" />
-        <map:MapDrawView Grid.Row="1" />
+        <map:MapDrawView 
+            Grid.Row="1" 
+            IsInteractive="True"
+            CircleFillColor="White"
+            StrokeColor="Black"
+            CircleRadiusMeters="20"
+            LastCircleRadiusMeters="40"
+            />
         <Button Grid.Row="2" Text="Back">
             <Button.Command>
                 <rf:PopCommand />
