@@ -106,6 +106,9 @@
       <Name>RedCorners.Forms.GoogleMaps.Android</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\foodtruck.png" />
+  </ItemGroup>
   <Import Project="..\RedCorners.Forms.GoogleMaps.Demo.Shared\RedCorners.Forms.GoogleMaps.Demo.Shared.projitems" Label="Shared" Condition="Exists('..\RedCorners.Forms.GoogleMaps.Demo.Shared\RedCorners.Forms.GoogleMaps.Demo.Shared.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
