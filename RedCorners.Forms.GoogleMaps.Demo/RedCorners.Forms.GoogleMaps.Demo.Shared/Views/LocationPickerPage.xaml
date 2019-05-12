@@ -4,20 +4,39 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
     xmlns:rf="clr-namespace:RedCorners.Forms;assembly=RedCorners.Forms"
     xmlns:map="clr-namespace:RedCorners.Forms.GoogleMaps;assembly=RedCorners.Forms.GoogleMaps"
+    xmlns:vm="clr-namespace:RedCorners.Forms.GoogleMaps.Demo.ViewModels"
     x:Class="RedCorners.Forms.GoogleMaps.Demo.Views.LocationPickerPage">
+    <rf:AliveContentPage.BindingContext>
+        <vm:LocationPickerViewModel />
+    </rf:AliveContentPage.BindingContext>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Label Text="Location Picker View" HorizontalOptions="Center" Grid.Row="0" />
-        <map:LocationPickerView Grid.Row="1">
+        <map:LocationPickerView Grid.Row="1" Latitude="{Binding Latitude,Mode=TwoWay}" Longitude="{Binding Longitude, Mode=TwoWay}">
             <map:LocationPickerView.PinIcon>
                 <map:BitmapDescriptor Type="Bundle" BundleName="foodtruck.png" />
             </map:LocationPickerView.PinIcon>
         </map:LocationPickerView>
-        <Button Grid.Row="2" Text="Back">
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Text="Red" Command="{Binding RedCommand}" />
+            <Button Grid.Column="1" Text="Green" Command="{Binding GreenCommand}" />
+        </Grid>
+        <map:LocationPickerView Grid.Row="3" Latitude="{Binding Latitude,Mode=TwoWay}" Longitude="{Binding Longitude,Mode=TwoWay}">
+            <map:LocationPickerView.PinIcon>
+                <map:BitmapDescriptor Color="{Binding Color}" />
+            </map:LocationPickerView.PinIcon>
+        </map:LocationPickerView>
+        <Button Grid.Row="4" Text="Back">
             <Button.Command>
                 <rf:PopCommand FireOnce="False" FireDelay="1000" />
             </Button.Command>

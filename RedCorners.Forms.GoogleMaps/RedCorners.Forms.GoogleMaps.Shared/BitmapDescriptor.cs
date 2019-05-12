@@ -48,45 +48,51 @@ namespace RedCorners.Forms.GoogleMaps
             set => SetValue(ViewProperty, value);
         }
 
-        public BindableProperty IdProperty = BindableProperty.Create(
+        protected override void OnBindingContextChanged()
+        {
+            Console.WriteLine($"[{Id}] Context Changed: " + BindingContext?.GetType().FullName ?? "null");
+            base.OnBindingContextChanged();
+        }
+
+        public static BindableProperty IdProperty = BindableProperty.Create(
             nameof(Id),
             typeof(string),
             typeof(BitmapDescriptor),
             defaultBindingMode: BindingMode.TwoWay);
 
-        public BindableProperty TypeProperty = BindableProperty.Create(
+        public static BindableProperty TypeProperty = BindableProperty.Create(
             nameof(Type),
             typeof(BitmapDescriptorType),
             typeof(BitmapDescriptor),
             defaultValue: BitmapDescriptorType.Default,
             defaultBindingMode: BindingMode.TwoWay);
 
-        public BindableProperty ColorProperty = BindableProperty.Create(
+        public static BindableProperty ColorProperty = BindableProperty.Create(
             nameof(Color),
             typeof(Color),
             typeof(BitmapDescriptor),
             defaultValue: Color.Red,
             defaultBindingMode: BindingMode.TwoWay);
 
-        public BindableProperty BundleNameProperty = BindableProperty.Create(
+        public static BindableProperty BundleNameProperty = BindableProperty.Create(
             nameof(BundleName),
             typeof(string),
             typeof(BitmapDescriptor),
             defaultBindingMode: BindingMode.TwoWay);
 
-        public BindableProperty StreamProperty = BindableProperty.Create(
+        public static BindableProperty StreamProperty = BindableProperty.Create(
             nameof(Stream),
             typeof(Stream),
             typeof(BitmapDescriptor),
             defaultBindingMode: BindingMode.TwoWay);
 
-        public BindableProperty AbsolutePathProperty = BindableProperty.Create(
+        public static BindableProperty AbsolutePathProperty = BindableProperty.Create(
             nameof(AbsolutePath),
             typeof(string),
             typeof(BitmapDescriptor),
             defaultBindingMode: BindingMode.TwoWay);
 
-        public BindableProperty ViewProperty = BindableProperty.Create(
+        public static BindableProperty ViewProperty = BindableProperty.Create(
             nameof(View),
             typeof(View),
             typeof(BitmapDescriptor),

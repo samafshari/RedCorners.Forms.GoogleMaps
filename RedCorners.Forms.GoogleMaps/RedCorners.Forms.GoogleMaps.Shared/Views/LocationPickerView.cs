@@ -128,7 +128,26 @@ namespace RedCorners.Forms.GoogleMaps
             typeof(BitmapDescriptor),
             typeof(LocationPickerView),
             defaultBindingMode: BindingMode.TwoWay,
-            defaultValue: BitmapDescriptor.DefaultMarker(Color.Red, "Default"));
+            defaultValue: BitmapDescriptor.DefaultMarker(Color.Red, "Default"),
+            propertyChanged: (bindable, oldVal, newVal) =>
+            {
+                if (newVal is BitmapDescriptor descriptor && bindable is LocationPickerView view)
+                {
+                    if (descriptor.BindingContext == null)
+                        descriptor.BindingContext = view.BindingContext;
+                }
+            });
+
+        object oldContext = null;
+        protected override void OnBindingContextChanged()
+        {
+            base.OnBindingContextChanged();
+
+            if (PinIcon != null && PinIcon.BindingContext == oldContext)
+                PinIcon.BindingContext = BindingContext;
+
+            oldContext = BindingContext;
+        }
 
         public LocationPickerView()
         {
@@ -178,19 +197,17 @@ namespace RedCorners.Forms.GoogleMaps
                 {
                     var pin = Pins.FirstOrDefault();
                     if (pin == null)
-                    {
                         animate = false;
-                        pin = new Pin
-                        {
-                            Label = PinLabel,
-                            Address = PinAddress,
-                            Icon = PinIcon,
-                            Position = new Position(latitude, longitude)
-                        };
-                        Pins.Add(pin);
-                    }
-                    else
-                        pin.Position = new Position(latitude, longitude);
+                    
+                    Pins.Clear();
+                    pin = new Pin
+                    {
+                        Label = PinLabel,
+                        Address = PinAddress,
+                        Icon = PinIcon,
+                        Position = new Position(latitude, longitude)
+                    };
+                    Pins.Add(pin);
 
                     CameraLatitude = latitude;
                     CameraLongitude = longitude;
