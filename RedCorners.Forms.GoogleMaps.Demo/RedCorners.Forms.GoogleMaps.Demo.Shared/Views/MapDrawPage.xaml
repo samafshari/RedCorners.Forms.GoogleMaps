@@ -23,7 +23,7 @@
             />
         <Button Grid.Row="2" Text="Back">
             <Button.Command>
-                <rf:PopCommand />
+                <rf:PopCommand FireOnce="False" FireDelay="1000" />
             </Button.Command>
         </Button>
     </Grid>
