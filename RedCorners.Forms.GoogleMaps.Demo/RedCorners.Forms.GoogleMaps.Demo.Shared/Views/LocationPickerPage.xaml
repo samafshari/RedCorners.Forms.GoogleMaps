@@ -12,7 +12,11 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Label Text="Location Picker View" HorizontalOptions="Center" Grid.Row="0" />
-        <map:LocationPickerView Grid.Row="1" />
+        <map:LocationPickerView Grid.Row="1">
+            <map:LocationPickerView.PinIcon>
+                <map:BitmapDescriptor Color="White" />
+            </map:LocationPickerView.PinIcon>
+        </map:LocationPickerView>
         <Button Grid.Row="2" Text="Back">
             <Button.Command>
                 <rf:PopCommand FireOnce="False" FireDelay="1000" />

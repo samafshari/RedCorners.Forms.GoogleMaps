@@ -40,6 +40,24 @@ namespace RedCorners.Forms.GoogleMaps
             set => SetValue(LocationPickCommandProperty, value);
         }
 
+        public string PinLabel
+        {
+            get => (string)GetValue(PinLabelProperty);
+            set => SetValue(PinLabelProperty, value);
+        }
+
+        public string PinAddress
+        {
+            get => (string)GetValue(PinAddressProperty);
+            set => SetValue(PinAddressProperty, value);
+        }
+
+        public BitmapDescriptor PinIcon
+        {
+            get => (BitmapDescriptor)GetValue(PinIconProperty);
+            set => SetValue(PinIconProperty, value);
+        }
+
         public static readonly BindableProperty LatitudeProperty = BindableProperty.Create(
             nameof(Latitude),
             typeof(double?),
@@ -91,12 +109,30 @@ namespace RedCorners.Forms.GoogleMaps
             defaultBindingMode: BindingMode.TwoWay,
             defaultValue: null);
 
-        Map map => this;
+        public static readonly BindableProperty PinLabelProperty = BindableProperty.Create(
+            nameof(PinLabel),
+            typeof(string),
+            typeof(LocationPickerView),
+            defaultBindingMode: BindingMode.TwoWay,
+            defaultValue: "Marker");
+
+        public static readonly BindableProperty PinAddressProperty = BindableProperty.Create(
+            nameof(PinAddress),
+            typeof(string),
+            typeof(LocationPickerView),
+            defaultBindingMode: BindingMode.TwoWay,
+            defaultValue: "");
+
+        public static readonly BindableProperty PinIconProperty = BindableProperty.Create(
+            nameof(PinIcon),
+            typeof(BitmapDescriptor),
+            typeof(LocationPickerView),
+            defaultBindingMode: BindingMode.TwoWay,
+            defaultValue: BitmapDescriptor.DefaultMarker(Color.Red, "Default"));
 
         public LocationPickerView()
         {
-            map.MapLongClicked += Map_MapLongClicked;
-            //Content = map;
+            MapLongClicked += Map_MapLongClicked;
         }
 
         bool isFirstTime = true;
@@ -128,10 +164,8 @@ namespace RedCorners.Forms.GoogleMaps
         }
 
         bool isUpdatingPin = false;
-        void UpdatePin()
+        protected virtual void UpdatePin()
         {
-            if (map == null) return;
-
             if (isUpdatingPin) return;
             isUpdatingPin = true;
             bool animate = true;
@@ -142,18 +176,18 @@ namespace RedCorners.Forms.GoogleMaps
 
                 try
                 {
-                    var pin = map.Pins.FirstOrDefault();
+                    var pin = Pins.FirstOrDefault();
                     if (pin == null)
                     {
                         animate = false;
                         pin = new Pin
                         {
-                            Label = "Search",
-                            Address = "",
-                            Icon = BitmapDescriptor.DefaultMarker(Color.Red, "Default"),
+                            Label = PinLabel,
+                            Address = PinAddress,
+                            Icon = PinIcon,
                             Position = new Position(latitude, longitude)
                         };
-                        map.Pins.Add(pin);
+                        Pins.Add(pin);
                     }
                     else
                         pin.Position = new Position(latitude, longitude);
@@ -168,7 +202,7 @@ namespace RedCorners.Forms.GoogleMaps
             }
             else
             {
-                if (map.Pins.Count > 0) map.Pins.Clear();
+                if (Pins.Count > 0) Pins.Clear();
             }
             CenterOnPin(animate);
             isUpdatingPin = false;
@@ -191,11 +225,11 @@ namespace RedCorners.Forms.GoogleMaps
             if (Width > 0 && Height > 0)
             {
                 LogSystem.Instance.Log($"Focusing on {CameraLatitude}, {CameraLongitude}");
-                map.CenterMap(CameraLatitude, CameraLongitude, 0.5, animate);
+                this.CenterMap(CameraLatitude, CameraLongitude, 0.5, animate);
             }
             else
             {
-                map.InitialCameraUpdate = new CameraUpdate(new Position(CameraLatitude, CameraLongitude), 14.0);
+                InitialCameraUpdate = new CameraUpdate(new Position(CameraLatitude, CameraLongitude), 14.0);
             }
         }
 

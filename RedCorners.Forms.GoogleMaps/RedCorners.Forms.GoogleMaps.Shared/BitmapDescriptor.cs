@@ -1,20 +1,100 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using Xamarin.Forms;
 
 namespace RedCorners.Forms.GoogleMaps
 {
-    public sealed class BitmapDescriptor
+    public class BitmapDescriptor : BindableObject
     {
-        public string Id { get; private set; }      
-        public BitmapDescriptorType Type { get; private set; }      
-        public Color Color { get; private set; }
-        public string BundleName { get; private set; }
-        public Stream Stream { get; private set; }
-        public string AbsolutePath { get; private set; }
-        public View View { get; private set; }
-
-        private BitmapDescriptor()
+        public string Id
         {
+            get => (string)GetValue(IdProperty);
+            set => SetValue(IdProperty, value);
+        }
+
+        public BitmapDescriptorType Type
+        {
+            get => (BitmapDescriptorType)GetValue(TypeProperty);
+            set => SetValue(TypeProperty, value);
+        }
+
+        public Color Color
+        {
+            get => (Color)GetValue(ColorProperty);
+            set => SetValue(ColorProperty, value);
+        }
+
+        public string BundleName
+        {
+            get => (string)GetValue(BundleNameProperty);
+            set => SetValue(BundleNameProperty, value);
+        }
+
+        public Stream Stream
+        {
+            get => (Stream)GetValue(StreamProperty);
+            set => SetValue(StreamProperty, value);
+        }
+
+        public string AbsolutePath
+        {
+            get => (string)GetValue(AbsolutePathProperty);
+            set => SetValue(AbsolutePathProperty, value);
+        }
+
+        public View View
+        {
+            get => (View)GetValue(ViewProperty);
+            set => SetValue(ViewProperty, value);
+        }
+
+        public BindableProperty IdProperty = BindableProperty.Create(
+            nameof(Id),
+            typeof(string),
+            typeof(BitmapDescriptor),
+            defaultBindingMode: BindingMode.TwoWay);
+
+        public BindableProperty TypeProperty = BindableProperty.Create(
+            nameof(Type),
+            typeof(BitmapDescriptorType),
+            typeof(BitmapDescriptor),
+            defaultValue: BitmapDescriptorType.Default,
+            defaultBindingMode: BindingMode.TwoWay);
+
+        public BindableProperty ColorProperty = BindableProperty.Create(
+            nameof(Color),
+            typeof(Color),
+            typeof(BitmapDescriptor),
+            defaultValue: Color.Red,
+            defaultBindingMode: BindingMode.TwoWay);
+
+        public BindableProperty BundleNameProperty = BindableProperty.Create(
+            nameof(BundleName),
+            typeof(string),
+            typeof(BitmapDescriptor),
+            defaultBindingMode: BindingMode.TwoWay);
+
+        public BindableProperty StreamProperty = BindableProperty.Create(
+            nameof(Stream),
+            typeof(Stream),
+            typeof(BitmapDescriptor),
+            defaultBindingMode: BindingMode.TwoWay);
+
+        public BindableProperty AbsolutePathProperty = BindableProperty.Create(
+            nameof(AbsolutePath),
+            typeof(string),
+            typeof(BitmapDescriptor),
+            defaultBindingMode: BindingMode.TwoWay);
+
+        public BindableProperty ViewProperty = BindableProperty.Create(
+            nameof(View),
+            typeof(View),
+            typeof(BitmapDescriptor),
+            defaultBindingMode: BindingMode.TwoWay);
+
+        public BitmapDescriptor()
+        {
+            if (Id == null) Id = Guid.NewGuid().ToString();
         }
 
         internal static BitmapDescriptor DefaultMarker(Color color, string id)
