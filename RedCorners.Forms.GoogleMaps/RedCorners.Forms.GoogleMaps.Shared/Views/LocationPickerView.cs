@@ -132,6 +132,8 @@ namespace RedCorners.Forms.GoogleMaps
         bool isUpdatingPin = false;
         void UpdatePin()
         {
+            if (map == null) return;
+
             if (isUpdatingPin) return;
             isUpdatingPin = true;
             bool animate = true;

@@ -12,6 +12,7 @@ namespace RedCorners.Forms.GoogleMaps
     public class MapDrawView : AliveContentView
     {
         readonly Map map;
+
         public MapDrawView()
         {
             map = new Map();
@@ -95,7 +96,7 @@ namespace RedCorners.Forms.GoogleMaps
             nameof(Positions),
             typeof(ObservableCollection<Position>),
             typeof(MapDrawView),
-            defaultValue: null,
+            defaultValue: new ObservableCollection<Position>(),
             defaultBindingMode: BindingMode.TwoWay,
             propertyChanged: (bindable, oldVal, newVal) =>
             {
@@ -140,6 +141,8 @@ namespace RedCorners.Forms.GoogleMaps
         bool isUpdatingPath = false;
         void UpdatePath()
         {
+            if (map == null) return;
+
             if (isUpdatingPath) return;
             isUpdatingPath = true;
 
@@ -187,15 +190,18 @@ namespace RedCorners.Forms.GoogleMaps
 
         public void UpdateCamera(bool animate)
         {
+            if (map == null) return;
+
             var viewLatitude = CameraLatitude;
             var viewLongitude = CameraLongitude;
             var cameraUpdate = new CameraUpdate(new Position(viewLatitude, viewLongitude), 14.0);
             var distance = 0.5;
 
-            if (map.IsShowingUser != IsInteractive)
+            if (map.UiSettings.MyLocationButtonEnabled != IsInteractive)
             {
-                map.IsShowingUser = IsInteractive;
-                map.HasZoomEnabled = IsInteractive;
+                map.UiSettings.MyLocationButtonEnabled = IsInteractive;
+                map.UiSettings.ZoomControlsEnabled = IsInteractive;
+                map.UiSettings.ZoomGesturesEnabled = IsInteractive;
             }
 
             if (Positions != null && Positions.Count > 0)

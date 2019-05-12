@@ -2,11 +2,25 @@
 <rf:AppBase xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:rf="clr-namespace:RedCorners.Forms;assembly=RedCorners.Forms"
+             xmlns:map="clr-namespace:RedCorners.Forms.GoogleMaps;assembly=RedCorners.Forms.GoogleMaps"
              x:Class="RedCorners.Forms.GoogleMaps.Demo.App">
     <Application.Resources>
         <ResourceDictionary>
             <Style TargetType="Button">
                 <Setter Property="Visual" Value="Material" />
+            </Style>
+
+            <x:Double x:Key="DefaultLatitude">49.6081379</x:Double>
+            <x:Double x:Key="DefaultLongitude">6.1308141</x:Double>
+            
+            <Style TargetType="map:MapDrawView">
+                <Setter Property="CameraLatitude" Value="{StaticResource DefaultLatitude}" />
+                <Setter Property="CameraLongitude" Value="{StaticResource DefaultLongitude}" />
+            </Style>
+
+            <Style TargetType="map:LocationPickerView">
+                <Setter Property="CameraLatitude" Value="{StaticResource DefaultLatitude}" />
+                <Setter Property="CameraLongitude" Value="{StaticResource DefaultLongitude}" />
             </Style>
         </ResourceDictionary>
     </Application.Resources>
