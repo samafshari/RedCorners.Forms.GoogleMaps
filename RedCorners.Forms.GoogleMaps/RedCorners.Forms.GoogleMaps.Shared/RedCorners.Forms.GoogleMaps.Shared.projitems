@@ -53,7 +53,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)MapLongClickedEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MapRegion.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MapSpan.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)MapStyle.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MapType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MyLocationButtonClickedEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Pin.cs" />

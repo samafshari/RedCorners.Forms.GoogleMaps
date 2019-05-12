@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace RedCorners.Forms.GoogleMaps
 {
-    public class LocationPickerView : AliveContentView
+    public class LocationPickerView : Map
     {
         public double? Latitude
         {
@@ -91,14 +91,12 @@ namespace RedCorners.Forms.GoogleMaps
             defaultBindingMode: BindingMode.TwoWay,
             defaultValue: null);
 
-        Map map;
+        Map map => this;
 
         public LocationPickerView()
         {
-            map = new Map();
-
             map.MapLongClicked += Map_MapLongClicked;
-            Content = map;
+            //Content = map;
         }
 
         bool isFirstTime = true;

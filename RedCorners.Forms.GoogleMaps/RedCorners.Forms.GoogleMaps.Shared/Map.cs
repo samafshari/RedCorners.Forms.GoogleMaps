@@ -14,7 +14,7 @@ using Xamarin.Forms;
 
 namespace RedCorners.Forms.GoogleMaps
 {
-    public class Map : View, IEnumerable<Pin>
+    public class Map : AliveContentView, IEnumerable<Pin>
     {
         public static readonly BindableProperty ItemsSourceProperty = BindableProperty.Create(nameof(IEnumerable), typeof(IEnumerable), typeof(Map), default(IEnumerable),
             propertyChanged: (b, o, n) => ((Map)b).OnItemsSourcePropertyChanged((IEnumerable)o, (IEnumerable)n));
@@ -59,7 +59,7 @@ namespace RedCorners.Forms.GoogleMaps
             defaultValueCreator: (bindable) => new CameraPosition(((Map)bindable).InitialCameraUpdate.Position, 10),
             defaultBindingMode: BindingMode.TwoWay);
 
-        public static readonly BindableProperty MapStyleProperty = BindableProperty.Create(nameof(MapStyle), typeof(MapStyle), typeof(Map), null);
+        public static readonly BindableProperty MapStyleProperty = BindableProperty.Create(nameof(MapStyle), typeof(string), typeof(Map), default(string));
 
         readonly ObservableCollection<Pin> _pins = new ObservableCollection<Pin>();
         readonly ObservableCollection<Polyline> _polylines = new ObservableCollection<Polyline>();
@@ -194,9 +194,9 @@ namespace RedCorners.Forms.GoogleMaps
             set { SetValue(PaddingProperty, value); }
         }
 
-        public MapStyle MapStyle
+        public string MapStyle
         {
-            get { return (MapStyle)GetValue(MapStyleProperty); }
+            get { return (string)GetValue(MapStyleProperty); }
             set { SetValue(MapStyleProperty, value); }
         }
 

@@ -9,15 +9,11 @@ using RedCorners.Forms.Systems;
 
 namespace RedCorners.Forms.GoogleMaps
 {
-    public class MapDrawView : AliveContentView
+    public class MapDrawView : Map
     {
-        readonly Map map;
-
         public MapDrawView()
         {
-            map = new Map();
-            map.MapLongClicked += Map_MapLongClicked;
-            Content = map;
+            MapLongClicked += Map_MapLongClicked;
         }
 
         public double CameraLatitude
@@ -31,6 +27,7 @@ namespace RedCorners.Forms.GoogleMaps
             get => (double)GetValue(CameraLongitudeProperty);
             set => SetValue(CameraLongitudeProperty, value);
         }
+
 
         public ObservableCollection<Position> Positions
         {
@@ -55,13 +52,7 @@ namespace RedCorners.Forms.GoogleMaps
             get => (ICommand)GetValue(PositionAddedCommandProperty);
             set => SetValue(PositionAddedCommandProperty, value);
         }
-
-        public bool IsInteractive
-        {
-            get => (bool)GetValue(IsInteractiveProperty);
-            set => SetValue(IsInteractiveProperty, value);
-        }
-
+        
         public Color CircleFillColor
         {
             get => (Color)GetValue(CircleFillColorProperty);
@@ -91,12 +82,6 @@ namespace RedCorners.Forms.GoogleMaps
             get => (float)GetValue(StrokeWidthProperty);
             set => SetValue(StrokeWidthProperty, value);
         }
-
-        public static readonly BindableProperty IsInteractiveProperty = BindableProperty.Create(
-            nameof(IsInteractive),
-            typeof(bool),
-            typeof(MapDrawView),
-            propertyChanged: UpdatePath);
 
         bool freeCamera = false;
 
@@ -223,8 +208,6 @@ namespace RedCorners.Forms.GoogleMaps
 
         private void Map_MapLongClicked(object sender, MapLongClickedEventArgs e)
         {
-            if (!IsInteractive) return;
-
             freeCamera = true;
             CameraLatitude = e.Point.Latitude;
             CameraLongitude = e.Point.Longitude;
@@ -239,8 +222,6 @@ namespace RedCorners.Forms.GoogleMaps
         bool isUpdatingPath = false;
         void UpdatePath()
         {
-            if (map == null) return;
-
             if (isUpdatingPath) return;
             isUpdatingPath = true;
 
@@ -249,8 +230,8 @@ namespace RedCorners.Forms.GoogleMaps
             {
                 try
                 {
-                    map.Polylines.Clear();
-                    map.Circles.Clear();
+                    Polylines.Clear();
+                    Circles.Clear();
 
                     var polyline = new Polyline();
 
@@ -269,13 +250,13 @@ namespace RedCorners.Forms.GoogleMaps
                             circle.Radius = Distance.FromMeters(LastCircleRadiusMeters);
                         }
 
-                        map.Circles.Add(circle);
+                        Circles.Add(circle);
                     }
                     polyline.StrokeColor = StrokeColor;
                     polyline.StrokeWidth = StrokeWidth;
 
                     if (polyline.Positions.Count > 1)
-                        map.Polylines.Add(polyline);
+                        Polylines.Add(polyline);
                 }
                 catch (Exception ex)
                 {
@@ -288,19 +269,10 @@ namespace RedCorners.Forms.GoogleMaps
 
         public void UpdateCamera(bool animate)
         {
-            if (map == null) return;
-
             var viewLatitude = CameraLatitude;
             var viewLongitude = CameraLongitude;
             var cameraUpdate = new CameraUpdate(new Position(viewLatitude, viewLongitude), CameraUpdateZoomLevel);
             var distance = CameraPathDefaultDistance;
-
-            if (map.UiSettings.MyLocationButtonEnabled != IsInteractive)
-            {
-                map.UiSettings.MyLocationButtonEnabled = IsInteractive;
-                map.UiSettings.ZoomControlsEnabled = IsInteractive;
-                map.UiSettings.ZoomGesturesEnabled = IsInteractive;
-            }
 
             if (Positions != null && Positions.Count > 0)
             {
@@ -317,11 +289,11 @@ namespace RedCorners.Forms.GoogleMaps
             if (Width > 0 && Height > 0)
             {
                 LogSystem.Instance.Log($"Focusing on {viewLatitude}, {viewLongitude}");
-                map.CenterMap(viewLatitude, viewLongitude, distance, animate);
+                this.CenterMap(viewLatitude, viewLongitude, distance, animate);
             }
             else
             {
-                map.InitialCameraUpdate = cameraUpdate;
+                InitialCameraUpdate = cameraUpdate;
             }
         }
 

@@ -390,15 +390,11 @@ namespace RedCorners.Forms.GoogleMaps.iOS
 
         void UpdateMapStyle()
         {
-            if (Map.MapStyle == null)
-            {
-                ((MapView)Control).MapStyle = null;
-            }
+            var styleJson = ((Map)Element).MapStyle;
+            if (!string.IsNullOrWhiteSpace(styleJson))
+                ((MapView)Control).MapStyle = MapStyle.FromJson(styleJson, null);
             else
-            {
-                var mapStyle = Google.Maps.MapStyle.FromJson(Map.MapStyle.JsonStyle, null);
-                ((MapView)Control).MapStyle = mapStyle;
-            }
+                ((MapView)Control).MapStyle = null;
         }
 
         #region Overridable Members

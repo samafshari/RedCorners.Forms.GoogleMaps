@@ -361,9 +361,15 @@ namespace RedCorners.Forms.GoogleMaps.Android
 
         private void UpdateMapStyle()
         {
-            NativeMap.SetMapStyle(Map.MapStyle != null ?
-                new MapStyleOptions(Map.MapStyle.JsonStyle) : 
-                null);
+            var map = NativeMap;
+            if (map == null)
+                return;
+
+            var styleJson = Map.MapStyle;
+            if (styleJson != null)
+                map.SetMapStyle(new MapStyleOptions(styleJson));
+            else
+                map.SetMapStyle(new MapStyleOptions("[]"));
         }
 
         void SetMapType()
