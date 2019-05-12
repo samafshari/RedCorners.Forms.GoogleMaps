@@ -102,8 +102,8 @@ namespace RedCorners.Forms.GoogleMaps.iOS
         {
             base.OnElementChanged(e);
 
-            // For XAML Previewer or FormsGoogleMaps.Init not called.
-            if (!FormsGoogleMaps.IsInitialized)
+            // For XAML Previewer or GoogleMapsSystem.Init not called.
+            if (!GoogleMapsSystem.IsInitialized)
             {
                 var label = new UILabel()
                 {
@@ -179,8 +179,8 @@ namespace RedCorners.Forms.GoogleMaps.iOS
         {
             base.OnElementPropertyChanged(sender, e);
 
-            // For XAML Previewer or FormsGoogleMaps.Init not called.
-            if (!FormsGoogleMaps.IsInitialized)
+            // For XAML Previewer or GoogleMapsSystem.Init not called.
+            if (!GoogleMapsSystem.IsInitialized)
             {
                 return;
             }
@@ -241,8 +241,8 @@ namespace RedCorners.Forms.GoogleMaps.iOS
         {
             base.LayoutSubviews();
 
-            // For XAML Previewer or FormsGoogleMaps.Init not called.
-            if (!FormsGoogleMaps.IsInitialized)
+            // For XAML Previewer or GoogleMapsSystem.Init not called.
+            if (!GoogleMapsSystem.IsInitialized)
             {
                 return;
             }

@@ -7,9 +7,9 @@ using Android.OS;
 using RedCorners.Forms.GoogleMaps.Android;
 using RedCorners.Forms.GoogleMaps.Android.Factories;
 
-namespace Xamarin
+namespace RedCorners.Forms
 {
-    public static class FormsGoogleMaps
+    public static class GoogleMapsSystem
     {
         public static bool IsInitialized { get; private set; }
 

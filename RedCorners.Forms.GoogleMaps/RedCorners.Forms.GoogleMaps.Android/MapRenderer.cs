@@ -93,8 +93,8 @@ namespace RedCorners.Forms.GoogleMaps.Android
                 return;
             }
 
-            // For XAML Previewer or FormsGoogleMaps.Init not called.
-            if (!FormsGoogleMaps.IsInitialized)
+            // For XAML Previewer or GoogleMapsSystem.Init not called.
+            if (!GoogleMapsSystem.IsInitialized)
             {
                 var tv = new TextView(Context)
                 {
@@ -211,8 +211,8 @@ namespace RedCorners.Forms.GoogleMaps.Android
         {
             base.OnLayout(changed, l, t, r, b);
 
-            // For XAML Previewer or FormsGoogleMaps.Init not called.
-            if (!FormsGoogleMaps.IsInitialized)
+            // For XAML Previewer or GoogleMapsSystem.Init not called.
+            if (!GoogleMapsSystem.IsInitialized)
             {
                 return;
             }
@@ -250,8 +250,8 @@ namespace RedCorners.Forms.GoogleMaps.Android
         {
             base.OnElementPropertyChanged(sender, e);
 
-            // For XAML Previewer or FormsGoogleMaps.Init not called.
-            if (!FormsGoogleMaps.IsInitialized)
+            // For XAML Previewer or GoogleMapsSystem.Init not called.
+            if (!GoogleMapsSystem.IsInitialized)
             {
                 return;
             }

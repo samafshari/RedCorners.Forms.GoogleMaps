@@ -2,9 +2,9 @@
 using Google.Maps;
 using RedCorners.Forms.GoogleMaps.iOS;
 
-namespace Xamarin
+namespace RedCorners.Forms
 {
-    public static class FormsGoogleMaps
+    public static class GoogleMapsSystem
     {
         public static bool IsInitialized { get; private set; }
 

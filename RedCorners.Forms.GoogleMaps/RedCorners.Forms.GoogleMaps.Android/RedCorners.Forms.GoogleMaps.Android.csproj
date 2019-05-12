@@ -58,7 +58,7 @@
     <Compile Include="Extensions\VisibleRegionExtensions.cs" />
     <Compile Include="Factories\DefaultBitmapDescriptorFactory.cs" />
     <Compile Include="Factories\IBitmapDescriptorFactory.cs" />
-    <Compile Include="FormsGoogleMaps.cs" />
+    <Compile Include="GoogleMapsSystem.cs" />
     <Compile Include="GeocoderBackend.cs" />
     <Compile Include="Logics\CameraLogic.cs" />
     <Compile Include="Logics\CircleLogic.cs" />

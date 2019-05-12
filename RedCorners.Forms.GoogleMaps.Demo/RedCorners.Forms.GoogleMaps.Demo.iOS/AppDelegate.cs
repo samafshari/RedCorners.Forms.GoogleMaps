@@ -26,7 +26,7 @@ namespace RedCorners.Forms.GoogleMaps.Demo.iOS
             global::Xamarin.Forms.Forms.Init();
             FormsMaterial.Init();
 
-            Xamarin.FormsGoogleMaps.Init("AIzaSyD8-o87CrfrYJDyvdwKrovfBkR3gMBkNyQ");
+            RedCorners.Forms.GoogleMapsSystem.Init("AIzaSyD8-o87CrfrYJDyvdwKrovfBkR3gMBkNyQ");
 
             LoadApplication(new App());
 

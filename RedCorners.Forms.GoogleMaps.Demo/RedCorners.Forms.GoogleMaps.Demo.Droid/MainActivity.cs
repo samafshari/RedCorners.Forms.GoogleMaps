@@ -19,7 +19,7 @@ namespace RedCorners.Forms.GoogleMaps.Demo.Droid
 
             base.OnCreate(savedInstanceState);
             Xamarin.Forms.Forms.Init(this, savedInstanceState);
-            Xamarin.FormsGoogleMaps.Init(this, savedInstanceState);
+            RedCorners.Forms.GoogleMapsSystem.Init(this, savedInstanceState);
 
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
