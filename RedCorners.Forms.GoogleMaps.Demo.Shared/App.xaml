@@ -13,8 +13,20 @@
 
             <x:Double x:Key="DefaultLatitude">49.6081379</x:Double>
             <x:Double x:Key="DefaultLongitude">6.1308141</x:Double>
+
+            <Style TargetType="map:Map2">
+                <Setter Property="CameraLatitude" Value="{StaticResource DefaultLatitude}" />
+                <Setter Property="CameraLongitude" Value="{StaticResource DefaultLongitude}" />
+                <Setter Property="MapStyle" Value="{Static app:App.MapStyle}" />
+            </Style>
             
-            <Style TargetType="map:Map">
+            <Style TargetType="map:MapDrawView">
+                <Setter Property="CameraLatitude" Value="{StaticResource DefaultLatitude}" />
+                <Setter Property="CameraLongitude" Value="{StaticResource DefaultLongitude}" />
+                <Setter Property="MapStyle" Value="{Static app:App.MapStyle}" />
+            </Style>
+
+            <Style TargetType="map:LocationPickerView">
                 <Setter Property="CameraLatitude" Value="{StaticResource DefaultLatitude}" />
                 <Setter Property="CameraLongitude" Value="{StaticResource DefaultLongitude}" />
                 <Setter Property="MapStyle" Value="{Static app:App.MapStyle}" />
