@@ -10,11 +10,11 @@ namespace RedCorners.Forms.GoogleMaps.Logics
         public float ScaledDensity { get; internal set; }
 
         public TNativeMap NativeMap { get; private set; }
-        public Map Map { get; private set; }
+        public MapBase Map { get; private set; }
 
-        protected abstract INotifyCollectionChanged GetItemAsNotifyCollectionChanged(Map map);
+        protected abstract INotifyCollectionChanged GetItemAsNotifyCollectionChanged(MapBase map);
 
-        internal virtual void Register(TNativeMap oldNativeMap, Map oldMap, TNativeMap newNativeMap, Map newMap)
+        internal virtual void Register(TNativeMap oldNativeMap, MapBase oldMap, TNativeMap newNativeMap, MapBase newMap)
         {
             this.NativeMap = newNativeMap;
             this.Map = newMap;
@@ -26,7 +26,7 @@ namespace RedCorners.Forms.GoogleMaps.Logics
                 inccItems.CollectionChanged += OnCollectionChanged;
         }
 
-        internal virtual void Unregister(TNativeMap nativeMap, Map map)
+        internal virtual void Unregister(TNativeMap nativeMap, MapBase map)
         {
             if (map != null)
             {

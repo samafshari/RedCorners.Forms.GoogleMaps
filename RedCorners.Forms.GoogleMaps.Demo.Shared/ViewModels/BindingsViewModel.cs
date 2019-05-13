@@ -7,11 +7,12 @@ namespace RedCorners.Forms.GoogleMaps.Demo.ViewModels
 {
     public class BindingsViewModel : BindableModel
     {
+        int _counter = 0;
         string _console = "";
         public string Console
         {
             get => _console;
-            set => SetProperty(ref _console, value);
+            set => SetProperty(ref _console, $"[{_counter++}] {value}");
         }
 
         public Command<Pin> PinClickCommand => new Command<Pin>(pin =>
@@ -19,7 +20,7 @@ namespace RedCorners.Forms.GoogleMaps.Demo.ViewModels
             if (pin != null)
                 Console += $"PinClickCommand {pin.Position.Latitude}, {pin.Position.Longitude}\n{Console}";
             else
-                Console += $"PinClickCommand null";
+                Console += $"PinClickCommand null\n";
         });
 
         public Command<Pin> SelectedPinChangeCommand => new Command<Pin>(pin =>
@@ -27,7 +28,7 @@ namespace RedCorners.Forms.GoogleMaps.Demo.ViewModels
             if (pin != null)
                 Console += $"SelectedPinChangeCommand {pin.Position.Latitude}, {pin.Position.Longitude}\n{Console}";
             else
-                Console += $"SelectedPinChangeCommand null";
+                Console += $"SelectedPinChangeCommand null\n";
         });
 
         public Command<Position> MapClickCommand => new Command<Position>(point =>
@@ -35,7 +36,7 @@ namespace RedCorners.Forms.GoogleMaps.Demo.ViewModels
             if (point != null)
                 Console += $"MapClickCommand {point.Latitude}, {point.Longitude}\n{Console}";
             else
-                Console += $"MapClickCommand null";
+                Console += $"MapClickCommand null\n";
         });
 
         public Command<Position> MapLongClickCommand => new Command<Position>(point =>
@@ -43,7 +44,7 @@ namespace RedCorners.Forms.GoogleMaps.Demo.ViewModels
             if (point != null)
                 Console += $"MapLongClickCommand {point.Latitude}, {point.Longitude}\n{Console}";
             else
-                Console += $"MapLongClickCommand null";
+                Console += $"MapLongClickCommand null\n";
         });
     }
 }

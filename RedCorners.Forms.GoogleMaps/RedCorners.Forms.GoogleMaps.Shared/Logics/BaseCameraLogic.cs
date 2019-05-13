@@ -4,12 +4,12 @@ namespace RedCorners.Forms.GoogleMaps.Logics
 {
     internal abstract class BaseCameraLogic<TNativeMap> : IMapRequestDelegate where TNativeMap:class
     {
-        protected Map _map;
+        protected MapBase _map;
         protected TNativeMap _nativeMap;
 
         public float ScaledDensity { get; internal set; }
 
-        public virtual void Register(Map map, TNativeMap nativeMap)
+        public virtual void Register(MapBase map, TNativeMap nativeMap)
         {
             _map = map ?? throw new System.ArgumentNullException(nameof(map));
             _nativeMap = nativeMap ?? throw new System.ArgumentNullException(nameof(nativeMap));

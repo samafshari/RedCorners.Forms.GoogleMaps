@@ -16,7 +16,7 @@ namespace RedCorners.Forms.GoogleMaps.Logics.Android
 {
     internal class GroundOverlayLogic : DefaultGroundOverlayLogic<NativeGroundOverlay, GoogleMap>
     {
-        protected override IList<GroundOverlay> GetItems(Map map) => map.GroundOverlays;
+        protected override IList<GroundOverlay> GetItems(MapBase map) => map.GroundOverlays;
 
         private readonly Context _context;
         private readonly IBitmapDescriptorFactory _bitmapDescriptorFactory;
@@ -29,7 +29,7 @@ namespace RedCorners.Forms.GoogleMaps.Logics.Android
             _bitmapDescriptorFactory = bitmapDescriptorFactory;
         }
 
-        internal override void Register(GoogleMap oldNativeMap, Map oldMap, GoogleMap newNativeMap, Map newMap)
+        internal override void Register(GoogleMap oldNativeMap, MapBase oldMap, GoogleMap newNativeMap, MapBase newMap)
         {
             base.Register(oldNativeMap, oldMap, newNativeMap, newMap);
 
@@ -39,7 +39,7 @@ namespace RedCorners.Forms.GoogleMaps.Logics.Android
             }
         }
 
-        internal override void Unregister(GoogleMap nativeMap, Map map)
+        internal override void Unregister(GoogleMap nativeMap, MapBase map)
         {
             if (nativeMap != null)
             {

@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace RedCorners.Forms.GoogleMaps
 {
-    public class LocationPickerView : Map2
+    public class LocationPickerView : Map
     {
         public double? Latitude
         {

@@ -11,9 +11,9 @@ namespace RedCorners.Forms.GoogleMaps.Logics.iOS
 {
     internal class PolygonLogic : DefaultPolygonLogic<NativePolygon, MapView>
     {
-        protected override IList<Polygon> GetItems(Map map) => map.Polygons;
+        protected override IList<Polygon> GetItems(MapBase map) => map.Polygons;
 
-        internal override void Register(MapView oldNativeMap, Map oldMap, MapView newNativeMap, Map newMap)
+        internal override void Register(MapView oldNativeMap, MapBase oldMap, MapView newNativeMap, MapBase newMap)
         {
             base.Register(oldNativeMap, oldMap, newNativeMap, newMap);
 
@@ -23,7 +23,7 @@ namespace RedCorners.Forms.GoogleMaps.Logics.iOS
             }
         }
 
-        internal override void Unregister(MapView nativeMap, Map map)
+        internal override void Unregister(MapView nativeMap, MapBase map)
         {
             if (nativeMap != null)
             {

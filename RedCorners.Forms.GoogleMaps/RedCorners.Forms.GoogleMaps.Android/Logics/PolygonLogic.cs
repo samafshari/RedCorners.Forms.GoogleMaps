@@ -14,9 +14,9 @@ namespace RedCorners.Forms.GoogleMaps.Logics.Android
 {
     internal class PolygonLogic : DefaultPolygonLogic<NativePolygon, GoogleMap>
     {
-        protected override IList<Polygon> GetItems(Map map) => map.Polygons;
+        protected override IList<Polygon> GetItems(MapBase map) => map.Polygons;
 
-        internal override void Register(GoogleMap oldNativeMap, Map oldMap, GoogleMap newNativeMap, Map newMap)
+        internal override void Register(GoogleMap oldNativeMap, MapBase oldMap, GoogleMap newNativeMap, MapBase newMap)
         {
             base.Register(oldNativeMap, oldMap, newNativeMap, newMap);
 
@@ -26,7 +26,7 @@ namespace RedCorners.Forms.GoogleMaps.Logics.Android
             }
         }
 
-        internal override void Unregister(GoogleMap nativeMap, Map map)
+        internal override void Unregister(GoogleMap nativeMap, MapBase map)
         {
             if (nativeMap != null)
             {

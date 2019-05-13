@@ -7,9 +7,9 @@ using Xamarin.Forms;
 
 namespace RedCorners.Forms.GoogleMaps
 {
-    public class Map2 : Map
+    public class Map : MapBase
     {
-        public Map2()
+        public Map()
         {
             MapLongClicked += Map2_MapLongClicked;
             MapClicked += Map2_MapClicked;
@@ -93,66 +93,66 @@ namespace RedCorners.Forms.GoogleMaps
 
         protected static void UpdatePin(BindableObject bindable, object oldVal, object newVal)
         {
-            if (bindable is Map2 view)
+            if (bindable is Map view)
                 view.UpdatePin();
         }
 
         public static readonly BindableProperty CameraLatitudeProperty = BindableProperty.Create(
             nameof(CameraLatitude),
             typeof(double),
-            typeof(Map2),
+            typeof(Map),
             MapLocationSystem.Instance.Latitude,
             defaultBindingMode: BindingMode.OneTime,
             propertyChanged: (bindable, oldVal, newVal) =>
             {
-                if (bindable is Map2 map && !map.FreeCamera)
+                if (bindable is Map map && !map.FreeCamera)
                     map.UpdatePin();
             });
 
         public static readonly BindableProperty CameraLongitudeProperty = BindableProperty.Create(
             nameof(CameraLongitude),
             typeof(double),
-            typeof(Map2),
+            typeof(Map),
             MapLocationSystem.Instance.Longitude,
             defaultBindingMode: BindingMode.OneTime,
             propertyChanged: (bindable, oldVal, newVal) =>
             {
-                if (bindable is Map2 map && !map.FreeCamera)
+                if (bindable is Map map && !map.FreeCamera)
                     map.UpdatePin();
             });
 
         public static readonly BindableProperty PinClickCommandProperty = BindableProperty.Create(
             nameof(PinClickCommand),
             typeof(ICommand),
-            typeof(Map2),
+            typeof(Map),
             defaultBindingMode: BindingMode.TwoWay,
             defaultValue: null);
 
         public static readonly BindableProperty SelectedPinChangeCommandProperty = BindableProperty.Create(
             nameof(SelectedPinChangeCommand),
             typeof(ICommand),
-            typeof(Map2),
+            typeof(Map),
             defaultBindingMode: BindingMode.TwoWay,
             defaultValue: null);
 
         public static readonly BindableProperty MapClickCommandProperty = BindableProperty.Create(
             nameof(MapClickCommand),
             typeof(ICommand),
-            typeof(Map2),
+            typeof(Map),
             defaultBindingMode: BindingMode.TwoWay,
             defaultValue: null);
 
         public static readonly BindableProperty MapLongClickCommandProperty = BindableProperty.Create(
             nameof(MapLongClickCommand),
             typeof(ICommand),
-            typeof(Map2),
+            typeof(Map),
             defaultBindingMode: BindingMode.TwoWay,
             defaultValue: null);
 
         public static readonly BindableProperty CameraUpdateZoomLevelProperty = BindableProperty.Create(
             nameof(CameraUpdateZoomLevel),
             typeof(int),
-            typeof(Map2),
+            typeof(Map),
             14,
             defaultBindingMode: BindingMode.TwoWay,
             propertyChanged: UpdatePin);
@@ -160,7 +160,7 @@ namespace RedCorners.Forms.GoogleMaps
         public static readonly BindableProperty CameraPathDefaultDistanceProperty = BindableProperty.Create(
             nameof(CameraPathDefaultDistance),
             typeof(double),
-            typeof(Map2),
+            typeof(Map),
             0.5,
             BindingMode.TwoWay,
             propertyChanged: UpdatePin);

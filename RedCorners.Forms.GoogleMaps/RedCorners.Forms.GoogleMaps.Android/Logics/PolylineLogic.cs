@@ -12,9 +12,9 @@ namespace RedCorners.Forms.GoogleMaps.Logics.Android
 {
     internal class PolylineLogic : DefaultPolylineLogic<NativePolyline, GoogleMap>
     {
-        protected override IList<Polyline> GetItems(Map map) => map.Polylines;
+        protected override IList<Polyline> GetItems(MapBase map) => map.Polylines;
 
-        internal override void Register(GoogleMap oldNativeMap, Map oldMap, GoogleMap newNativeMap, Map newMap)
+        internal override void Register(GoogleMap oldNativeMap, MapBase oldMap, GoogleMap newNativeMap, MapBase newMap)
         {
             base.Register(oldNativeMap, oldMap, newNativeMap, newMap);
 
@@ -24,7 +24,7 @@ namespace RedCorners.Forms.GoogleMaps.Logics.Android
             }
         }
 
-        internal override void Unregister(GoogleMap nativeMap, Map map)
+        internal override void Unregister(GoogleMap nativeMap, MapBase map)
         {
             if (nativeMap != null)
             {

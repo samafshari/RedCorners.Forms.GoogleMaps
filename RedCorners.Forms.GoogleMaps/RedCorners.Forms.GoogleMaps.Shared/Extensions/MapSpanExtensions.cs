@@ -14,7 +14,7 @@ namespace RedCorners.Forms.GoogleMaps
             return new Bounds(southWest, northEast);
         }
 
-        public static void CenterMap(this Map map,
+        public static void CenterMap(this MapBase map,
             double lat,
             double lng,
             double km,

@@ -21,7 +21,7 @@ namespace RedCorners.Forms.GoogleMaps.Logics.Android
             _updateVisibleRegion = updateVisibleRegion;
         }
 
-        public override void Register(Map map, GoogleMap nativeMap)
+        public override void Register(MapBase map, GoogleMap nativeMap)
         {
             base.Register(map, nativeMap);
 

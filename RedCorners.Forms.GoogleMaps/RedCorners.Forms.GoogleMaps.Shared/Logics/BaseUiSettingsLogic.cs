@@ -7,10 +7,10 @@ namespace RedCorners.Forms.GoogleMaps.Logics
 {
     internal abstract class BaseUiSettingsLogic<TNativeMap>
     {
-        protected Map Map { get; private set; }
+        protected MapBase Map { get; private set; }
         protected TNativeMap NativeMap { get; private set; }
 
-        public void Register(Map map, TNativeMap nativeMap)
+        public void Register(MapBase map, TNativeMap nativeMap)
         {
             this.Map = map;
             this.NativeMap = nativeMap;

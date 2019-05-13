@@ -24,11 +24,11 @@ using Xamarin;
 using Android.Locations;
 using Xamarin.Forms.Internals;
 
-[assembly: ExportRenderer(typeof(RedCorners.Forms.GoogleMaps.Map), typeof(RedCorners.Forms.GoogleMaps.Android.MapRenderer))]
+[assembly: ExportRenderer(typeof(RedCorners.Forms.GoogleMaps.MapBase), typeof(RedCorners.Forms.GoogleMaps.Android.MapRenderer))]
 [assembly: Preserve]
 namespace RedCorners.Forms.GoogleMaps.Android
 {
-    public class MapRenderer : ViewRenderer<Map, global::Android.Views.View>,
+    public class MapRenderer : ViewRenderer<MapBase, global::Android.Views.View>,
         GoogleMap.IOnMapClickListener,
         GoogleMap.IOnMapLongClickListener,
         GoogleMap.IOnMyLocationButtonClickListener,
@@ -72,7 +72,7 @@ namespace RedCorners.Forms.GoogleMaps.Android
         protected GoogleMap NativeMap { get; private set; }
 
         // ReSharper disable once MemberCanBePrivate.Global
-        protected Map Map => Element;
+        protected MapBase Map => Element;
 
         private bool _ready = false;
         private bool _onLayout = false;
@@ -84,7 +84,7 @@ namespace RedCorners.Forms.GoogleMaps.Android
             return new SizeRequest(new Size(Context.ToPixels(40), Context.ToPixels(40)));
         }
 
-        protected override async void OnElementChanged(ElementChangedEventArgs<Map> e)
+        protected override async void OnElementChanged(ElementChangedEventArgs<MapBase> e)
         {
             base.OnElementChanged(e);
 
@@ -109,7 +109,7 @@ namespace RedCorners.Forms.GoogleMaps.Android
 
             // Uninitialize old view
             GoogleMap oldNativeMap = null;
-            Map oldMap = null;
+            MapBase oldMap = null;
             if (e.OldElement != null)
             {
                 try
@@ -172,7 +172,7 @@ namespace RedCorners.Forms.GoogleMaps.Android
             }));
         }
 
-        protected virtual void OnMapReady(GoogleMap nativeMap, Map map)
+        protected virtual void OnMapReady(GoogleMap nativeMap, MapBase map)
         {
             if (nativeMap != null)
             {
@@ -238,7 +238,7 @@ namespace RedCorners.Forms.GoogleMaps.Android
                 if (logic.Map != null)
                 {
                     logic.RestoreItems();
-                    logic.OnMapPropertyChanged(new PropertyChangedEventArgs(Map.SelectedPinProperty.PropertyName));
+                    logic.OnMapPropertyChanged(new PropertyChangedEventArgs(MapBase.SelectedPinProperty.PropertyName));
                 }
             }
 
@@ -256,13 +256,13 @@ namespace RedCorners.Forms.GoogleMaps.Android
                 return;
             }
 
-            if (e.PropertyName == Map.MapTypeProperty.PropertyName)
+            if (e.PropertyName == MapBase.MapTypeProperty.PropertyName)
             {
                 SetMapType();
                 return;
             }
 
-            if (e.PropertyName == Map.PaddingProperty.PropertyName)
+            if (e.PropertyName == MapBase.PaddingProperty.PropertyName)
             {
                 SetPadding();
                 return;
@@ -273,35 +273,35 @@ namespace RedCorners.Forms.GoogleMaps.Android
                 return;
             }
 
-            if (e.PropertyName == Map.IsShowingUserProperty.PropertyName)
+            if (e.PropertyName == MapBase.IsShowingUserProperty.PropertyName)
             {
                 UpdateIsShowingUser();
             }
-            else if (e.PropertyName == Map.MyLocationEnabledProperty.PropertyName)
+            else if (e.PropertyName == MapBase.MyLocationEnabledProperty.PropertyName)
             {
                 UpdateMyLocationEnabled();
             }
-            else if (e.PropertyName == Map.HasScrollEnabledProperty.PropertyName)
+            else if (e.PropertyName == MapBase.HasScrollEnabledProperty.PropertyName)
             {
                 UpdateHasScrollEnabled();
             }
-            else if (e.PropertyName == Map.HasZoomEnabledProperty.PropertyName)
+            else if (e.PropertyName == MapBase.HasZoomEnabledProperty.PropertyName)
             {
                 UpdateHasZoomEnabled();
             }
-            else if (e.PropertyName == Map.HasRotationEnabledProperty.PropertyName)
+            else if (e.PropertyName == MapBase.HasRotationEnabledProperty.PropertyName)
             {
                 UpdateHasRotationEnabled();
             }
-            else if (e.PropertyName == Map.IsTrafficEnabledProperty.PropertyName)
+            else if (e.PropertyName == MapBase.IsTrafficEnabledProperty.PropertyName)
             {
                 UpdateIsTrafficEnabled();
             }
-            else if (e.PropertyName == Map.IndoorEnabledProperty.PropertyName)
+            else if (e.PropertyName == MapBase.IndoorEnabledProperty.PropertyName)
             {
                 UpdateIndoorEnabled();
             }
-            else if (e.PropertyName == Map.MapStyleProperty.PropertyName)
+            else if (e.PropertyName == MapBase.MapStyleProperty.PropertyName)
             {
                 UpdateMapStyle();
             }
@@ -495,7 +495,7 @@ namespace RedCorners.Forms.GoogleMaps.Android
 
         #endregion
 
-        private void Uninitialize(GoogleMap nativeMap, Map map) 
+        private void Uninitialize(GoogleMap nativeMap, MapBase map) 
         {
             try
             {

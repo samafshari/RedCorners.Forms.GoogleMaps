@@ -13,9 +13,9 @@ namespace RedCorners.Forms.GoogleMaps.Logics
     {
         readonly IList<TOuter> _outerItems = new List<TOuter>(); // Only for ResetItems.
 
-        protected abstract IList<TOuter> GetItems(Map map);
+        protected abstract IList<TOuter> GetItems(MapBase map);
 
-        protected override INotifyCollectionChanged GetItemAsNotifyCollectionChanged(Map map) =>
+        protected override INotifyCollectionChanged GetItemAsNotifyCollectionChanged(MapBase map) =>
             GetItems(map) as INotifyCollectionChanged;
 
         protected abstract TNative CreateNativeItem(TOuter outerItem);

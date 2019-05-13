@@ -12,7 +12,7 @@ namespace RedCorners.Forms.GoogleMaps.Logics.Android
 {
     internal class CircleLogic : DefaultCircleLogic<NativeCircle, GoogleMap>
     {
-        internal override void Register(GoogleMap oldNativeMap, Map oldMap, GoogleMap newNativeMap, Map newMap)
+        internal override void Register(GoogleMap oldNativeMap, MapBase oldMap, GoogleMap newNativeMap, MapBase newMap)
         {
             base.Register(oldNativeMap, oldMap, newNativeMap, newMap);
 
@@ -22,7 +22,7 @@ namespace RedCorners.Forms.GoogleMaps.Logics.Android
             }
         }
 
-        internal override void Unregister(GoogleMap nativeMap, Map map)
+        internal override void Unregister(GoogleMap nativeMap, MapBase map)
         {
             if (nativeMap != null)
             {
@@ -32,7 +32,7 @@ namespace RedCorners.Forms.GoogleMaps.Logics.Android
             base.Unregister(nativeMap, map);
         }
 
-        protected override IList<Circle> GetItems(Map map) => map.Circles;
+        protected override IList<Circle> GetItems(MapBase map) => map.Circles;
 
         protected override NativeCircle CreateNativeItem(Circle outerItem)
         {

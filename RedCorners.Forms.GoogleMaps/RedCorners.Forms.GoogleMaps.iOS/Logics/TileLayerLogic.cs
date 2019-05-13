@@ -11,7 +11,7 @@ namespace RedCorners.Forms.GoogleMaps.Logics.iOS
 {
     internal class TileLayerLogic : DefaultLogic<TileLayer, NativeTileLayer, MapView>
     {
-        protected override IList<TileLayer> GetItems(Map map) => map.TileLayers;
+        protected override IList<TileLayer> GetItems(MapBase map) => map.TileLayers;
 
         protected override NativeTileLayer CreateNativeItem(TileLayer outerItem)
         {

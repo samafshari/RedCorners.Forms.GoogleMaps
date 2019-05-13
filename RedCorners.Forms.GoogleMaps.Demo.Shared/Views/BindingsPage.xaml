@@ -15,7 +15,7 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <map:Map2
+        <map:Map
             Grid.Row="0" 
             PinClickCommand="{Binding PinClickCommand}"
             SelectedPinChangeCommand="{Binding SelectedPinChangeCommand}"

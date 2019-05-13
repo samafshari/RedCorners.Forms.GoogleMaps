@@ -9,7 +9,7 @@ using RedCorners.Forms.Systems;
 
 namespace RedCorners.Forms.GoogleMaps
 {
-    public class MapDrawView : Map2
+    public class MapDrawView : Map
     {
         public MapDrawView()
         {

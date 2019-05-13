@@ -12,7 +12,7 @@ namespace RedCorners.Forms.GoogleMaps.Logics.iOS
 {
     internal class PinLogic : DefaultPinLogic<Marker, MapView>
     {
-        protected override IList<Pin> GetItems(Map map) => map.Pins;
+        protected override IList<Pin> GetItems(MapBase map) => map.Pins;
 
         private bool _onMarkerEvent;
         private Pin _draggingPin;
@@ -38,7 +38,7 @@ namespace RedCorners.Forms.GoogleMaps.Logics.iOS
             _onMarkerDeleted = onMarkerDeleted;
         }
 
-        internal override void Register(MapView oldNativeMap, Map oldMap, MapView newNativeMap, Map newMap)
+        internal override void Register(MapView oldNativeMap, MapBase oldMap, MapView newNativeMap, MapBase newMap)
         {
             base.Register(oldNativeMap, oldMap, newNativeMap, newMap);
 
@@ -55,7 +55,7 @@ namespace RedCorners.Forms.GoogleMaps.Logics.iOS
 
         }
 
-        internal override void Unregister(MapView nativeMap, Map map)
+        internal override void Unregister(MapView nativeMap, MapBase map)
         {
             if (nativeMap != null)
             {
@@ -119,7 +119,7 @@ namespace RedCorners.Forms.GoogleMaps.Logics.iOS
 
         internal override void OnMapPropertyChanged(PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == Map.SelectedPinProperty.PropertyName)
+            if (e.PropertyName == MapBase.SelectedPinProperty.PropertyName)
             {
                 if (!_onMarkerEvent)
                     UpdateSelectedPin(Map.SelectedPin);

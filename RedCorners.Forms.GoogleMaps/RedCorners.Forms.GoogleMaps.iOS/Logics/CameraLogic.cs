@@ -22,7 +22,7 @@ namespace RedCorners.Forms.GoogleMaps.Logics.iOS
             _raiseCameraPositionChanged = raiseCameraPositionChanged;
         }
 
-        public override void Register(Map map, MapView nativeMap)
+        public override void Register(MapBase map, MapView nativeMap)
         {
             base.Register(map, nativeMap);
             _nativeMap.WillMove += NativeMap_WillMove;

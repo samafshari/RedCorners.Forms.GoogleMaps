@@ -16,7 +16,7 @@ using Foundation;
 using Xamarin.Forms;
 using Xamarin;
 
-[assembly: ExportRenderer(typeof(RedCorners.Forms.GoogleMaps.Map), typeof(RedCorners.Forms.GoogleMaps.iOS.MapRenderer))]
+[assembly: ExportRenderer(typeof(RedCorners.Forms.GoogleMaps.MapBase), typeof(RedCorners.Forms.GoogleMaps.iOS.MapRenderer))]
 [assembly: Preserve]
 namespace RedCorners.Forms.GoogleMaps.iOS
 {
@@ -36,7 +36,7 @@ namespace RedCorners.Forms.GoogleMaps.iOS
         // ReSharper disable once MemberCanBePrivate.Global
         protected MapView NativeMap => (MapView)Control;
         // ReSharper disable once MemberCanBePrivate.Global
-        protected Map Map => (Map)Element;
+        protected MapBase Map => (MapBase)Element;
 
         protected internal static PlatformConfig Config { protected get; set; }
 
@@ -119,7 +119,7 @@ namespace RedCorners.Forms.GoogleMaps.iOS
             var oldMapView = (MapView)Control;
             if (e.OldElement != null)
             {
-                var oldMapModel = (Map)e.OldElement;
+                var oldMapModel = (MapBase)e.OldElement;
                 oldMapModel.OnSnapshot -= OnSnapshot;
                 _cameraLogic.Unregister();
 
@@ -134,7 +134,7 @@ namespace RedCorners.Forms.GoogleMaps.iOS
 
             if (e.NewElement != null)
             {
-                var mapModel = (Map)e.NewElement;
+                var mapModel = (MapBase)e.NewElement;
 
                 if (Control == null)
                 {
@@ -167,9 +167,9 @@ namespace RedCorners.Forms.GoogleMaps.iOS
 
                 foreach (var logic in Logics)
                 {
-                    logic.Register(oldMapView, (Map)e.OldElement, NativeMap, Map);
+                    logic.Register(oldMapView, (MapBase)e.OldElement, NativeMap, Map);
                     logic.RestoreItems();
-                    logic.OnMapPropertyChanged(new PropertyChangedEventArgs(Map.SelectedPinProperty.PropertyName));
+                    logic.OnMapPropertyChanged(new PropertyChangedEventArgs(MapBase.SelectedPinProperty.PropertyName));
                 }
 
             }
@@ -185,48 +185,48 @@ namespace RedCorners.Forms.GoogleMaps.iOS
                 return;
             }
 
-            if (e.PropertyName == Map.MapTypeProperty.PropertyName)
+            if (e.PropertyName == MapBase.MapTypeProperty.PropertyName)
             {
                 UpdateMapType();
             }
-            else if (e.PropertyName == Map.IsShowingUserProperty.PropertyName)
+            else if (e.PropertyName == MapBase.IsShowingUserProperty.PropertyName)
             {
                 UpdateIsShowingUser();
             }
-            else if (e.PropertyName == Map.MyLocationEnabledProperty.PropertyName)
+            else if (e.PropertyName == MapBase.MyLocationEnabledProperty.PropertyName)
             {
                 UpdateMyLocationEnabled();
             }
-            else if (e.PropertyName == Map.HasScrollEnabledProperty.PropertyName)
+            else if (e.PropertyName == MapBase.HasScrollEnabledProperty.PropertyName)
             {
                 UpdateHasScrollEnabled();
             }
-            else if (e.PropertyName == Map.HasRotationEnabledProperty.PropertyName)
+            else if (e.PropertyName == MapBase.HasRotationEnabledProperty.PropertyName)
             {
                 UpdateHasRotationEnabled();
             }
-            else if (e.PropertyName == Map.HasZoomEnabledProperty.PropertyName)
+            else if (e.PropertyName == MapBase.HasZoomEnabledProperty.PropertyName)
             {
                 UpdateHasZoomEnabled();
             }
-            else if (e.PropertyName == Map.IsTrafficEnabledProperty.PropertyName)
+            else if (e.PropertyName == MapBase.IsTrafficEnabledProperty.PropertyName)
             {
                 UpdateIsTrafficEnabled();
             }
             else if (e.PropertyName == VisualElement.HeightProperty.PropertyName &&
-                     ((Map) Element).InitialCameraUpdate != null)
+                     ((MapBase) Element).InitialCameraUpdate != null)
             {
                 _shouldUpdateRegion = true;
             }
-            else if (e.PropertyName == Map.IndoorEnabledProperty.PropertyName)
+            else if (e.PropertyName == MapBase.IndoorEnabledProperty.PropertyName)
             {
                 UpdateHasIndoorEnabled();
             }
-            else if (e.PropertyName == Map.PaddingProperty.PropertyName)
+            else if (e.PropertyName == MapBase.PaddingProperty.PropertyName)
             {
                 UpdatePadding();
             }
-            else if (e.PropertyName == Map.MapStyleProperty.PropertyName)
+            else if (e.PropertyName == MapBase.MapStyleProperty.PropertyName)
             {
                 UpdateMapStyle();
             }
@@ -249,7 +249,7 @@ namespace RedCorners.Forms.GoogleMaps.iOS
 
             if (_shouldUpdateRegion && !_ready)
             {
-                _cameraLogic.MoveCamera(((Map)Element).InitialCameraUpdate);
+                _cameraLogic.MoveCamera(((MapBase)Element).InitialCameraUpdate);
                 _ready = true;
                 _shouldUpdateRegion = false;
             }
@@ -280,7 +280,7 @@ namespace RedCorners.Forms.GoogleMaps.iOS
             if (Element == null)
                 return;
 
-            var mapModel = (Map)Element;
+            var mapModel = (MapBase)Element;
             var mkMapView = (MapView)Control;
 
             var region = mkMapView.Projection.VisibleRegion;
@@ -318,50 +318,50 @@ namespace RedCorners.Forms.GoogleMaps.iOS
         private void UpdateHasScrollEnabled(bool? initialScrollGesturesEnabled = null)
         {
 #pragma warning disable 618
-            NativeMap.Settings.ScrollGestures = initialScrollGesturesEnabled ?? ((Map)Element).HasScrollEnabled;
+            NativeMap.Settings.ScrollGestures = initialScrollGesturesEnabled ?? ((MapBase)Element).HasScrollEnabled;
 #pragma warning restore 618
         }
 
         private void UpdateHasZoomEnabled(bool? initialZoomGesturesEnabled = null)
         {
 #pragma warning disable 618
-            NativeMap.Settings.ZoomGestures = initialZoomGesturesEnabled ?? ((Map)Element).HasZoomEnabled;
+            NativeMap.Settings.ZoomGestures = initialZoomGesturesEnabled ?? ((MapBase)Element).HasZoomEnabled;
 #pragma warning restore 618
         }
 
         private void UpdateHasRotationEnabled(bool? initialRotateGesturesEnabled = null)
         {
 #pragma warning disable 618
-            NativeMap.Settings.RotateGestures = initialRotateGesturesEnabled ?? ((Map)Element).HasRotationEnabled;
+            NativeMap.Settings.RotateGestures = initialRotateGesturesEnabled ?? ((MapBase)Element).HasRotationEnabled;
 #pragma warning restore 618
         }
 
         private void UpdateIsShowingUser(bool? initialMyLocationButtonEnabled = null)
         {
 #pragma warning disable 618
-            ((MapView)Control).MyLocationEnabled = ((Map)Element).IsShowingUser;
-            ((MapView)Control).Settings.MyLocationButton = initialMyLocationButtonEnabled ?? ((Map)Element).IsShowingUser;
+            ((MapView)Control).MyLocationEnabled = ((MapBase)Element).IsShowingUser;
+            ((MapView)Control).Settings.MyLocationButton = initialMyLocationButtonEnabled ?? ((MapBase)Element).IsShowingUser;
 #pragma warning restore 618
         }
 
         void UpdateMyLocationEnabled()
         {
-            ((MapView)Control).MyLocationEnabled = ((Map)Element).MyLocationEnabled;
+            ((MapView)Control).MyLocationEnabled = ((MapBase)Element).MyLocationEnabled;
         }
 
         void UpdateIsTrafficEnabled()
         {
-            ((MapView)Control).TrafficEnabled = ((Map)Element).IsTrafficEnabled;
+            ((MapView)Control).TrafficEnabled = ((MapBase)Element).IsTrafficEnabled;
         }
 
         void UpdateHasIndoorEnabled()
         {
-            ((MapView) Control).IndoorEnabled = ((Map)Element).IsIndoorEnabled;
+            ((MapView) Control).IndoorEnabled = ((MapBase)Element).IsIndoorEnabled;
         }
 
         void UpdateMapType()
         {
-            switch (((Map)Element).MapType)
+            switch (((MapBase)Element).MapType)
             {
                 case MapType.Street:
                     ((MapView)Control).MapType = MapViewType.Normal;
@@ -385,12 +385,12 @@ namespace RedCorners.Forms.GoogleMaps.iOS
 
         void UpdatePadding()
         {
-            ((MapView)Control).Padding = ((Map)Element).Padding.ToUIEdgeInsets();
+            ((MapView)Control).Padding = ((MapBase)Element).Padding.ToUIEdgeInsets();
         }
 
         void UpdateMapStyle()
         {
-            var styleJson = ((Map)Element).MapStyle;
+            var styleJson = ((MapBase)Element).MapStyle;
             if (!string.IsNullOrWhiteSpace(styleJson))
                 ((MapView)Control).MapStyle = MapStyle.FromJson(styleJson, null);
             else
