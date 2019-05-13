@@ -67,6 +67,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)TileLayer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UiSettings.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\LocationPickerView.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Map2.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\MapDrawView.cs" />
   </ItemGroup>
 </Project>

@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace RedCorners.Forms.GoogleMaps
 {
-    public class LocationPickerView : Map
+    public class LocationPickerView : Map2
     {
         public double? Latitude
         {
@@ -20,18 +20,6 @@ namespace RedCorners.Forms.GoogleMaps
         {
             get => (double?)GetValue(LongitudeProperty);
             set => SetValue(LongitudeProperty, value);
-        }
-
-        public double CameraLatitude
-        {
-            get => (double)GetValue(CameraLatitudeProperty);
-            set => SetValue(CameraLatitudeProperty, value);
-        }
-
-        public double CameraLongitude
-        {
-            get => (double)GetValue(CameraLongitudeProperty);
-            set => SetValue(CameraLongitudeProperty, value);
         }
 
         public ICommand LocationPickCommand
@@ -75,28 +63,6 @@ namespace RedCorners.Forms.GoogleMaps
             typeof(LocationPickerView),
             null,
             defaultBindingMode: BindingMode.OneWay,
-            propertyChanged: (bindable, oldVal, newVal) =>
-            {
-                (bindable as LocationPickerView)?.UpdatePin();
-            });
-
-        public static readonly BindableProperty CameraLatitudeProperty = BindableProperty.Create(
-            nameof(CameraLatitude),
-            typeof(double),
-            typeof(LocationPickerView),
-            MapLocationSystem.Instance.Latitude,
-            defaultBindingMode: BindingMode.OneTime,
-            propertyChanged: (bindable, oldVal, newVal) =>
-            {
-                (bindable as LocationPickerView)?.UpdatePin();
-            });
-
-        public static readonly BindableProperty CameraLongitudeProperty = BindableProperty.Create(
-            nameof(CameraLongitude),
-            typeof(double),
-            typeof(LocationPickerView),
-            MapLocationSystem.Instance.Longitude,
-            defaultBindingMode: BindingMode.OneTime,
             propertyChanged: (bindable, oldVal, newVal) =>
             {
                 (bindable as LocationPickerView)?.UpdatePin();
@@ -156,9 +122,9 @@ namespace RedCorners.Forms.GoogleMaps
 
         bool isFirstTime = true;
 
-        public override void Start()
+        public override void OnStart()
         {
-            base.Start();
+            base.OnStart();
             if (isFirstTime)
             {
                 isFirstTime = false;
@@ -183,7 +149,7 @@ namespace RedCorners.Forms.GoogleMaps
         }
 
         bool isUpdatingPin = false;
-        protected virtual void UpdatePin()
+        protected override void UpdatePin()
         {
             if (isUpdatingPin) return;
             isUpdatingPin = true;
@@ -235,25 +201,6 @@ namespace RedCorners.Forms.GoogleMaps
                 LocationPickCommand?.Execute(e.Point);
             }
             Console.WriteLine($"End Map LongClicked: {e.Point}");
-        }
-
-        public void CenterOnPin(bool animate)
-        {
-            if (Width > 0 && Height > 0)
-            {
-                LogSystem.Instance.Log($"Focusing on {CameraLatitude}, {CameraLongitude}");
-                this.CenterMap(CameraLatitude, CameraLongitude, 0.5, animate);
-            }
-            else
-            {
-                InitialCameraUpdate = new CameraUpdate(new Position(CameraLatitude, CameraLongitude), 14.0);
-            }
-        }
-
-        protected override void OnSizeAllocated(double width, double height)
-        {
-            base.OnSizeAllocated(width, height);
-            UpdatePin();
         }
     }
 }

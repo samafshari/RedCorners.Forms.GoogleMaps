@@ -7,11 +7,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedCorners.Forms.GoogleMaps
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lib", "Lib", "{9F3DEF0A-02E2-450D-B9C3-693E620C7ABE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedCorners.Forms.GoogleMaps.Android", "..\RedCorners.Forms.GoogleMaps\RedCorners.Forms.GoogleMaps.Android\RedCorners.Forms.GoogleMaps.Android.csproj", "{03F8D9B4-DECD-462E-A845-F947F6976FBB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedCorners.Forms.GoogleMaps.Android", "RedCorners.Forms.GoogleMaps\RedCorners.Forms.GoogleMaps.Android\RedCorners.Forms.GoogleMaps.Android.csproj", "{03F8D9B4-DECD-462E-A845-F947F6976FBB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedCorners.Forms.GoogleMaps.iOS", "..\RedCorners.Forms.GoogleMaps\RedCorners.Forms.GoogleMaps.iOS\RedCorners.Forms.GoogleMaps.iOS.csproj", "{FCFA8F9A-6E8E-4F9B-9026-E562C9B6473B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedCorners.Forms.GoogleMaps.iOS", "RedCorners.Forms.GoogleMaps\RedCorners.Forms.GoogleMaps.iOS\RedCorners.Forms.GoogleMaps.iOS.csproj", "{FCFA8F9A-6E8E-4F9B-9026-E562C9B6473B}"
 EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "RedCorners.Forms.GoogleMaps.Shared", "..\RedCorners.Forms.GoogleMaps\RedCorners.Forms.GoogleMaps.Shared\RedCorners.Forms.GoogleMaps.Shared.shproj", "{B04AE06F-BE71-419B-B501-A5433E05C3BF}"
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "RedCorners.Forms.GoogleMaps.Shared", "RedCorners.Forms.GoogleMaps\RedCorners.Forms.GoogleMaps.Shared\RedCorners.Forms.GoogleMaps.Shared.shproj", "{B04AE06F-BE71-419B-B501-A5433E05C3BF}"
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "RedCorners.Forms.GoogleMaps.Demo.Shared", "RedCorners.Forms.GoogleMaps.Demo.Shared\RedCorners.Forms.GoogleMaps.Demo.Shared.shproj", "{185A383B-C8F6-410D-BD0F-C3078812558B}"
 EndProject
@@ -19,12 +19,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedCorners.Forms.GoogleMaps
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		..\RedCorners.Forms.GoogleMaps\RedCorners.Forms.GoogleMaps.Shared\RedCorners.Forms.GoogleMaps.Shared.projitems*{03f8d9b4-decd-462e-a845-f947f6976fbb}*SharedItemsImports = 4
+		RedCorners.Forms.GoogleMaps\RedCorners.Forms.GoogleMaps.Shared\RedCorners.Forms.GoogleMaps.Shared.projitems*{03f8d9b4-decd-462e-a845-f947f6976fbb}*SharedItemsImports = 4
 		RedCorners.Forms.GoogleMaps.Demo.Shared\RedCorners.Forms.GoogleMaps.Demo.Shared.projitems*{185a383b-c8f6-410d-bd0f-c3078812558b}*SharedItemsImports = 13
 		RedCorners.Forms.GoogleMaps.Demo.Shared\RedCorners.Forms.GoogleMaps.Demo.Shared.projitems*{354e0ab7-0b05-4d92-8672-4c504453401e}*SharedItemsImports = 4
 		RedCorners.Forms.GoogleMaps.Demo.Shared\RedCorners.Forms.GoogleMaps.Demo.Shared.projitems*{567c21da-b53b-4816-8bdf-a9e210f4974d}*SharedItemsImports = 4
-		..\RedCorners.Forms.GoogleMaps\RedCorners.Forms.GoogleMaps.Shared\RedCorners.Forms.GoogleMaps.Shared.projitems*{b04ae06f-be71-419b-b501-a5433e05c3bf}*SharedItemsImports = 13
-		..\RedCorners.Forms.GoogleMaps\RedCorners.Forms.GoogleMaps.Shared\RedCorners.Forms.GoogleMaps.Shared.projitems*{fcfa8f9a-6e8e-4f9b-9026-e562c9b6473b}*SharedItemsImports = 4
+		RedCorners.Forms.GoogleMaps\RedCorners.Forms.GoogleMaps.Shared\RedCorners.Forms.GoogleMaps.Shared.projitems*{b04ae06f-be71-419b-b501-a5433e05c3bf}*SharedItemsImports = 13
+		RedCorners.Forms.GoogleMaps\RedCorners.Forms.GoogleMaps.Shared\RedCorners.Forms.GoogleMaps.Shared.projitems*{fcfa8f9a-6e8e-4f9b-9026-e562c9b6473b}*SharedItemsImports = 4
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

@@ -18,7 +18,7 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Label Text="Location Picker View" HorizontalOptions="Center" Grid.Row="0" />
-        <map:LocationPickerView Grid.Row="1" Latitude="{Binding Latitude,Mode=TwoWay}" Longitude="{Binding Longitude, Mode=TwoWay}">
+        <map:LocationPickerView Grid.Row="1" Latitude="{Binding Latitude, Mode=TwoWay}" Longitude="{Binding Longitude, Mode=TwoWay}">
             <map:LocationPickerView.PinIcon>
                 <map:BitmapDescriptor Type="Bundle" BundleName="foodtruck.png" />
             </map:LocationPickerView.PinIcon>
@@ -31,7 +31,7 @@
             <Button Grid.Column="0" Text="Red" Command="{Binding RedCommand}" />
             <Button Grid.Column="1" Text="Green" Command="{Binding GreenCommand}" />
         </Grid>
-        <map:LocationPickerView Grid.Row="3" Latitude="{Binding Latitude,Mode=TwoWay}" Longitude="{Binding Longitude,Mode=TwoWay}">
+        <map:LocationPickerView Grid.Row="3" Latitude="{Binding Latitude, Mode=TwoWay}" Longitude="{Binding Longitude, Mode=TwoWay}">
             <map:LocationPickerView.PinIcon>
                 <map:BitmapDescriptor Color="{Binding Color}" />
             </map:LocationPickerView.PinIcon>
