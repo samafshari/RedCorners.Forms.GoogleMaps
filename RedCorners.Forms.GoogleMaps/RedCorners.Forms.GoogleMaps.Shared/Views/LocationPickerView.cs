@@ -187,7 +187,7 @@ namespace RedCorners.Forms.GoogleMaps
             {
                 if (Pins.Count > 0) Pins.Clear();
             }
-            CenterOnPin(animate);
+            UpdateCamera(animate);
             isUpdatingPin = false;
         }
 

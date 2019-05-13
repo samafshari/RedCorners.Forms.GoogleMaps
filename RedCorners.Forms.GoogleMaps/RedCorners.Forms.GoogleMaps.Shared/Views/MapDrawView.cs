@@ -9,42 +9,17 @@ using RedCorners.Forms.Systems;
 
 namespace RedCorners.Forms.GoogleMaps
 {
-    public class MapDrawView : Map
+    public class MapDrawView : Map2
     {
         public MapDrawView()
         {
             MapLongClicked += Map_MapLongClicked;
         }
 
-        public double CameraLatitude
-        {
-            get => (double)GetValue(CameraLatitudeProperty);
-            set => SetValue(CameraLatitudeProperty, value);
-        }
-
-        public double CameraLongitude
-        {
-            get => (double)GetValue(CameraLongitudeProperty);
-            set => SetValue(CameraLongitudeProperty, value);
-        }
-
-
         public ObservableCollection<Position> Positions
         {
             get => (ObservableCollection<Position>)GetValue(PositionsProperty);
             set => SetValue(PositionsProperty, value);
-        }
-
-        public int CameraUpdateZoomLevel
-        {
-            get => (int)GetValue(CameraUpdateZoomLevelProperty);
-            set => SetValue(CameraUpdateZoomLevelProperty, value);
-        }
-
-        public double CameraPathDefaultDistance
-        {
-            get => (double)GetValue(CameraPathDefaultDistanceProperty);
-            set => SetValue(CameraPathDefaultDistanceProperty, value);
         }
 
         public ICommand PositionAddedCommand
@@ -82,52 +57,6 @@ namespace RedCorners.Forms.GoogleMaps
             get => (float)GetValue(StrokeWidthProperty);
             set => SetValue(StrokeWidthProperty, value);
         }
-
-        bool freeCamera = false;
-
-        public static readonly BindableProperty CameraLatitudeProperty = BindableProperty.Create(
-            nameof(CameraLatitude),
-            typeof(double),
-            typeof(MapDrawView),
-            MapLocationSystem.Instance.Latitude,
-            defaultBindingMode: BindingMode.OneTime,
-            propertyChanged: (bindable, oldVal, newVal) =>
-            {
-                if (bindable is MapDrawView view && !view.freeCamera)
-                {
-                    view.UpdatePath();
-                }
-            });
-
-        public static readonly BindableProperty CameraLongitudeProperty = BindableProperty.Create(
-            nameof(CameraLongitude),
-            typeof(double),
-            typeof(MapDrawView),
-            MapLocationSystem.Instance.Longitude,
-            defaultBindingMode: BindingMode.OneTime,
-            propertyChanged: (bindable, oldVal, newVal) =>
-            {
-                if (bindable is MapDrawView view && !view.freeCamera)
-                {
-                    view.UpdatePath();
-                }
-            });
-
-        public static readonly BindableProperty CameraUpdateZoomLevelProperty = BindableProperty.Create(
-            nameof(CameraUpdateZoomLevel),
-            typeof(int),
-            typeof(MapDrawView),
-            14,
-            defaultBindingMode: BindingMode.TwoWay,
-            propertyChanged: UpdatePath);
-
-        public static readonly BindableProperty CameraPathDefaultDistanceProperty = BindableProperty.Create(
-            nameof(CameraPathDefaultDistance),
-            typeof(double),
-            typeof(MapDrawView),
-            0.5,
-            BindingMode.TwoWay,
-            propertyChanged: UpdatePath);
 
         public static readonly BindableProperty CircleFillColorProperty = BindableProperty.Create(
             nameof(CircleFillColor),
@@ -172,7 +101,7 @@ namespace RedCorners.Forms.GoogleMaps
         static void UpdatePath(BindableObject bindable, object oldVal, object newVal)
         {
             if (bindable is MapDrawView view)
-                view.UpdatePath();
+                view.UpdatePin();
         }
 
         public static readonly BindableProperty PositionsProperty = BindableProperty.Create(
@@ -192,7 +121,7 @@ namespace RedCorners.Forms.GoogleMaps
                 {
                     newCollection.CollectionChanged += view.Collection_CollectionChanged;
                 }
-                view.UpdatePath();
+                view.UpdatePin();
             });
 
         public static readonly BindableProperty PositionAddedCommandProperty = BindableProperty.Create(
@@ -203,15 +132,15 @@ namespace RedCorners.Forms.GoogleMaps
 
         void Collection_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            UpdatePath();
+            UpdatePin();
         }
 
         private void Map_MapLongClicked(object sender, MapLongClickedEventArgs e)
         {
-            freeCamera = true;
+            FreeCamera = true;
             CameraLatitude = e.Point.Latitude;
             CameraLongitude = e.Point.Longitude;
-            freeCamera = false;
+            FreeCamera = false;
 
             if (Positions == null) Positions = new ObservableCollection<Position>();
 
@@ -220,7 +149,7 @@ namespace RedCorners.Forms.GoogleMaps
         }
 
         bool isUpdatingPath = false;
-        void UpdatePath()
+        protected override void UpdatePin()
         {
             if (isUpdatingPath) return;
             isUpdatingPath = true;
@@ -267,7 +196,7 @@ namespace RedCorners.Forms.GoogleMaps
             isUpdatingPath = false;
         }
 
-        public void UpdateCamera(bool animate)
+        public override void UpdateCamera(bool animate)
         {
             var viewLatitude = CameraLatitude;
             var viewLongitude = CameraLongitude;
@@ -295,12 +224,6 @@ namespace RedCorners.Forms.GoogleMaps
             {
                 InitialCameraUpdate = cameraUpdate;
             }
-        }
-
-        protected override void OnSizeAllocated(double width, double height)
-        {
-            base.OnSizeAllocated(width, height);
-            UpdatePath();
         }
     }
 }

@@ -19,18 +19,50 @@ namespace RedCorners.Forms.GoogleMaps
 
         private void Map2_PinClicked(object sender, PinClickedEventArgs e)
         {
+            if (PinClickCommand?.CanExecute(e.Pin) ?? false)
+                PinClickCommand.Execute(e.Pin);
         }
 
         private void Map2_SelectedPinChanged(object sender, SelectedPinChangedEventArgs e)
         {
+            if (SelectedPinChangeCommand?.CanExecute(e.SelectedPin) ?? false)
+                SelectedPinChangeCommand.Execute(e.SelectedPin);
         }
 
         private void Map2_MapClicked(object sender, MapClickedEventArgs e)
         {
+            if (MapClickCommand?.CanExecute(e.Point) ?? false)
+                MapClickCommand.Execute(e.Point);
         }
 
         private void Map2_MapLongClicked(object sender, MapLongClickedEventArgs e)
         {
+            if (MapLongClickCommand?.CanExecute(e.Point) ?? false)
+                MapLongClickCommand.Execute(e.Point);
+        }
+
+        public ICommand PinClickCommand
+        {
+            get => (ICommand)GetValue(PinClickCommandProperty);
+            set => SetValue(PinClickCommandProperty, value);
+        }
+
+        public ICommand SelectedPinChangeCommand
+        {
+            get => (ICommand)GetValue(SelectedPinChangeCommandProperty);
+            set => SetValue(SelectedPinChangeCommandProperty, value);
+        }
+
+        public ICommand MapClickCommand
+        {
+            get => (ICommand)GetValue(MapClickCommandProperty);
+            set => SetValue(MapClickCommandProperty, value);
+        }
+
+        public ICommand MapLongClickCommand
+        {
+            get => (ICommand)GetValue(MapLongClickCommandProperty);
+            set => SetValue(MapLongClickCommandProperty, value);
         }
 
         public double CameraLatitude
@@ -45,6 +77,26 @@ namespace RedCorners.Forms.GoogleMaps
             set => SetValue(CameraLongitudeProperty, value);
         }
 
+        public int CameraUpdateZoomLevel
+        {
+            get => (int)GetValue(CameraUpdateZoomLevelProperty);
+            set => SetValue(CameraUpdateZoomLevelProperty, value);
+        }
+
+        public double CameraPathDefaultDistance
+        {
+            get => (double)GetValue(CameraPathDefaultDistanceProperty);
+            set => SetValue(CameraPathDefaultDistanceProperty, value);
+        }
+
+        protected bool FreeCamera = false;
+
+        protected static void UpdatePin(BindableObject bindable, object oldVal, object newVal)
+        {
+            if (bindable is Map2 view)
+                view.UpdatePin();
+        }
+
         public static readonly BindableProperty CameraLatitudeProperty = BindableProperty.Create(
             nameof(CameraLatitude),
             typeof(double),
@@ -53,7 +105,8 @@ namespace RedCorners.Forms.GoogleMaps
             defaultBindingMode: BindingMode.OneTime,
             propertyChanged: (bindable, oldVal, newVal) =>
             {
-                (bindable as Map2)?.UpdatePin();
+                if (bindable is Map2 map && !map.FreeCamera)
+                    map.UpdatePin();
             });
 
         public static readonly BindableProperty CameraLongitudeProperty = BindableProperty.Create(
@@ -64,19 +117,65 @@ namespace RedCorners.Forms.GoogleMaps
             defaultBindingMode: BindingMode.OneTime,
             propertyChanged: (bindable, oldVal, newVal) =>
             {
-                (bindable as Map2)?.UpdatePin();
+                if (bindable is Map2 map && !map.FreeCamera)
+                    map.UpdatePin();
             });
 
-        public void CenterOnPin(bool animate)
+        public static readonly BindableProperty PinClickCommandProperty = BindableProperty.Create(
+            nameof(PinClickCommand),
+            typeof(ICommand),
+            typeof(Map2),
+            defaultBindingMode: BindingMode.TwoWay,
+            defaultValue: null);
+
+        public static readonly BindableProperty SelectedPinChangeCommandProperty = BindableProperty.Create(
+            nameof(SelectedPinChangeCommand),
+            typeof(ICommand),
+            typeof(Map2),
+            defaultBindingMode: BindingMode.TwoWay,
+            defaultValue: null);
+
+        public static readonly BindableProperty MapClickCommandProperty = BindableProperty.Create(
+            nameof(MapClickCommand),
+            typeof(ICommand),
+            typeof(Map2),
+            defaultBindingMode: BindingMode.TwoWay,
+            defaultValue: null);
+
+        public static readonly BindableProperty MapLongClickCommandProperty = BindableProperty.Create(
+            nameof(MapLongClickCommand),
+            typeof(ICommand),
+            typeof(Map2),
+            defaultBindingMode: BindingMode.TwoWay,
+            defaultValue: null);
+
+        public static readonly BindableProperty CameraUpdateZoomLevelProperty = BindableProperty.Create(
+            nameof(CameraUpdateZoomLevel),
+            typeof(int),
+            typeof(Map2),
+            14,
+            defaultBindingMode: BindingMode.TwoWay,
+            propertyChanged: UpdatePin);
+
+        public static readonly BindableProperty CameraPathDefaultDistanceProperty = BindableProperty.Create(
+            nameof(CameraPathDefaultDistance),
+            typeof(double),
+            typeof(Map2),
+            0.5,
+            BindingMode.TwoWay,
+            propertyChanged: UpdatePin);
+
+
+        public virtual void UpdateCamera(bool animate)
         {
             if (Width > 0 && Height > 0)
             {
                 LogSystem.Instance.Log($"Focusing on {CameraLatitude}, {CameraLongitude}");
-                this.CenterMap(CameraLatitude, CameraLongitude, 0.5, animate);
+                this.CenterMap(CameraLatitude, CameraLongitude, CameraPathDefaultDistance, animate);
             }
             else
             {
-                InitialCameraUpdate = new CameraUpdate(new Position(CameraLatitude, CameraLongitude), 14.0);
+                InitialCameraUpdate = new CameraUpdate(new Position(CameraLatitude, CameraLongitude), CameraUpdateZoomLevel);
             }
         }
 
@@ -92,8 +191,8 @@ namespace RedCorners.Forms.GoogleMaps
             if (isUpdatingPin) return;
             isUpdatingPin = true;
             bool animate = true;
-            
-            CenterOnPin(animate);
+
+            UpdateCamera(animate);
             isUpdatingPin = false;
         }
     }
