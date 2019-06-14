@@ -108,8 +108,8 @@ namespace RedCorners.Forms.GoogleMaps.iOS
                 var label = new UILabel()
                 {
                     Text = "RedCorners.Forms.GoogleMaps",
-                    BackgroundColor = Color.Teal.ToUIColor(),
-                    TextColor = Color.Black.ToUIColor(),
+                    BackgroundColor = Xamarin.Forms.Color.Teal.ToUIColor(),
+                    TextColor = Xamarin.Forms.Color.Black.ToUIColor(),
                     TextAlignment = UITextAlignment.Center
                 };
                 SetNativeControl(label);
