@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<rf:AliveContentPage 
+<rf:ContentPage2 
     xmlns="http://xamarin.com/schemas/2014/forms" 
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
     xmlns:rf="clr-namespace:RedCorners.Forms;assembly=RedCorners.Forms"
     xmlns:map="clr-namespace:RedCorners.Forms.GoogleMaps;assembly=RedCorners.Forms.GoogleMaps"
     xmlns:vm="clr-namespace:RedCorners.Forms.GoogleMaps.Demo.ViewModels"
     x:Class="RedCorners.Forms.GoogleMaps.Demo.Views.LocationPickerPage">
-    <rf:AliveContentPage.BindingContext>
+    <rf:ContentPage2.BindingContext>
         <vm:LocationPickerViewModel />
-    </rf:AliveContentPage.BindingContext>
+    </rf:ContentPage2.BindingContext>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -46,4 +46,4 @@
         </Button>
     </Grid>
 
-</rf:AliveContentPage>
+</rf:ContentPage2>

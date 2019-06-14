@@ -14,7 +14,7 @@ using Xamarin.Forms;
 
 namespace RedCorners.Forms.GoogleMaps
 {
-    public class MapBase : AliveContentView, IEnumerable<Pin>
+    public class MapBase : ContentView2, IEnumerable<Pin>
     {
         public static readonly BindableProperty ItemsSourceProperty = BindableProperty.Create(nameof(IEnumerable), typeof(IEnumerable), typeof(MapBase), default(IEnumerable),
             propertyChanged: (b, o, n) => ((MapBase)b).OnItemsSourcePropertyChanged((IEnumerable)o, (IEnumerable)n));

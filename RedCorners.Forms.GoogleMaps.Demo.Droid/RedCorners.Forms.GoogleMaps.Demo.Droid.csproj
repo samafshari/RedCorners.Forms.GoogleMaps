@@ -36,7 +36,7 @@
     <AndroidLinkMode>None</AndroidLinkMode>
     <EmbedAssembliesIntoApk>true</EmbedAssembliesIntoApk>
     <AndroidEnableSGenConcurrent>false</AndroidEnableSGenConcurrent>
-    <AndroidSupportedAbis>armeabi-v7a;x86</AndroidSupportedAbis>
+    <AndroidSupportedAbis>armeabi-v7a;x86_64</AndroidSupportedAbis>
     <AndroidEnableMultiDex>true</AndroidEnableMultiDex>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -84,16 +84,16 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="RedCorners.Forms">
-      <Version>4.7.2</Version>
+      <Version>4.9.10</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Android.Support.Design" Version="28.0.0.1" />
     <PackageReference Include="Xamarin.Android.Support.Core.Utils" Version="28.0.0.1" />
     <PackageReference Include="Xamarin.Android.Support.CustomTabs" Version="28.0.0.1" />
     <PackageReference Include="RedCorners">
-      <Version>4.1.1</Version>
+      <Version>4.1.2</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Forms">
-      <Version>3.6.0.344457</Version>
+      <Version>4.0.0.497661</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.GooglePlayServices.Maps">
       <Version>60.1142.1</Version>

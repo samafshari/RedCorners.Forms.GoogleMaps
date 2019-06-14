@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<rf:AliveContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<rf:ContentPage2 xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:views="clr-namespace:RedCorners.Forms.GoogleMaps.Demo.Views"
              xmlns:map="clr-namespace:RedCorners.Forms.GoogleMaps;assembly=RedCorners.Forms.GoogleMaps"
@@ -34,4 +34,4 @@
         </Button>
     </StackLayout>
 
-</rf:AliveContentPage>
+</rf:ContentPage2>
