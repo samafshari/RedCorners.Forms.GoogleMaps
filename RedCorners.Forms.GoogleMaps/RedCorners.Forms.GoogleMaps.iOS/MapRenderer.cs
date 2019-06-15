@@ -138,7 +138,7 @@ namespace RedCorners.Forms.GoogleMaps.iOS
 
                 if (Control == null)
                 {
-                    SetNativeControl(new MapView(RectangleF.Empty));
+                    SetNativeControl(new MapView(CoreGraphics.CGRect.Empty));
                     var mkMapView = (MapView)Control;
                     mkMapView.CameraPositionChanged += CameraPositionChanged;
                     mkMapView.CoordinateTapped += CoordinateTapped;
