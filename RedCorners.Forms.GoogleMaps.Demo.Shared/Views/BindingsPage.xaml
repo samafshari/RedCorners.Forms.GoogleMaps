@@ -5,6 +5,7 @@
     xmlns:rf="clr-namespace:RedCorners.Forms;assembly=RedCorners.Forms"
     xmlns:map="clr-namespace:RedCorners.Forms.GoogleMaps;assembly=RedCorners.Forms.GoogleMaps"
     xmlns:vm="clr-namespace:RedCorners.Forms.GoogleMaps.Demo.ViewModels"
+    FixTopPadding="False"
     x:Class="RedCorners.Forms.GoogleMaps.Demo.Views.BindingsPage">
     <rf:ContentPage2.BindingContext>
         <vm:BindingsViewModel />
