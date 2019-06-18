@@ -14,7 +14,7 @@
             <x:Double x:Key="DefaultLatitude">49.6081379</x:Double>
             <x:Double x:Key="DefaultLongitude">6.1308141</x:Double>
 
-            <Style TargetType="map:Map2">
+            <Style TargetType="map:Map">
                 <Setter Property="CameraLatitude" Value="{StaticResource DefaultLatitude}" />
                 <Setter Property="CameraLongitude" Value="{StaticResource DefaultLongitude}" />
                 <Setter Property="MapStyle" Value="{Static app:App.MapStyle}" />

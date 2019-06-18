@@ -3,7 +3,7 @@
 	<metadata minClientVersion="2.8.3">
 		<id>RedCorners.Forms.GoogleMaps</id>
 		<title>RedCorners.Forms.GoogleMaps</title>
-		<version>4.2.0</version>
+		<version>4.10.0</version>
 		<releaseNotes>	</releaseNotes>
 		<authors>Saeed Afshari and NeatCapital OÜ</authors>
 		<owners>NeatCapital OÜ</owners>
@@ -16,9 +16,9 @@
 		<tags>xamarin forms maps xamarinforms xamarinformsmaps xamarin.forms.maps xamarinformsgooglemaps RedCorners.Forms.GoogleMaps google googlemap redcorners</tags>
 	<dependencies>
       <group>
-        <dependency id="Xamarin.Forms" version="3.6.0.344457" />
-		<dependency id="RedCorners" version="4.1.1" />
-		<dependency id="RedCorners.Forms" version="4.7.1" />
+        <dependency id="Xamarin.Forms" version="3.6.0.425677" />
+		<dependency id="RedCorners" version="4.10.0" />
+		<dependency id="RedCorners.Forms" version="4.10.0" />
       </group>
       <group targetFramework="MonoAndroid80">
         <dependency id="Xamarin.GooglePlayServices.Maps" version="60.1142.1"/>
