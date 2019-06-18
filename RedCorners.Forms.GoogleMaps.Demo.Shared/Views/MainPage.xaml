@@ -7,7 +7,13 @@
              x:Class="RedCorners.Forms.GoogleMaps.Demo.Views.MainPage">
 
     <StackLayout Spacing="10" Padding="10" VerticalOptions="Center">
+        <Image 
+            Source="http://ooze.redcorners.com/redcorners_forms_googlemaps_logo.png"
+            HorizontalOptions="Center"
+            HeightRequest="128"
+            WidthRequest="128" />
         <Label Text="RedCorners.Forms.GoogleMaps" HorizontalOptions="Center" HorizontalTextAlignment="Center" FontSize="Large" FontAttributes="Bold" />
+        <rf:HorizontalLine BackgroundColor="Black" />
         
         <Button Text="Location Picker Page">
             <Button.Command>
