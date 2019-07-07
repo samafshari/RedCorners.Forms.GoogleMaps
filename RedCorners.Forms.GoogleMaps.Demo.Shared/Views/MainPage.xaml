@@ -38,6 +38,14 @@
                 </rf:PageCommand>
             </Button.Command>
         </Button>
+
+        <Button Text="Heavy Page">
+            <Button.Command>
+                <rf:PageCommand>
+                    <views:HeavyPage />
+                </rf:PageCommand>
+            </Button.Command>
+        </Button>
     </StackLayout>
 
 </rf:ContentPage2>

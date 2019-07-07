@@ -18,6 +18,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)Views\BindingsPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\HeavyPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Views\LocationPickerPage.xaml.cs">
       <DependentUpon>LocationPickerPage.xaml</DependentUpon>
     </Compile>
@@ -57,5 +60,14 @@
     <Compile Update="E:\Projects\RedCorners.Forms.GoogleMaps\RedCorners.Forms.GoogleMaps.Demo.Shared\Views\BindingsPage.xaml.cs">
       <DependentUpon>BindingsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="E:\Projects\RedCorners.Forms.GoogleMaps\RedCorners.Forms.GoogleMaps.Demo.Shared\Views\HeavyPage.xaml.cs">
+      <DependentUpon>HeavyPage.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\HeavyPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>
