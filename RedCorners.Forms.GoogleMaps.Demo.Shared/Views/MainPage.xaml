@@ -39,6 +39,14 @@
             </Button.Command>
         </Button>
 
+        <Button Text="List Page">
+            <Button.Command>
+                <rf:PageCommand>
+                    <views:PinsListPage />
+                </rf:PageCommand>
+            </Button.Command>
+        </Button>
+        
         <Button Text="Heavy Page">
             <Button.Command>
                 <rf:PageCommand>

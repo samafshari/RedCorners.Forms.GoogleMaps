@@ -11,6 +11,7 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)AnimationStatus.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Assembly.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)BasicMapItemTemplate.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)BitmapDescriptor.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)BitmapDescriptorFactory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)BitmapDescriptorType.cs" />

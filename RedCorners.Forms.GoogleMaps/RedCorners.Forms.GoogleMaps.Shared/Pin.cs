@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace RedCorners.Forms.GoogleMaps
@@ -30,6 +31,18 @@ namespace RedCorners.Forms.GoogleMaps
         public static readonly BindableProperty ZIndexProperty = BindableProperty.Create(nameof(ZIndex), typeof(int), typeof(Pin), 0);
 
         public static readonly BindableProperty TransparencyProperty = BindableProperty.Create(nameof(Transparency), typeof(float), typeof(Pin), 0f);
+
+        public static readonly BindableProperty CommandProperty = BindableProperty.Create(
+            nameof(Command),
+            typeof(ICommand),
+            typeof(Pin),
+            default(ICommand));
+
+        public static readonly BindableProperty CommandParameterProperty = BindableProperty.Create(
+            nameof(CommandParameter),
+            typeof(object),
+            typeof(Pin),
+            null);
 
         public string Label
         {
@@ -109,6 +122,18 @@ namespace RedCorners.Forms.GoogleMaps
             set { SetValue(TransparencyProperty, value); }
         }
 
+        public ICommand Command
+        {
+            get => (ICommand)GetValue(CommandProperty);
+            set => SetValue(CommandProperty, value);
+        }
+
+        public object CommandParameter
+        {
+            get => GetValue(CommandParameterProperty);
+            set => SetValue(CommandParameterProperty, value);
+        }
+
         public object Tag { get; set; }
 
         public object NativeObject { get; internal set; }
@@ -154,11 +179,15 @@ namespace RedCorners.Forms.GoogleMaps
 
         internal bool SendTap()
         {
+            if (Command?.CanExecute(CommandParameter) ?? false)
+                Command?.Execute(CommandParameter);
+
             EventHandler handler = Clicked;
             if (handler == null)
                 return false;
 
             handler(this, EventArgs.Empty);
+
             return true;
         }
 

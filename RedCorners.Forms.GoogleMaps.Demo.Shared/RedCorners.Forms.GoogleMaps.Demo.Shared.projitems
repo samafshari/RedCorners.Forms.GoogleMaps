@@ -15,6 +15,7 @@
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\BindingsViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\LocationPickerViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\PinsListViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\BindingsPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -30,6 +31,9 @@
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Views\MapDrawPage.xaml.cs">
       <DependentUpon>MapDrawPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\PinsListPage.xaml.cs">
+      <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -63,9 +67,18 @@
     <Compile Update="E:\Projects\RedCorners.Forms.GoogleMaps\RedCorners.Forms.GoogleMaps.Demo.Shared\Views\HeavyPage.xaml.cs">
       <DependentUpon>HeavyPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="E:\Projects\RedCorners.Forms.GoogleMaps\RedCorners.Forms.GoogleMaps.Demo.Shared\Views\PinsListPage.xaml.cs">
+      <DependentUpon>PinsListPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\HeavyPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\PinsListPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>

@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<rf:ContentPage2
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:rf="clr-namespace:RedCorners.Forms;assembly=RedCorners.Forms"
+    xmlns:vm="clr-namespace:RedCorners.Forms.GoogleMaps.Demo.ViewModels"
+    xmlns:map="clr-namespace:RedCorners.Forms.GoogleMaps;assembly=RedCorners.Forms.GoogleMaps"
+    mc:Ignorable="d"
+    x:Class="RedCorners.Forms.GoogleMaps.Demo.Views.PinsListPage">
+    <ContentPage.BindingContext>
+        <vm:PinsListViewModel x:Name="viewModel" />
+    </ContentPage.BindingContext>
+    <rf:ContentPage2.Resources>
+        <ResourceDictionary>
+            <Style TargetType="rf:TitledContentView">
+                <Setter Property="BackCommand" Value="{Binding ShowSideBarCommand}" />
+                <Setter Property="IsBackButtonVisible" Value="False" />
+                <Setter Property="TitlePosition" Value="Top" />
+                <Setter Property="FixTitlePadding" Value="True" />
+            </Style>
+        </ResourceDictionary>
+    </rf:ContentPage2.Resources>
+
+    <Grid>
+        <rf:TabbedContentView
+            Transition="Slide"
+            TabStyle="Text"
+            TabBarBackgroundColor="#FEFEFE"
+            BackgroundColor="#FFFFFF"
+            TabBarPadding="0,5,0,10">
+            <rf:TabbedContentView.Background>
+                <rf:TitledContentView />
+            </rf:TabbedContentView.Background>
+
+            <rf:TitledContentView Title="Page 1" Icon="icon">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <map:Map ItemsSource="{Binding Items}" Grid.Row="0" />
+                    <StackLayout Orientation="Horizontal" Grid.Row="1">
+                        <Button Text="Circ" VerticalOptions="Center" Command="{Binding AddCircleCommand}" />
+                        <Button Text="Pin" VerticalOptions="Center" Command="{Binding AddPinCommand}" />
+                        <Button Text="Line" VerticalOptions="Center" Command="{Binding AddLineCommand}" />
+                        <Button Text="Clear" VerticalOptions="Center" Command="{Binding ClearCommand}" />
+                    </StackLayout>
+                </Grid>
+            </rf:TitledContentView>
+
+            <rf:TitledContentView Title="Page 2" Icon="icon">
+                <Grid>
+                    <Label HorizontalOptions="Center" VerticalOptions="Center" Text="Hello, Page 2!" />
+                </Grid>
+            </rf:TitledContentView>
+
+            <rf:TitledContentView Title="Page 3" Icon="icon">
+                <Grid>
+                    <Label HorizontalOptions="Center" VerticalOptions="Center" Text="Hello, Page 3!" />
+                </Grid>
+            </rf:TitledContentView>
+        </rf:TabbedContentView>
+
+        <rf:SideBar ContentSize="2*" Side="Left" IsSwipeEnabled="False">
+            <Frame Padding="0" BackgroundColor="#333333" HasShadow="True" CornerRadius="0">
+                <StackLayout Padding="20, 40">
+                    <!-- Define SideBar Here -->
+                </StackLayout>
+            </Frame>
+        </rf:SideBar>
+    </Grid>
+</rf:ContentPage2>

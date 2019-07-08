@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace RedCorners.Forms.GoogleMaps
@@ -15,6 +16,19 @@ namespace RedCorners.Forms.GoogleMaps
         public static readonly BindableProperty CenterProperty = BindableProperty.Create(nameof(Center), typeof(Position), typeof(Circle), default(Position));
         public static readonly BindableProperty RadiusProperty = BindableProperty.Create(nameof(Radius), typeof(Distance), typeof(Circle), Distance.FromMeters(1));
         public static readonly BindableProperty ZIndexProperty = BindableProperty.Create(nameof(ZIndex), typeof(int), typeof(Circle), 0);
+
+        public static readonly BindableProperty CommandProperty = BindableProperty.Create(
+            nameof(Command),
+            typeof(ICommand),
+            typeof(Circle),
+            default(ICommand));
+
+        public static readonly BindableProperty CommandParameterProperty = BindableProperty.Create(
+            nameof(CommandParameter),
+            typeof(object),
+            typeof(Circle),
+            null);
+
 
         public float StrokeWidth
         {
@@ -58,6 +72,18 @@ namespace RedCorners.Forms.GoogleMaps
             set { SetValue(ZIndexProperty, value); }
         }
 
+        public ICommand Command
+        {
+            get => (ICommand)GetValue(CommandProperty);
+            set => SetValue(CommandProperty, value);
+        }
+
+        public object CommandParameter
+        {
+            get => GetValue(CommandParameterProperty);
+            set => SetValue(CommandParameterProperty, value);
+        }
+
         public object Tag { get; set; }
 
         public object NativeObject { get; internal set; }
@@ -70,11 +96,15 @@ namespace RedCorners.Forms.GoogleMaps
 
         internal bool SendTap()
         {
+            if (Command?.CanExecute(CommandParameter) ?? false)
+                Command?.Execute(CommandParameter);
+
             EventHandler handler = Clicked;
             if (handler == null)
                 return false;
 
             handler(this, EventArgs.Empty);
+
             return true;
         }
     }

@@ -14,12 +14,12 @@ using Xamarin.Forms;
 
 namespace RedCorners.Forms.GoogleMaps
 {
-    public class MapBase : ContentView2, IEnumerable<Pin>
+    public class MapBase : ContentView2
     {
         public static readonly BindableProperty ItemsSourceProperty = BindableProperty.Create(nameof(IEnumerable), typeof(IEnumerable), typeof(MapBase), default(IEnumerable),
             propertyChanged: (b, o, n) => ((MapBase)b).OnItemsSourcePropertyChanged((IEnumerable)o, (IEnumerable)n));
 
-        public static readonly BindableProperty ItemTemplateProperty = BindableProperty.Create(nameof(ItemTemplate), typeof(DataTemplate), typeof(MapBase), default(DataTemplate),
+        public static readonly BindableProperty ItemTemplateProperty = BindableProperty.Create(nameof(ItemTemplate), typeof(DataTemplate), typeof(MapBase), new BasicMapItemTemplate(),
             propertyChanged: (b, o, n) => ((MapBase)b).OnItemTemplatePropertyChanged((DataTemplate)o, (DataTemplate)n));
 
         public static readonly BindableProperty MapTypeProperty = BindableProperty.Create(nameof(MapType), typeof(MapType), typeof(MapBase), default(MapType));
@@ -271,11 +271,6 @@ namespace RedCorners.Forms.GoogleMaps
 
         public UiSettings UiSettings { get; } = new UiSettings();
 
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
-        }
-
         public IEnumerator<Pin> GetEnumerator()
         {
             return _pins.GetEnumerator();
@@ -476,13 +471,18 @@ namespace RedCorners.Forms.GoogleMaps
 
         void OnItemTemplatePropertyChanged(DataTemplate _, DataTemplate newItemTemplate)
         {
-            if (newItemTemplate is DataTemplateSelector)
-            {
-                throw new NotSupportedException($"You are using an instance of {nameof(DataTemplateSelector)} to set the {nameof(MapBase)}.{ItemTemplateProperty.PropertyName} property. Use an instance of a {nameof(DataTemplate)} property instead to set an item template.");
-            }
-
-            _pins.Clear();
+            ClearCollections();
             CreatePinItems();
+        }
+
+        void ClearCollections()
+        {
+            _pins.Clear();
+            _polylines.Clear();
+            _polygons.Clear();
+            _circles.Clear();
+            _tileLayers.Clear();
+            _groundOverlays.Clear();
         }
 
         void OnItemsSourceCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
@@ -515,7 +515,7 @@ namespace RedCorners.Forms.GoogleMaps
                         CreatePin(item);
                     break;
                 case NotifyCollectionChangedAction.Reset:
-                    _pins.Clear();
+                    ClearCollections();
                     break;
             }
         }
@@ -540,18 +540,62 @@ namespace RedCorners.Forms.GoogleMaps
                 return;
             }
 
-            var pin = (Pin)ItemTemplate.CreateContent();
-            pin.BindingContext = newItem;
-            _pins.Add(pin);
+            var template = ItemTemplate;
+            if (template is DataTemplateSelector ds)
+                template = ds.SelectTemplate(newItem, this);
+
+            var obj = template.CreateContent();
+
+            switch (obj)
+            {
+                case Pin pin:
+                    pin.BindingContext = newItem;
+                    _pins.Add(pin);
+                    break;
+                case Polyline polyline:
+                    polyline.BindingContext = newItem;
+                    _polylines.Add(polyline);
+                    break;
+                case Polygon polygon:
+                    polygon.BindingContext = newItem;
+                    _polygons.Add(polygon);
+                    break;
+                case Circle circle:
+                    circle.BindingContext = newItem;
+                    _circles.Add(circle);
+                    break;
+                case TileLayer tileLayer:
+                    tileLayer.BindingContext = newItem;
+                    _tileLayers.Add(tileLayer);
+                    break;
+                case GroundOverlay groundOverlay:
+                    groundOverlay.BindingContext = newItem;
+                    _groundOverlays.Add(groundOverlay);
+                    break;
+                default:
+                    throw new Exception("RedCorners.Forms.GoogleMaps: No behavior is defined for the item.");
+            }
         }
 
         void RemovePin(object itemToRemove)
         {
-            Pin pinToRemove = _pins.FirstOrDefault(pin => pin.BindingContext?.Equals(itemToRemove) == true);
-            if (pinToRemove != null)
-            {
-                _pins.Remove(pinToRemove);
-            }
+            foreach (var pin in _pins.Where(x => x.BindingContext?.Equals(itemToRemove) ?? false).ToList())
+                _pins.Remove(pin);
+
+            foreach (var polyline in _polylines.Where(x => x.BindingContext?.Equals(itemToRemove) ?? false).ToList())
+                _polylines.Remove(polyline);
+
+            foreach (var polygon in _polygons.Where(x => x.BindingContext?.Equals(itemToRemove) ?? false).ToList())
+                _polygons.Remove(polygon);
+
+            foreach (var circle in _circles.Where(x => x.BindingContext?.Equals(itemToRemove) ?? false).ToList())
+                _circles.Remove(circle);
+
+            foreach (var tileLayer in _tileLayers.Where(x => x.BindingContext?.Equals(itemToRemove) ?? false).ToList())
+                _tileLayers.Remove(tileLayer);
+
+            foreach (var groundOverlay in _groundOverlays.Where(x => x.BindingContext?.Equals(itemToRemove) ?? false).ToList())
+                _groundOverlays.Remove(groundOverlay);
         }
     }
 }
