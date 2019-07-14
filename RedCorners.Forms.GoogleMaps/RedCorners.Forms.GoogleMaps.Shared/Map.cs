@@ -271,11 +271,6 @@ namespace RedCorners.Forms.GoogleMaps
 
         public UiSettings UiSettings { get; } = new UiSettings();
 
-        public IEnumerator<Pin> GetEnumerator()
-        {
-            return _pins.GetEnumerator();
-        }
-
         public void MoveToRegion(MapSpan mapSpan, bool animate = true)
         {
             if (mapSpan == null)
@@ -465,14 +460,14 @@ namespace RedCorners.Forms.GoogleMaps
                 ncc1.CollectionChanged += OnItemsSourceCollectionChanged;
             }
 
-            _pins.Clear();
-            CreatePinItems();
+            ClearCollections();
+            CreateItems();
         }
 
         void OnItemTemplatePropertyChanged(DataTemplate _, DataTemplate newItemTemplate)
         {
             ClearCollections();
-            CreatePinItems();
+            CreateItems();
         }
 
         void ClearCollections()
@@ -493,7 +488,7 @@ namespace RedCorners.Forms.GoogleMaps
                     if (e.NewStartingIndex == -1)
                         goto case NotifyCollectionChangedAction.Reset;
                     foreach (object item in e.NewItems)
-                        CreatePin(item);
+                        CreateItem(item);
                     break;
                 case NotifyCollectionChangedAction.Move:
                     if (e.OldStartingIndex == -1 || e.NewStartingIndex == -1)
@@ -504,15 +499,15 @@ namespace RedCorners.Forms.GoogleMaps
                     if (e.OldStartingIndex == -1)
                         goto case NotifyCollectionChangedAction.Reset;
                     foreach (object item in e.OldItems)
-                        RemovePin(item);
+                        RemoveItem(item);
                     break;
                 case NotifyCollectionChangedAction.Replace:
                     if (e.OldStartingIndex == -1)
                         goto case NotifyCollectionChangedAction.Reset;
                     foreach (object item in e.OldItems)
-                        RemovePin(item);
+                        RemoveItem(item);
                     foreach (object item in e.NewItems)
-                        CreatePin(item);
+                        CreateItem(item);
                     break;
                 case NotifyCollectionChangedAction.Reset:
                     ClearCollections();
@@ -520,7 +515,7 @@ namespace RedCorners.Forms.GoogleMaps
             }
         }
 
-        void CreatePinItems()
+        void CreateItems()
         {
             if (ItemsSource == null || ItemTemplate == null)
             {
@@ -529,11 +524,11 @@ namespace RedCorners.Forms.GoogleMaps
 
             foreach (object item in ItemsSource)
             {
-                CreatePin(item);
+                CreateItem(item);
             }
         }
 
-        void CreatePin(object newItem)
+        void CreateItem(object newItem)
         {
             if (ItemTemplate == null)
             {
@@ -577,7 +572,7 @@ namespace RedCorners.Forms.GoogleMaps
             }
         }
 
-        void RemovePin(object itemToRemove)
+        void RemoveItem(object itemToRemove)
         {
             foreach (var pin in _pins.Where(x => x.BindingContext?.Equals(itemToRemove) ?? false).ToList())
                 _pins.Remove(pin);

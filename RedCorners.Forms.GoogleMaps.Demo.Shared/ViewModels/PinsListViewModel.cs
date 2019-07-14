@@ -5,12 +5,14 @@ using RedCorners.Forms;
 using RedCorners.Models;
 using System.Collections.Generic;
 using Xamarin.Forms;
+using System.Collections.ObjectModel;
 
 namespace RedCorners.Forms.GoogleMaps.Demo.ViewModels
 {
     public class PinsListViewModel : BindableModel
     {
-        public List<object> Items { get; set; } = new List<object>();
+        //public List<object> Items { get; set; } = new List<object>();
+        public ObservableCollection<object> Items { get; set; } = new ObservableCollection<object>();
 
         public PinsListViewModel()
         {
@@ -31,7 +33,7 @@ namespace RedCorners.Forms.GoogleMaps.Demo.ViewModels
             circ.CommandParameter = circ;
             Items.Add(circ);
 
-            Items = Items.ToList();
+            //Items = Items.ToList();
             UpdateProperties();
         });
 
@@ -48,7 +50,7 @@ namespace RedCorners.Forms.GoogleMaps.Demo.ViewModels
             pin.CommandParameter = pin;
             Items.Add(pin);
 
-            Items = Items.ToList();
+            //Items = Items.ToList();
             UpdateProperties();
         });
 
@@ -63,13 +65,13 @@ namespace RedCorners.Forms.GoogleMaps.Demo.ViewModels
             polyline.Positions.Add(RandPos());
             Items.Add(polyline);
 
-            Items = Items.ToList();
+            //Items = Items.ToList();
             UpdateProperties();
         });
 
         public Command ClearCommand => new Command(() =>
         {
-            Items = new List<object>();
+            Items = new ObservableCollection<object>();// new List<object>();
             UpdateProperties();
         });
 
