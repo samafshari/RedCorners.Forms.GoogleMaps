@@ -10,6 +10,7 @@ namespace RedCorners.Forms.GoogleMaps
 {
     public enum LocationPickerClickTypes
     {
+        Any,
         Click,
         LongClick
     }
@@ -121,7 +122,7 @@ namespace RedCorners.Forms.GoogleMaps
             typeof(LocationPickerClickTypes),
             typeof(LocationPickerView),
             defaultBindingMode: BindingMode.TwoWay,
-            defaultValue: LocationPickerClickTypes.LongClick);
+            defaultValue: LocationPickerClickTypes.Any);
 
         object oldContext = null;
         protected override void OnBindingContextChanged()
@@ -213,13 +214,13 @@ namespace RedCorners.Forms.GoogleMaps
 
         private void Map_MapLongClicked(object sender, MapLongClickedEventArgs e)
         {
-            if (ClickType == LocationPickerClickTypes.LongClick)
+            if (ClickType == LocationPickerClickTypes.LongClick || ClickType == LocationPickerClickTypes.Any)
                 Clicked(e.Point);
         }
 
         private void Map_MapClicked(object sender, MapClickedEventArgs e)
         {
-            if (ClickType == LocationPickerClickTypes.Click)
+            if (ClickType == LocationPickerClickTypes.Click || ClickType == LocationPickerClickTypes.Any)
                 Clicked(e.Point);
         }
 
