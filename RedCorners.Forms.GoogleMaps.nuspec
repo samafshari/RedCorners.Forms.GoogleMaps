@@ -11,8 +11,8 @@
 		<iconUrl>http://ooze.redcorners.com/redcorners_forms_googlemaps_logo.png</iconUrl>
 		<license type="file">LICENSE.txt</license>
     <projectUrl>https://github.com/saeedafshari/RedCorners.Forms.GoogleMaps</projectUrl>
-  	<description>Enhanced Google Maps for Xamarin Forms. Xamarin.Forms.GoogleMaps fork.</description>
-		<summary>Enhanced Google Maps for Xamarin Forms. Xamarin.Forms.GoogleMaps fork.</summary>
+  	<description>Enhanced Google Maps for Xamarin Forms (iOS and Android).</description>
+		<summary>Enhanced Google Maps for Xamarin Forms (iOS and Android).</summary>
 		<tags>xamarin forms maps xamarinforms xamarinformsmaps xamarin.forms.maps xamarinformsgooglemaps RedCorners.Forms.GoogleMaps google googlemap redcorners</tags>
 	<dependencies>
       <group>
