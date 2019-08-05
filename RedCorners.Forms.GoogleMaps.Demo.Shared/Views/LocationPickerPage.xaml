@@ -20,6 +20,7 @@
         <Label Text="Location Picker View" HorizontalOptions="Center" Grid.Row="0" />
         <map:LocationPickerView 
             Grid.Row="1" 
+            ClickType="Click"
             Latitude="{Binding Latitude, Mode=TwoWay}" 
             Longitude="{Binding Longitude, Mode=TwoWay}">
             <map:LocationPickerView.PinIcon>

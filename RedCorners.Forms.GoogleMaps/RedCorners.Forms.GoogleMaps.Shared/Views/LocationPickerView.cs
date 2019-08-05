@@ -8,6 +8,12 @@ using System.Linq;
 
 namespace RedCorners.Forms.GoogleMaps
 {
+    public enum LocationPickerClickTypes
+    {
+        Click,
+        LongClick
+    }
+
     public class LocationPickerView : Map
     {
         public double? Latitude
@@ -44,6 +50,12 @@ namespace RedCorners.Forms.GoogleMaps
         {
             get => (BitmapDescriptor)GetValue(PinIconProperty);
             set => SetValue(PinIconProperty, value);
+        }
+
+        public LocationPickerClickTypes ClickType
+        {
+            get => (LocationPickerClickTypes)GetValue(ClickTypeProperty);
+            set => SetValue(ClickTypeProperty, value);
         }
 
         public static readonly BindableProperty LatitudeProperty = BindableProperty.Create(
@@ -104,6 +116,13 @@ namespace RedCorners.Forms.GoogleMaps
                 }
             });
 
+        public static readonly BindableProperty ClickTypeProperty = BindableProperty.Create(
+            nameof(ClickType),
+            typeof(LocationPickerClickTypes),
+            typeof(LocationPickerView),
+            defaultBindingMode: BindingMode.TwoWay,
+            defaultValue: LocationPickerClickTypes.LongClick);
+
         object oldContext = null;
         protected override void OnBindingContextChanged()
         {
@@ -118,6 +137,7 @@ namespace RedCorners.Forms.GoogleMaps
         public LocationPickerView()
         {
             MapLongClicked += Map_MapLongClicked;
+            MapClicked += Map_MapClicked;
         }
 
         bool isFirstTime = true;
@@ -193,14 +213,26 @@ namespace RedCorners.Forms.GoogleMaps
 
         private void Map_MapLongClicked(object sender, MapLongClickedEventArgs e)
         {
-            Console.WriteLine($"Map LongClicked: {e.Point}");
-            (Latitude, Longitude) = (e.Point.Latitude, e.Point.Longitude);
-            if (LocationPickCommand?.CanExecute(e.Point) ?? false)
+            if (ClickType == LocationPickerClickTypes.LongClick)
+                Clicked(e.Point);
+        }
+
+        private void Map_MapClicked(object sender, MapClickedEventArgs e)
+        {
+            if (ClickType == LocationPickerClickTypes.Click)
+                Clicked(e.Point);
+        }
+
+        void Clicked(Position point)
+        {
+            Console.WriteLine($"Map Clicked: {point}");
+            (Latitude, Longitude) = (point.Latitude, point.Longitude);
+            if (LocationPickCommand?.CanExecute(point) ?? false)
             {
-                Console.WriteLine($"Executing LocationPickCommand: {e.Point}");
-                LocationPickCommand?.Execute(e.Point);
+                Console.WriteLine($"Executing LocationPickCommand: {point}");
+                LocationPickCommand?.Execute(point);
             }
-            Console.WriteLine($"End Map LongClicked: {e.Point}");
+            Console.WriteLine($"End Map Clicked: {point}");
         }
     }
 }
