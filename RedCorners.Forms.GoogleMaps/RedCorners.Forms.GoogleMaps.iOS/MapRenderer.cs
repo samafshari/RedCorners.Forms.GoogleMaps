@@ -248,6 +248,7 @@ namespace RedCorners.Forms.GoogleMaps.iOS
                 _cameraLogic.MoveCamera(((MapBase)Element).InitialCameraUpdate);
                 _ready = true;
                 _shouldUpdateRegion = false;
+                UpdateMyLocationEnabled();
             }
 
         }

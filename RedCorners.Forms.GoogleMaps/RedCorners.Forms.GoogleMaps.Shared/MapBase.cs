@@ -52,7 +52,7 @@ namespace RedCorners.Forms.GoogleMaps
                 ((MapBase)bindable)._useMoveToRegisonAsInitialBounds = false;   
             });
 
-        public static readonly BindableProperty PaddingProperty = BindableProperty.Create(nameof(PaddingProperty), typeof(Thickness), typeof(MapBase), default(Thickness));
+        public static new readonly BindableProperty PaddingProperty = BindableProperty.Create(nameof(PaddingProperty), typeof(Thickness), typeof(MapBase), default(Thickness));
 
         bool _useMoveToRegisonAsInitialBounds = true;
 
@@ -196,7 +196,7 @@ namespace RedCorners.Forms.GoogleMaps
             internal set { SetValue(CameraPositionProperty, value); }
         }
 
-        public Thickness Padding
+        public new Thickness Padding
         {
             get { return (Thickness)GetValue(PaddingProperty); }
             set { SetValue(PaddingProperty, value); }
