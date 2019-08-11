@@ -1,0 +1,28 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
+
+namespace RedCorners.Forms.GoogleMaps.Demo.Views
+{
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class MyLocationPage
+    {
+        public MyLocationPage()
+        {
+            InitializeComponent();
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            map.MyLocationEnabled = true;
+            map.IsMyLocationButtonVisible = true;
+        }
+    }
+}

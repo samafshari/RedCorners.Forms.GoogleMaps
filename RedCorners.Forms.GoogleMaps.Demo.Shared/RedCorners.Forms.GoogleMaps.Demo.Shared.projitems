@@ -32,6 +32,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)Views\MapDrawPage.xaml.cs">
       <DependentUpon>MapDrawPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\MyLocationPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Views\PinsListPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -61,6 +64,9 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="C:\Projects\RedCorners.Forms.GoogleMaps\RedCorners.Forms.GoogleMaps.Demo.Shared\Views\MyLocationPage.xaml.cs">
+      <DependentUpon>MyLocationPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="E:\Projects\RedCorners.Forms.GoogleMaps\RedCorners.Forms.GoogleMaps.Demo.Shared\Views\BindingsPage.xaml.cs">
       <DependentUpon>BindingsPage.xaml</DependentUpon>
     </Compile>
@@ -79,6 +85,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\PinsListPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\MyLocationPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>

@@ -15,6 +15,14 @@
             <Label Text="RedCorners.Forms.GoogleMaps" HorizontalOptions="Center" HorizontalTextAlignment="Center" FontSize="Large" FontAttributes="Bold" />
             <rf:HorizontalLine BackgroundColor="Black" />
 
+            <Button Text="My Location Page">
+                <Button.Command>
+                    <rf:PageCommand>
+                        <views:MyLocationPage />
+                    </rf:PageCommand>
+                </Button.Command>
+            </Button>
+            
             <Button Text="Location Picker Page">
                 <Button.Command>
                     <rf:PageCommand>

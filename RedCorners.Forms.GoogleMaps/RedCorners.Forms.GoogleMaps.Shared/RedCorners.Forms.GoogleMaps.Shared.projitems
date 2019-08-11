@@ -49,7 +49,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Logics\DefaultPinLogic.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Logics\DefaultPolygonLogic.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Logics\DefaultPolylineLogic.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Map.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MapClickedEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MapLongClickedEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MapRegion.cs" />
@@ -68,7 +68,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)TileLayer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UiSettings.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\LocationPickerView.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Views\Map2.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Map.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\MapDrawView.cs" />
   </ItemGroup>
 </Project>

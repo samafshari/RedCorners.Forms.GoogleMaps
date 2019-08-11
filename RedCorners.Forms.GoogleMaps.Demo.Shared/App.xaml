@@ -18,8 +18,6 @@
                 <Setter Property="CameraLatitude" Value="{StaticResource DefaultLatitude}" />
                 <Setter Property="CameraLongitude" Value="{StaticResource DefaultLongitude}" />
                 <Setter Property="MapStyle" Value="{Static app:App.MapStyle}" />
-                <Setter Property="MyLocationEnabled" Value="True" />
-                <Setter Property="IsMyLocationButtonVisible" Value="True" />
             </Style>
             
             <Style TargetType="rf:ContentPage2" ApplyToDerivedTypes="True">
