@@ -5,55 +5,55 @@
              xmlns:map="clr-namespace:RedCorners.Forms.GoogleMaps;assembly=RedCorners.Forms.GoogleMaps"
              xmlns:rf="clr-namespace:RedCorners.Forms;assembly=RedCorners.Forms"
              x:Class="RedCorners.Forms.GoogleMaps.Demo.Views.MainPage">
+    <ScrollView>
+        <StackLayout Spacing="10" Padding="10" VerticalOptions="Center">
+            <Image 
+                Source="https://ooze.redcorners.com/redcorners_forms_googlemaps_logo.png"
+                HorizontalOptions="Center"
+                HeightRequest="128"
+                WidthRequest="128" />
+            <Label Text="RedCorners.Forms.GoogleMaps" HorizontalOptions="Center" HorizontalTextAlignment="Center" FontSize="Large" FontAttributes="Bold" />
+            <rf:HorizontalLine BackgroundColor="Black" />
 
-    <StackLayout Spacing="10" Padding="10" VerticalOptions="Center">
-        <Image 
-            Source="http://ooze.redcorners.com/redcorners_forms_googlemaps_logo.png"
-            HorizontalOptions="Center"
-            HeightRequest="128"
-            WidthRequest="128" />
-        <Label Text="RedCorners.Forms.GoogleMaps" HorizontalOptions="Center" HorizontalTextAlignment="Center" FontSize="Large" FontAttributes="Bold" />
-        <rf:HorizontalLine BackgroundColor="Black" />
-        
-        <Button Text="Location Picker Page">
-            <Button.Command>
-                <rf:PageCommand>
-                    <views:LocationPickerPage />
-                </rf:PageCommand>
-            </Button.Command>
-        </Button>
-       
-       <Button Text="Map Draw Page">
-            <Button.Command>
-                <rf:PageCommand>
-                    <views:MapDrawPage />
-                </rf:PageCommand>
-            </Button.Command>
-        </Button>
+            <Button Text="Location Picker Page">
+                <Button.Command>
+                    <rf:PageCommand>
+                        <views:LocationPickerPage />
+                    </rf:PageCommand>
+                </Button.Command>
+            </Button>
 
-        <Button Text="Bindings Page">
-            <Button.Command>
-                <rf:PageCommand>
-                    <views:BindingsPage />
-                </rf:PageCommand>
-            </Button.Command>
-        </Button>
+            <Button Text="Map Draw Page">
+                <Button.Command>
+                    <rf:PageCommand>
+                        <views:MapDrawPage />
+                    </rf:PageCommand>
+                </Button.Command>
+            </Button>
 
-        <Button Text="List Page">
-            <Button.Command>
-                <rf:PageCommand>
-                    <views:PinsListPage />
-                </rf:PageCommand>
-            </Button.Command>
-        </Button>
-        
-        <Button Text="Heavy Page">
-            <Button.Command>
-                <rf:PageCommand>
-                    <views:HeavyPage />
-                </rf:PageCommand>
-            </Button.Command>
-        </Button>
-    </StackLayout>
+            <Button Text="Bindings Page">
+                <Button.Command>
+                    <rf:PageCommand>
+                        <views:BindingsPage />
+                    </rf:PageCommand>
+                </Button.Command>
+            </Button>
 
+            <Button Text="List Page">
+                <Button.Command>
+                    <rf:PageCommand>
+                        <views:PinsListPage />
+                    </rf:PageCommand>
+                </Button.Command>
+            </Button>
+
+            <Button Text="Heavy Page">
+                <Button.Command>
+                    <rf:PageCommand>
+                        <views:HeavyPage />
+                    </rf:PageCommand>
+                </Button.Command>
+            </Button>
+        </StackLayout>
+    </ScrollView>
 </rf:ContentPage2>

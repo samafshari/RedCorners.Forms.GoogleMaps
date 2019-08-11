@@ -155,7 +155,6 @@ namespace RedCorners.Forms.GoogleMaps.iOS
 
                 _uiSettingsLogic.Register(Map, NativeMap);
                 UpdateMapType();
-                UpdateIsShowingUser(_uiSettingsLogic.MyLocationButtonEnabled);
                 UpdateHasScrollEnabled(_uiSettingsLogic.ScrollGesturesEnabled);
                 UpdateHasZoomEnabled(_uiSettingsLogic.ZoomGesturesEnabled);
                 UpdateHasRotationEnabled(_uiSettingsLogic.RotateGesturesEnabled);
@@ -189,11 +188,8 @@ namespace RedCorners.Forms.GoogleMaps.iOS
             {
                 UpdateMapType();
             }
-            else if (e.PropertyName == MapBase.IsShowingUserProperty.PropertyName)
-            {
-                UpdateIsShowingUser();
-            }
-            else if (e.PropertyName == MapBase.MyLocationEnabledProperty.PropertyName)
+            else if (e.PropertyName == MapBase.MyLocationEnabledProperty.PropertyName ||
+                e.PropertyName == MapBase.IsMyLocationButtonVisibleProperty.PropertyName)
             {
                 UpdateMyLocationEnabled();
             }
@@ -336,17 +332,10 @@ namespace RedCorners.Forms.GoogleMaps.iOS
 #pragma warning restore 618
         }
 
-        private void UpdateIsShowingUser(bool? initialMyLocationButtonEnabled = null)
-        {
-#pragma warning disable 618
-            ((MapView)Control).MyLocationEnabled = ((MapBase)Element).IsShowingUser;
-            ((MapView)Control).Settings.MyLocationButton = initialMyLocationButtonEnabled ?? ((MapBase)Element).IsShowingUser;
-#pragma warning restore 618
-        }
-
         void UpdateMyLocationEnabled()
         {
             ((MapView)Control).MyLocationEnabled = ((MapBase)Element).MyLocationEnabled;
+            ((MapView)Control).Settings.MyLocationButton = ((MapBase)Element).IsMyLocationButtonVisible;
         }
 
         void UpdateIsTrafficEnabled()

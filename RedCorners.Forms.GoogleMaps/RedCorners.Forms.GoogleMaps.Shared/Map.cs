@@ -25,9 +25,11 @@ namespace RedCorners.Forms.GoogleMaps
         public static readonly BindableProperty MapTypeProperty = BindableProperty.Create(nameof(MapType), typeof(MapType), typeof(MapBase), default(MapType));
 
 #pragma warning disable CS0618 // Type or member is obsolete
-        public static readonly BindableProperty IsShowingUserProperty = BindableProperty.Create(nameof(IsShowingUser), typeof(bool), typeof(MapBase), default(bool));
+        //public static readonly BindableProperty IsShowingUserProperty = BindableProperty.Create(nameof(IsShowingUser), typeof(bool), typeof(MapBase), default(bool));
 
         public static readonly BindableProperty MyLocationEnabledProperty = BindableProperty.Create(nameof(MyLocationEnabled), typeof(bool), typeof(MapBase), default(bool));
+        public static readonly BindableProperty IsMyLocationButtonVisibleProperty = BindableProperty.Create(nameof(IsMyLocationButtonVisible), typeof(bool), typeof(MapBase), true);
+
 
         public static readonly BindableProperty HasScrollEnabledProperty = BindableProperty.Create(nameof(HasScrollEnabled), typeof(bool), typeof(MapBase), true);
 
@@ -150,17 +152,23 @@ namespace RedCorners.Forms.GoogleMaps
             set { SetValue(IndoorEnabledProperty, value);}
         }
 
-        [Obsolete("Please use Map.MyLocationEnabled and Map.UiSettings.MyLocationButtonEnabled instead of this")]
-        public bool IsShowingUser
-        {
-            get { return (bool)GetValue(IsShowingUserProperty); }
-            set { SetValue(IsShowingUserProperty, value); }
-        }
+        //[Obsolete("Please use Map.MyLocationEnabled and Map.UiSettings.MyLocationButtonEnabled instead of this")]
+        //public bool IsShowingUser
+        //{
+        //    get { return (bool)GetValue(IsShowingUserProperty); }
+        //    set { SetValue(IsShowingUserProperty, value); }
+        //}
 
         public bool MyLocationEnabled
         {
             get { return (bool)GetValue(MyLocationEnabledProperty); }
             set { SetValue(MyLocationEnabledProperty, value); }
+        }
+
+        public bool IsMyLocationButtonVisible
+        {
+            get { return (bool)GetValue(IsMyLocationButtonVisibleProperty); }
+            set { SetValue(IsMyLocationButtonVisibleProperty, value); }
         }
 
         public MapType MapType

@@ -21,6 +21,7 @@
         <map:LocationPickerView 
             Grid.Row="1" 
             ClickType="Click"
+            MyLocationEnabled="True"
             Latitude="{Binding Latitude, Mode=TwoWay}" 
             Longitude="{Binding Longitude, Mode=TwoWay}">
             <map:LocationPickerView.PinIcon>

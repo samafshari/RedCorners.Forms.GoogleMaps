@@ -34,5 +34,11 @@
     <string>RedCorners.Forms.GoogleMaps.Demo</string>
     <key>XSAppIconAssets</key>
     <string>Assets.xcassets/AppIcon.appiconset</string>
+  <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+  <string>This app needs access to location to continue.</string>
+  <key>NSLocationAlwaysUsageDescription</key>
+  <string>This app needs access to location to continue.</string>
+  <key>NSLocationWhenInUseUsageDescription</key>
+  <string>This app needs access to location to continue.</string>
 </dict>
 </plist>

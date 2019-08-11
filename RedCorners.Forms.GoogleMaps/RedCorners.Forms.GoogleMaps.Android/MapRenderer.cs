@@ -186,7 +186,6 @@ namespace RedCorners.Forms.GoogleMaps.Android
                 nativeMap.SetOnMyLocationButtonClickListener(this);
                 nativeMap.SetOnMyLocationChangeListener(this);
 
-                UpdateIsShowingUser(_uiSettingsLogic.MyLocationButtonEnabled);
                 UpdateHasScrollEnabled(_uiSettingsLogic.ScrollGesturesEnabled);
                 UpdateHasZoomEnabled(_uiSettingsLogic.ZoomControlsEnabled, _uiSettingsLogic.ZoomGesturesEnabled);
                 UpdateHasRotationEnabled(_uiSettingsLogic.RotateGesturesEnabled);
@@ -273,11 +272,8 @@ namespace RedCorners.Forms.GoogleMaps.Android
                 return;
             }
 
-            if (e.PropertyName == MapBase.IsShowingUserProperty.PropertyName)
-            {
-                UpdateIsShowingUser();
-            }
-            else if (e.PropertyName == MapBase.MyLocationEnabledProperty.PropertyName)
+            if (e.PropertyName == MapBase.MyLocationEnabledProperty.PropertyName ||
+                e.PropertyName == MapBase.IsMyLocationButtonVisibleProperty.PropertyName)
             {
                 UpdateMyLocationEnabled();
             }
@@ -312,17 +308,11 @@ namespace RedCorners.Forms.GoogleMaps.Android
             }
         }
 
-        private void UpdateIsShowingUser(bool? initialMyLocationButtonEnabled = null)
-        {
-#pragma warning disable 618
-            NativeMap.MyLocationEnabled = Map.IsShowingUser;
-            NativeMap.UiSettings.MyLocationButtonEnabled = initialMyLocationButtonEnabled ?? Map.IsShowingUser;
-#pragma warning restore 618
-        }
-
         private void UpdateMyLocationEnabled()
         {
             NativeMap.MyLocationEnabled = Map.MyLocationEnabled;
+            NativeMap.UiSettings.MyLocationButtonEnabled = Map.IsMyLocationButtonVisible;
+            NativeMap.UiSettings.MapToolbarEnabled = true;
         }
 
         private void UpdateHasScrollEnabled(bool? initialScrollGesturesEnabled = null)
