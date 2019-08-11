@@ -76,6 +76,12 @@
     <Compile Update="E:\Projects\RedCorners.Forms.GoogleMaps\RedCorners.Forms.GoogleMaps.Demo.Shared\Views\PinsListPage.xaml.cs">
       <DependentUpon>PinsListPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="E:\Projects\RedCorners.Forms.GoogleMaps\RedCorners.Forms.GoogleMaps.Demo.Shared\Views\XamarinMap.xaml.cs">
+      <DependentUpon>XamarinMap.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="E:\Projects\RedCorners.Forms.GoogleMaps\RedCorners.Forms.GoogleMaps.Demo.Shared\Views\XamarinMapPage.xaml.cs">
+      <DependentUpon>XamarinMapPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\HeavyPage.xaml">

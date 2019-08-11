@@ -41,6 +41,34 @@ Based on your use case, you need to configure the `info.plist` file as follows:
 
 ### Android Setup
 
+You have to initialize `RedCorners.Forms.GoogleMaps` before using it. Typically you can do this in your `MainActivity.cs`:
+
+```cs
+protected override void OnCreate(Bundle savedInstanceState)
+{
+    TabLayoutResource = Resource.Layout.Tabbar;
+    ToolbarResource = Resource.Layout.Toolbar;
+
+    base.OnCreate(savedInstanceState);
+    Xamarin.Forms.Forms.Init(this, savedInstanceState);
+    
+    // Initialize RedCorners.Forms.GoogleMaps
+    RedCorners.Forms.GoogleMapsSystem.Init(this, savedInstanceState);
+
+    LoadApplication(new App());
+
+    // Optional: Ask for Location Permissions
+    if (
+        (ContextCompat.CheckSelfPermission(this, Manifest.Permission.AccessFineLocation) != Permission.Granted) ||
+        (ContextCompat.CheckSelfPermission(this, Manifest.Permission.AccessCoarseLocation) != Permission.Granted))
+    {
+        ActivityCompat.RequestPermissions(this, new [] {
+            Manifest.Permission.AccessFineLocation,
+            Manifest.Permission.AccessCoarseLocation}, 1);
+    };
+}
+```
+
 Depending on your use case, you may want to request _Fine_ or _Coarse_ locations. To do this, first add the following lines in your `AndroidManifest.xml` file:
 
 ```xml
@@ -65,17 +93,17 @@ The entire manifest can look like this:
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <manifest 
-  xmlns:android="http://schemas.android.com/apk/res/android" 
-  android:versionCode="1" 
-  android:versionName="1.0" 
-  package="com.redcorners.googlemaps">
-	<uses-sdk android:minSdkVersion="21" android:targetSdkVersion="28" />
+    xmlns:android="http://schemas.android.com/apk/res/android" 
+    android:versionCode="1" 
+    android:versionName="1.0" 
+    package="com.redcorners.googlemaps">
+    <uses-sdk android:minSdkVersion="21" android:targetSdkVersion="28" />
 	<application android:label="RedCorners.Forms.GoogleMaps.Demo.Android">
-    <uses-library android:name="org.apache.http.legacy" android:required="false" />
-    <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyD8-xxxxxxxxxxxxxxxxxxxxxxxx" />
-	</application>
-  <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-  <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+        <uses-library android:name="org.apache.http.legacy" android:required="false" />
+        <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyD8-xxxxxxxxxxxxxxxxxxxxxxxx" />
+    </application>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 </manifest>
 ```
 
@@ -92,6 +120,7 @@ Afterwards, you can use `map:Map` or other variants of it such as `map:LocationP
 ```xml
 <map:Map
     MyLocationEnabled="True"
+	IsMyLocationButtonVisible="True"
     Latitude="{Binding Latitude, Mode=TwoWay}" 
     Longitude="{Binding Longitude, Mode=TwoWay}">
 </map:Map>

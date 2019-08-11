@@ -16,13 +16,5 @@ namespace RedCorners.Forms.GoogleMaps.Demo.Views
         {
             InitializeComponent();
         }
-
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-
-            map.MyLocationEnabled = true;
-            map.IsMyLocationButtonVisible = true;
-        }
     }
 }

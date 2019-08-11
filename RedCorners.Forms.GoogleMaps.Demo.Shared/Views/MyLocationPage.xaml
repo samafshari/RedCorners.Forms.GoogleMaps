@@ -20,11 +20,12 @@
         <rf:TitledContentView.ToolBar>
             <StackLayout Orientation="Horizontal" VerticalOptions="CenterAndExpand">
                 <!-- Define Toolbar Here -->
+                <Switch x:Name="myloc" IsToggled="True" />
             </StackLayout>
         </rf:TitledContentView.ToolBar>
 
         <Grid>
-            <map:Map x:Name="map" />
+            <map:Map BindingContext="{x:Reference myloc}" IsMyLocationButtonVisible="{Binding IsToggled}" MyLocationEnabled="{Binding IsToggled}"  />
         </Grid>
     </rf:TitledContentView>
 </rf:ContentPage2>

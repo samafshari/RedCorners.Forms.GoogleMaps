@@ -11,7 +11,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>RedCorners.Forms.GoogleMaps.Demo.Droid</RootNamespace>
-    <AssemblyName>RedCorners.Forms.GoogleMaps.Demo.Droid</AssemblyName>
+    <AssemblyName>untRedCorners.Forms.GoogleMaps.Demo.Droid</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <AndroidApplication>True</AndroidApplication>
     <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>

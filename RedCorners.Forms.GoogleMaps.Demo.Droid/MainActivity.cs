@@ -28,11 +28,13 @@ namespace RedCorners.Forms.GoogleMaps.Demo.Droid
 
             if (
                 (ContextCompat.CheckSelfPermission(this, Manifest.Permission.AccessFineLocation) != Permission.Granted) ||
-                (ContextCompat.CheckSelfPermission(this, Manifest.Permission.AccessCoarseLocation) != Permission.Granted))
+                (ContextCompat.CheckSelfPermission(this, Manifest.Permission.AccessCoarseLocation) != Permission.Granted) ||
+                (ContextCompat.CheckSelfPermission(this, Manifest.Permission.AccessLocationExtraCommands) != Permission.Granted))
             {
                 ActivityCompat.RequestPermissions(this, new [] {
                     Manifest.Permission.AccessFineLocation,
-                    Manifest.Permission.AccessCoarseLocation}, 1);
+                    Manifest.Permission.AccessCoarseLocation,
+                    Manifest.Permission.AccessLocationExtraCommands}, 1);
             };
         }
 

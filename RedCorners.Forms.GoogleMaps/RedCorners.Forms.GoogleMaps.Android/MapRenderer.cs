@@ -311,8 +311,7 @@ namespace RedCorners.Forms.GoogleMaps.Android
         private void UpdateMyLocationEnabled()
         {
             NativeMap.MyLocationEnabled = Map.MyLocationEnabled;
-            NativeMap.UiSettings.MyLocationButtonEnabled = Map.IsMyLocationButtonVisible;
-            NativeMap.UiSettings.MapToolbarEnabled = true;
+            Map.UiSettings.MyLocationButtonEnabled = Map.IsMyLocationButtonVisible;
         }
 
         private void UpdateHasScrollEnabled(bool? initialScrollGesturesEnabled = null)
