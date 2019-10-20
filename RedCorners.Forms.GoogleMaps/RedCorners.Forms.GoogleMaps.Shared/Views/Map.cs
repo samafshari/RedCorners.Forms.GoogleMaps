@@ -15,6 +15,22 @@ namespace RedCorners.Forms.GoogleMaps
             MapClicked += Map2_MapClicked;
             PinClicked += Map2_PinClicked;
             SelectedPinChanged += Map2_SelectedPinChanged;
+            CameraIdled += Map_CameraIdled;
+        }
+
+        private void Map_CameraIdled(object sender, CameraIdledEventArgs e)
+        {
+            if (!isUpdatingPin)
+            {
+                isUpdatingPin = true;
+                CameraLatitude = e.Position.Target.Latitude;
+                CameraLongitude = e.Position.Target.Longitude;
+                CameraUpdateZoomLevel = (int)e.Position.Zoom;
+                isUpdatingPin = false;
+            }
+
+            if (MapIdledCommand?.CanExecute(e.Position) ?? false)
+                MapIdledCommand?.Execute(e.Position);
         }
 
         private void Map2_PinClicked(object sender, PinClickedEventArgs e)
@@ -63,6 +79,12 @@ namespace RedCorners.Forms.GoogleMaps
         {
             get => (ICommand)GetValue(MapLongClickCommandProperty);
             set => SetValue(MapLongClickCommandProperty, value);
+        }
+
+        public ICommand MapIdledCommand
+        {
+            get => (ICommand)GetValue(MapIdledCommandProperty);
+            set => SetValue(MapIdledCommandProperty, value);
         }
 
         public double CameraLatitude
@@ -149,6 +171,13 @@ namespace RedCorners.Forms.GoogleMaps
             defaultBindingMode: BindingMode.TwoWay,
             defaultValue: null);
 
+        public static readonly BindableProperty MapIdledCommandProperty = BindableProperty.Create(
+            nameof(MapIdledCommand),
+            typeof(ICommand),
+            typeof(Map),
+            defaultBindingMode: BindingMode.TwoWay,
+            defaultValue: null);
+
         public static readonly BindableProperty CameraUpdateZoomLevelProperty = BindableProperty.Create(
             nameof(CameraUpdateZoomLevel),
             typeof(int),
@@ -190,9 +219,7 @@ namespace RedCorners.Forms.GoogleMaps
         {
             if (isUpdatingPin) return;
             isUpdatingPin = true;
-            bool animate = true;
-
-            UpdateCamera(animate);
+            UpdateCamera(true);
             isUpdatingPin = false;
         }
     }
