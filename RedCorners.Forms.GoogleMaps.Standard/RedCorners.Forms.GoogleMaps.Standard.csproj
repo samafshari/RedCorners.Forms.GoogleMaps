@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>RedCorners.Forms.GoogleMaps</AssemblyName>
+  </PropertyGroup>
+
+  <Import Project="..\RedCorners.Forms.GoogleMaps\RedCorners.Forms.GoogleMaps.Shared\RedCorners.Forms.GoogleMaps.Shared.projitems" Label="Shared" />
+
+  <ItemGroup>
+    <PackageReference Include="RedCorners" Version="5.0.0" />
+    <PackageReference Include="RedCorners.Forms" Version="5.30.0" />
+  </ItemGroup>
+
+</Project>
