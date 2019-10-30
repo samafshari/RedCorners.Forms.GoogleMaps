@@ -20,6 +20,12 @@ namespace RedCorners.Forms.GoogleMaps
 
         private void Map_CameraIdled(object sender, CameraIdledEventArgs e)
         {
+            const double Epsilon = 0.0001;
+            if (
+                Math.Abs(e.Position.Target.Latitude - CameraLatitude) < Epsilon &&
+                Math.Abs(e.Position.Target.Longitude - CameraLongitude) < Epsilon)
+                return;
+
             if (!isUpdatingPin)
             {
                 isUpdatingPin = true;
@@ -200,7 +206,8 @@ namespace RedCorners.Forms.GoogleMaps
             if (Width > 0 && Height > 0)
             {
                 LogSystem.Instance.Log($"Focusing on {CameraLatitude}, {CameraLongitude}");
-                this.CenterMap(CameraLatitude, CameraLongitude, CameraPathDefaultDistance, animate);
+                //this.CenterMap(CameraLatitude, CameraLongitude, CameraPathDefaultDistance, animate);
+                MoveCamera(CameraUpdateFactory.NewPosition(new Position(CameraLatitude, CameraLongitude)));
             }
             else
             {
@@ -214,7 +221,7 @@ namespace RedCorners.Forms.GoogleMaps
             UpdatePin();
         }
 
-        bool isUpdatingPin = false;
+        volatile bool isUpdatingPin = false;
         protected virtual void UpdatePin()
         {
             if (isUpdatingPin) return;
