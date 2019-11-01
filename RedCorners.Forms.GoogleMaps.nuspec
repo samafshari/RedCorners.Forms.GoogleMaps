@@ -3,29 +3,29 @@
 	<metadata minClientVersion="2.8.3">
 		<id>RedCorners.Forms.GoogleMaps</id>
 		<title>RedCorners.Forms.GoogleMaps</title>
-		<version>5.30.5</version>
+		<version>5.33.6</version>
 		<releaseNotes>	</releaseNotes>
-		<authors>Saeed Afshari and NeatCapital OÜ</authors>
+		<authors>NeatCapital OÜ</authors>
 		<owners>NeatCapital OÜ</owners>
 		<copyright>Copyright 2019 NeatCapital OÜ</copyright>
 		<iconUrl>http://ooze.redcorners.com/redcorners_forms_googlemaps_logo.png</iconUrl>
 		<license type="file">LICENSE.txt</license>
-    <projectUrl>https://github.com/saeedafshari/RedCorners.Forms.GoogleMaps</projectUrl>
+    <projectUrl>https://redcorners.com/googlemaps/</projectUrl>
   	<description>Enhanced Google Maps for Xamarin Forms (iOS and Android).</description>
 		<summary>Enhanced Google Maps for Xamarin Forms (iOS and Android).</summary>
 		<tags>xamarin forms maps xamarinforms xamarinformsmaps xamarin.forms.maps xamarinformsgooglemaps RedCorners.Forms.GoogleMaps google googlemap redcorners</tags>
 	<dependencies>
       <group>
-        <dependency id="Xamarin.Forms" version="3.6.0.425677" />
+        <dependency id="Xamarin.Forms" version="4.3.0.947036" />
 		<dependency id="RedCorners" version="5.0.0" />
-		<dependency id="RedCorners.Forms" version="5.26.0" />
+		<dependency id="RedCorners.Forms" version="5.33.0" />
       </group>
       <group targetFramework="MonoAndroid80">
-        <dependency id="Xamarin.GooglePlayServices.Maps" version="71.1600.0"/>
+        <dependency id="Xamarin.GooglePlayServices.Maps" version="71.1610.0"/>
         <dependency id="Xamarin.Android.Support.v7.AppCompat" version="28.0.0.1"/>
       </group>
       <group targetFramework="Xamarin.iOS10">
-        <dependency id="Xamarin.Google.iOS.Maps" version="3.1.0"/>
+        <dependency id="Xamarin.Google.iOS.Maps" version="3.5.0"/>
       </group>
 	</dependencies>
 	</metadata>
