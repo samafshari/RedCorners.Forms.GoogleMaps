@@ -3,7 +3,7 @@
 	<metadata minClientVersion="2.8.3">
 		<id>RedCorners.Forms.GoogleMaps</id>
 		<title>RedCorners.Forms.GoogleMaps</title>
-		<version>5.33.7</version>
+		<version>5.34.8</version>
 		<releaseNotes>	</releaseNotes>
 		<authors>NeatCapital OÜ</authors>
 		<owners>NeatCapital OÜ</owners>
@@ -12,8 +12,8 @@
 		<icon>redcorners_forms_googlemaps_logo.png</icon>
 		<license type="file">LICENSE.txt</license>
     <projectUrl>https://redcorners.com/googlemaps/</projectUrl>
-  	<description>Enhanced Google Maps for Xamarin Forms (iOS and Android).</description>
-		<summary>Enhanced Google Maps for Xamarin Forms (iOS and Android).</summary>
+  	<description>Advanced Google Maps for Xamarin Forms (iOS and Android).</description>
+		<summary>Advanced Google Maps for Xamarin Forms (iOS and Android).</summary>
 		<tags>xamarin forms maps xamarinforms xamarinformsmaps xamarin.forms.maps xamarinformsgooglemaps RedCorners.Forms.GoogleMaps google googlemap redcorners</tags>
 	<dependencies>
       <group>

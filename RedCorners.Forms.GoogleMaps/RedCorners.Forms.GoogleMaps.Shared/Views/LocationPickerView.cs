@@ -208,7 +208,8 @@ namespace RedCorners.Forms.GoogleMaps
             {
                 if (Pins.Count > 0) Pins.Clear();
             }
-            UpdateCamera(animate);
+            //UpdateCamera(animate);
+            UpdateCamera(false); // BUG in animation, looks crap
             isUpdatingPin = false;
         }
 

@@ -206,8 +206,17 @@ namespace RedCorners.Forms.GoogleMaps
             if (Width > 0 && Height > 0)
             {
                 LogSystem.Instance.Log($"Focusing on {CameraLatitude}, {CameraLongitude}");
-                //this.CenterMap(CameraLatitude, CameraLongitude, CameraPathDefaultDistance, animate);
-                MoveCamera(CameraUpdateFactory.NewPosition(new Position(CameraLatitude, CameraLongitude)));
+                if (animate)
+                {
+                    MoveToRegion(MapSpan.FromPositions(new[] {
+                        new Position(CameraLatitude, CameraLongitude) }),
+                        animate: animate);
+                }
+                else
+                {
+                    var cu = CameraUpdateFactory.NewPosition(new Position(CameraLatitude, CameraLongitude));
+                    MoveCamera(cu);
+                }
             }
             else
             {
