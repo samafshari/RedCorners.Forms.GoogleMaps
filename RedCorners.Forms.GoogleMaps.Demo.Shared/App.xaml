@@ -19,11 +19,6 @@
                 <Setter Property="CameraLongitude" Value="{StaticResource DefaultLongitude}" />
                 <Setter Property="MapStyle" Value="{Static app:App.MapStyle}" />
             </Style>
-            
-            <Style TargetType="rf:ContentPage2" ApplyToDerivedTypes="True">
-                <Setter Property="FixBottomPadding" Value="True" />
-                <Setter Property="FixTopPadding" Value="True" />
-            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </rf:Application2>

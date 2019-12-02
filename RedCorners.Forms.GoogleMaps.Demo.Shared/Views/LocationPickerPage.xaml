@@ -5,11 +5,13 @@
     xmlns:rf="clr-namespace:RedCorners.Forms;assembly=RedCorners.Forms"
     xmlns:map="clr-namespace:RedCorners.Forms.GoogleMaps;assembly=RedCorners.Forms.GoogleMaps"
     xmlns:vm="clr-namespace:RedCorners.Forms.GoogleMaps.Demo.ViewModels"
-    x:Class="RedCorners.Forms.GoogleMaps.Demo.Views.LocationPickerPage">
+    x:Class="RedCorners.Forms.GoogleMaps.Demo.Views.LocationPickerPage"
+    FixBottomPadding="True"
+    FixTopPadding="False">
     <rf:ContentPage2.BindingContext>
         <vm:LocationPickerViewModel />
     </rf:ContentPage2.BindingContext>
-    <Grid>
+    <Grid RowSpacing="0">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
@@ -17,7 +19,6 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <Label Text="Location Picker View" HorizontalOptions="Center" Grid.Row="0" />
         <map:LocationPickerView 
             Grid.Row="1" 
             ClickType="Click"

@@ -16,7 +16,7 @@
         <ResourceDictionary>
             <Style TargetType="rf:TitledContentView">
                 <Setter Property="BackCommand" Value="{Binding ShowSideBarCommand}" />
-                <Setter Property="IsBackButtonVisible" Value="False" />
+                <Setter Property="IsBackButtonVisible" Value="True" />
                 <Setter Property="TitlePosition" Value="Top" />
                 <Setter Property="FixTitlePadding" Value="True" />
             </Style>

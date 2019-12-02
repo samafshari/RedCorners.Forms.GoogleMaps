@@ -16,6 +16,7 @@
         Title="HeavyPage" 
         TitleColor="#e91e63" 
         BackCommand="{Binding GoBackCommand}" 
+        FixBottomPadding="True"
         IsBackButtonVisible="True">
         <rf:TitledContentView.ToolBar>
             <StackLayout Orientation="Horizontal" VerticalOptions="CenterAndExpand">

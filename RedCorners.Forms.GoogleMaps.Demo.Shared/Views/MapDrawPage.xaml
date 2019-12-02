@@ -4,7 +4,9 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
     xmlns:rf="clr-namespace:RedCorners.Forms;assembly=RedCorners.Forms"
     xmlns:map="clr-namespace:RedCorners.Forms.GoogleMaps;assembly=RedCorners.Forms.GoogleMaps"
-    x:Class="RedCorners.Forms.GoogleMaps.Demo.Views.MapDrawPage">
+    x:Class="RedCorners.Forms.GoogleMaps.Demo.Views.MapDrawPage"
+    FixTopPadding="False"
+    FixBottomPadding="True">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
