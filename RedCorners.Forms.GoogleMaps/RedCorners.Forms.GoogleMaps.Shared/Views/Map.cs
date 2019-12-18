@@ -20,20 +20,20 @@ namespace RedCorners.Forms.GoogleMaps
 
         private void Map_CameraIdled(object sender, CameraIdledEventArgs e)
         {
-            const double Epsilon = 0.0001;
-            if (
-                Math.Abs(e.Position.Target.Latitude - CameraLatitude) < Epsilon &&
-                Math.Abs(e.Position.Target.Longitude - CameraLongitude) < Epsilon)
-                return;
+            //const double Epsilon = 0.0001;
+            //if (
+            //    Math.Abs(e.Position.Target.Latitude - CameraLatitude) < Epsilon &&
+            //    Math.Abs(e.Position.Target.Longitude - CameraLongitude) < Epsilon)
+            //    return;
 
-            if (!isUpdatingPin)
-            {
-                isUpdatingPin = true;
-                CameraLatitude = e.Position.Target.Latitude;
-                CameraLongitude = e.Position.Target.Longitude;
-                CameraUpdateZoomLevel = (int)e.Position.Zoom;
-                isUpdatingPin = false;
-            }
+            //if (!isUpdatingPin)
+            //{
+            //    isUpdatingPin = true;
+            //    CameraLatitude = e.Position.Target.Latitude;
+            //    CameraLongitude = e.Position.Target.Longitude;
+            //    CameraUpdateZoomLevel = (int)e.Position.Zoom;
+            //    isUpdatingPin = false;
+            //}
 
             if (MapIdledCommand?.CanExecute(e.Position) ?? false)
                 MapIdledCommand?.Execute(e.Position);
@@ -235,7 +235,7 @@ namespace RedCorners.Forms.GoogleMaps
         {
             if (isUpdatingPin) return;
             isUpdatingPin = true;
-            UpdateCamera(true);
+            UpdateCamera(false);
             isUpdatingPin = false;
         }
     }
