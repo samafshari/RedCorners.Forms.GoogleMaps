@@ -8,9 +8,9 @@
   <Import Project="..\RedCorners.Forms.GoogleMaps\RedCorners.Forms.GoogleMaps.Shared\RedCorners.Forms.GoogleMaps.Shared.projitems" Label="Shared" />
 
   <ItemGroup>
-    <PackageReference Include="RedCorners" Version="5.0.0" />
-    <PackageReference Include="RedCorners.Forms" Version="5.39.0" />
-    <PackageReference Include="Xamarin.Forms" Version="4.3.0.991211" />
+    <PackageReference Include="RedCorners" Version="6.0.0" />
+    <PackageReference Include="RedCorners.Forms" Version="6.41.0" />
+    <PackageReference Include="Xamarin.Forms" Version="4.4.0.991265" />
   </ItemGroup>
 
 </Project>
