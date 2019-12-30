@@ -48,6 +48,12 @@ namespace RedCorners.Forms.GoogleMaps
             set => SetValue(ViewProperty, value);
         }
 
+        public float IconScale
+        {
+            get => (float)GetValue(IconScaleProperty);
+            set => SetValue(IconScaleProperty, value);
+        }
+
         protected override void OnBindingContextChanged()
         {
             Console.WriteLine($"[{Id}] Context Changed: " + BindingContext?.GetType().FullName ?? "null");
@@ -58,6 +64,13 @@ namespace RedCorners.Forms.GoogleMaps
             nameof(Id),
             typeof(string),
             typeof(BitmapDescriptor),
+            defaultBindingMode: BindingMode.TwoWay);
+
+        public static BindableProperty IconScaleProperty = BindableProperty.Create(
+            nameof(IconScale),
+            typeof(float),
+            typeof(BitmapDescriptor),
+            defaultValue: 1.0f,
             defaultBindingMode: BindingMode.TwoWay);
 
         public static BindableProperty TypeProperty = BindableProperty.Create(

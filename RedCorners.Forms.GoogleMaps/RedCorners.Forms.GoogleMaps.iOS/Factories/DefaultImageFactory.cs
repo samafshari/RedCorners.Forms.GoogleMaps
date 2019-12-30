@@ -1,4 +1,5 @@
 ﻿using System;
+using CoreGraphics;
 using Foundation;
 using UIKit;
 using Xamarin.Forms.Platform.iOS;
@@ -19,8 +20,8 @@ namespace RedCorners.Forms.GoogleMaps.iOS.Factories
         private DefaultImageFactory()
         {
         }
-        
-        public UIImage ToUIImage(BitmapDescriptor descriptor)
+
+        UIImage GetRaw(BitmapDescriptor descriptor)
         {
             switch (descriptor.Type)
             {
@@ -37,6 +38,18 @@ namespace RedCorners.Forms.GoogleMaps.iOS.Factories
                 default:
                     return Google.Maps.Marker.MarkerImage(UIColor.Red);
             }
+        }
+
+        public UIImage ToUIImage(BitmapDescriptor descriptor)
+        {
+            var scale = descriptor.IconScale;
+            if (scale == 0) scale = 1;
+            
+            var originalImage = GetRaw(descriptor);
+            if (scale == 1) return originalImage;
+
+            var newSize = new CGSize(originalImage.Size.Width * scale, originalImage.Size.Height * scale);
+            return originalImage.Scale(newSize, originalImage.CurrentScale);
         }
     }
 }

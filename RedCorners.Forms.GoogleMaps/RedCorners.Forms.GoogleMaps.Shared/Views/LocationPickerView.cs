@@ -115,6 +115,7 @@ namespace RedCorners.Forms.GoogleMaps
                     if (descriptor.BindingContext == null)
                         descriptor.BindingContext = view.BindingContext;
                 }
+                (bindable as LocationPickerView)?.UpdatePin();
             });
 
         public static readonly BindableProperty ClickTypeProperty = BindableProperty.Create(

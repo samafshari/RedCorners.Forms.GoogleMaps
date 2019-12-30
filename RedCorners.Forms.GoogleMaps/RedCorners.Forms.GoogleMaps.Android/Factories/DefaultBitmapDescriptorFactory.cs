@@ -21,12 +21,19 @@ namespace RedCorners.Forms.GoogleMaps.Android.Factories
         
         public AndroidBitmapDescriptor ToNative(BitmapDescriptor descriptor)
         {
+            return GetRaw(descriptor);
+        }
+
+        AndroidBitmapDescriptor GetRaw(BitmapDescriptor descriptor)
+        {
             switch (descriptor.Type)
             {
                 case BitmapDescriptorType.Default:
                     return AndroidBitmapDescriptorFactory.DefaultMarker((float)((descriptor.Color.Hue * 360f) % 360f));
                 case BitmapDescriptorType.Bundle:
-                    return AndroidBitmapDescriptorFactory.FromAsset(descriptor.BundleName);
+                    var bundleName = descriptor.BundleName;
+                    if (!bundleName.Contains('.')) bundleName += ".png";
+                    return AndroidBitmapDescriptorFactory.FromAsset(bundleName);
                 case BitmapDescriptorType.Stream:
                     if (descriptor.Stream.CanSeek && descriptor.Stream.Position > 0)
                     {
