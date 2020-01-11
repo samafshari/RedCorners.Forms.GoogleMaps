@@ -126,7 +126,7 @@ namespace RedCorners.Forms.GoogleMaps
             set { SetValue(HasScrollEnabledProperty, value); }
         }
 
-        [Obsolete("Please use Map.UiSettings.ZoomGesturesEnabled and ZoomControlsEnabled instead of this")]
+        //[Obsolete("Please use Map.UiSettings.ZoomGesturesEnabled and ZoomControlsEnabled instead of this")]
         public bool HasZoomEnabled
         {
             get { return (bool)GetValue(HasZoomEnabledProperty); }

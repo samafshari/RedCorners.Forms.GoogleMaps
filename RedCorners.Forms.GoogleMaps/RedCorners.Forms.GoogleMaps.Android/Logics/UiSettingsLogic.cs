@@ -54,13 +54,13 @@ namespace RedCorners.Forms.GoogleMaps.Logics.Android
 
         protected override void OnUpdateZoomControlsEnabled()
         {
-            NativeMap.UiSettings.ZoomControlsEnabled = Map.UiSettings.ZoomControlsEnabled;
+            NativeMap.UiSettings.ZoomControlsEnabled = Map.UiSettings.ZoomControlsEnabled && Map.HasZoomEnabled;
             ZoomControlsEnabled = Map.UiSettings.ZoomControlsEnabled;
         }
 
         protected override void OnUpdateZoomGesturesEnabled()
         {
-            NativeMap.UiSettings.ZoomGesturesEnabled = Map.UiSettings.ZoomGesturesEnabled;
+            NativeMap.UiSettings.ZoomGesturesEnabled = Map.UiSettings.ZoomGesturesEnabled && Map.HasZoomEnabled;
             ZoomGesturesEnabled = Map.UiSettings.ZoomGesturesEnabled;
         }
 

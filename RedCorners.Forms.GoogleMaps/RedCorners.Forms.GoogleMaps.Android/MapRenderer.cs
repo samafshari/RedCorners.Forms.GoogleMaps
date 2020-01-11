@@ -187,7 +187,7 @@ namespace RedCorners.Forms.GoogleMaps.Android
                 nativeMap.SetOnMyLocationChangeListener(this);
 
                 UpdateHasScrollEnabled(_uiSettingsLogic.ScrollGesturesEnabled);
-                UpdateHasZoomEnabled(_uiSettingsLogic.ZoomControlsEnabled, _uiSettingsLogic.ZoomGesturesEnabled);
+                UpdateHasZoomEnabled((_uiSettingsLogic.ZoomControlsEnabled ?? true) && map.HasZoomEnabled, (_uiSettingsLogic.ZoomGesturesEnabled ?? true) && map.HasZoomEnabled);
                 UpdateHasRotationEnabled(_uiSettingsLogic.RotateGesturesEnabled);
                 UpdateIsTrafficEnabled();
                 UpdateIndoorEnabled();
@@ -326,8 +326,8 @@ namespace RedCorners.Forms.GoogleMaps.Android
             bool? initialZoomGesturesEnabled = null)
         {
 #pragma warning disable 618
-            NativeMap.UiSettings.ZoomControlsEnabled = initialZoomControlsEnabled ?? Map.HasZoomEnabled;
-            NativeMap.UiSettings.ZoomGesturesEnabled = initialZoomGesturesEnabled ?? Map.HasZoomEnabled;
+            NativeMap.UiSettings.ZoomControlsEnabled = (initialZoomControlsEnabled ?? true) && Map.HasZoomEnabled;
+            NativeMap.UiSettings.ZoomGesturesEnabled = (initialZoomGesturesEnabled ?? true) && Map.HasZoomEnabled;
 #pragma warning restore 618
         }
 

@@ -38,16 +38,21 @@
             <Button Grid.Column="0" Text="Red" Command="{Binding RedCommand}" />
             <Button Grid.Column="1" Text="Green" Command="{Binding GreenCommand}" />
         </Grid>
-        <map:LocationPickerView Grid.Row="3" Latitude="{Binding Latitude, Mode=TwoWay}" Longitude="{Binding Longitude, Mode=TwoWay}">
+        <map:LocationPickerView x:Name="map2" Grid.Row="3" Latitude="{Binding Latitude, Mode=TwoWay}" Longitude="{Binding Longitude, Mode=TwoWay}" HasZoomEnabled="False">
             <map:LocationPickerView.PinIcon>
                 <map:BitmapDescriptor Color="{Binding Color}" />
             </map:LocationPickerView.PinIcon>
         </map:LocationPickerView>
-        <Button Grid.Row="4" Text="Back">
-            <Button.Command>
-                <rf:PopCommand FireOnce="False" FireDelay="1000" />
-            </Button.Command>
-        </Button>
+        <StackLayout Grid.Row="4">
+            <Button Text="Back" WidthRequest="100">
+                <Button.Command>
+                    <rf:PopCommand FireOnce="False" FireDelay="1000" />
+                </Button.Command>
+            </Button>
+            <Switch IsToggled="{Binding HasZoomEnabled}" BindingContext="{Reference map2}" />
+        </StackLayout>
+        
+        
     </Grid>
 
 </rf:ContentPage2>
