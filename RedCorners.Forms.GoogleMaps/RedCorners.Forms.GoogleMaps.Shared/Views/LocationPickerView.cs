@@ -53,11 +53,28 @@ namespace RedCorners.Forms.GoogleMaps
             set => SetValue(PinIconProperty, value);
         }
 
+        public bool PinFlat
+        {
+            get => (bool)GetValue(PinFlatProperty);
+            set => SetValue(PinFlatProperty, value);
+        }
+
         public LocationPickerClickTypes ClickType
         {
             get => (LocationPickerClickTypes)GetValue(ClickTypeProperty);
             set => SetValue(ClickTypeProperty, value);
         }
+
+        public static readonly BindableProperty PinFlatProperty = BindableProperty.Create(
+            nameof(PinFlat),
+            typeof(bool),
+            typeof(LocationPickerView),
+            false,
+            defaultBindingMode: BindingMode.OneWay,
+            propertyChanged: (bindable, oldVal, newVal) =>
+            {
+                (bindable as LocationPickerView)?.UpdatePin();
+            });
 
         public static readonly BindableProperty LatitudeProperty = BindableProperty.Create(
             nameof(Latitude),
@@ -190,10 +207,12 @@ namespace RedCorners.Forms.GoogleMaps
                     Pins.Clear();
                     pin = new Pin
                     {
+                        Flat = PinFlat,
                         Label = PinLabel,
                         Address = PinAddress,
                         Icon = PinIcon,
-                        Position = new Position(latitude, longitude)
+                        Position = new Position(latitude, longitude),
+                        IsDraggable = true
                     };
                     Pins.Add(pin);
 

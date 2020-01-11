@@ -52,7 +52,7 @@ namespace RedCorners.Forms.GoogleMaps.Logics.Android
         protected override NativeGroundOverlay CreateNativeItem(GroundOverlay outerItem)
         {
             var factory = _bitmapDescriptorFactory ?? DefaultBitmapDescriptorFactory.Instance;
-            var nativeDescriptor = factory.ToNative(outerItem.Icon);
+            var nativeDescriptor = factory.ToNative(outerItem.Icon, _context);
 
             var opts = new GroundOverlayOptions()
                 .PositionFromBounds(outerItem.Bounds.ToLatLngBounds())
@@ -125,7 +125,7 @@ namespace RedCorners.Forms.GoogleMaps.Logics.Android
             else
             {
                 var factory = _bitmapDescriptorFactory ?? DefaultBitmapDescriptorFactory.Instance;
-                var nativeDescriptor = factory.ToNative(outerItem.Icon);
+                var nativeDescriptor = factory.ToNative(outerItem.Icon, _context);
                 nativeItem.SetImage(nativeDescriptor);
             }
         }

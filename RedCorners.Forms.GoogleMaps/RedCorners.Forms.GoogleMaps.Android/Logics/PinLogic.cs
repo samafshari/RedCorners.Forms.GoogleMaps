@@ -94,7 +94,7 @@ namespace RedCorners.Forms.GoogleMaps.Logics.Android
             if (outerItem.Icon != null)
             {
                 var factory = _bitmapDescriptorFactory ?? DefaultBitmapDescriptorFactory.Instance;
-                var nativeDescriptor = factory.ToNative(outerItem.Icon);
+                var nativeDescriptor = factory.ToNative(outerItem.Icon, _context);
                 opts.SetIcon(nativeDescriptor);
             }
 
@@ -311,7 +311,7 @@ namespace RedCorners.Forms.GoogleMaps.Logics.Android
             else
             {
                 var factory = _bitmapDescriptorFactory ?? DefaultBitmapDescriptorFactory.Instance;
-                var nativeDescriptor = factory.ToNative(outerItem.Icon);
+                var nativeDescriptor = factory.ToNative(outerItem.Icon, _context);
                 nativeItem.SetIcon(nativeDescriptor);
             }
         }

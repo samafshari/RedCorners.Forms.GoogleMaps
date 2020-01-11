@@ -23,10 +23,11 @@
             Grid.Row="1" 
             ClickType="Click"
             MyLocationEnabled="True"
+            PinFlat="True"
             Latitude="{Binding Latitude, Mode=TwoWay}" 
             Longitude="{Binding Longitude, Mode=TwoWay}">
             <map:LocationPickerView.PinIcon>
-                <map:BitmapDescriptor Type="Bundle" BundleName="foodtruck.png" />
+                <map:BitmapDescriptor Type="Bundle" BundleName="foodtruck.png" IconScale="0.5" />
             </map:LocationPickerView.PinIcon>
         </map:LocationPickerView>
         <Grid Grid.Row="2">
