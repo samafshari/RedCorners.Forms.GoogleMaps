@@ -15,6 +15,7 @@
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\BindingsViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\LocationPickerViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\MyLocationPageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\PinsListViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\BindingsPage.xaml.cs">
       <SubType>Code</SubType>

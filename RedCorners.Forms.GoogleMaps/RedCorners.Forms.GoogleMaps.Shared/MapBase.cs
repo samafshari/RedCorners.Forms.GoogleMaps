@@ -24,6 +24,8 @@ namespace RedCorners.Forms.GoogleMaps
 
         public static readonly BindableProperty MapTypeProperty = BindableProperty.Create(nameof(MapType), typeof(MapType), typeof(MapBase), default(MapType));
 
+        public static readonly BindableProperty RegionChangeActionProperty = BindableProperty.Create(nameof(RegionChangeAction), typeof(Action<MapRegion>), typeof(MapBase));
+
 #pragma warning disable CS0618 // Type or member is obsolete
         //public static readonly BindableProperty IsShowingUserProperty = BindableProperty.Create(nameof(IsShowingUser), typeof(bool), typeof(MapBase), default(bool));
 
@@ -274,7 +276,14 @@ namespace RedCorners.Forms.GoogleMaps
                 OnPropertyChanging();
                 _region = value ?? throw new ArgumentNullException(nameof(value));
                 OnPropertyChanged();
+                RegionChangeAction?.Invoke(Region);
             }
+        }
+
+        public Action<MapRegion> RegionChangeAction
+        {
+            get => (Action<MapRegion>)GetValue(RegionChangeActionProperty);
+            set => SetValue(RegionChangeActionProperty, value);
         }
 
         public UiSettings UiSettings { get; } = new UiSettings();

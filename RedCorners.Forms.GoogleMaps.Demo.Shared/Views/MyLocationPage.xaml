@@ -6,11 +6,12 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:rf="clr-namespace:RedCorners.Forms;assembly=RedCorners.Forms"
     xmlns:map="clr-namespace:RedCorners.Forms.GoogleMaps;assembly=RedCorners.Forms.GoogleMaps"
+    xmlns:vm="clr-namespace:RedCorners.Forms.GoogleMaps.Demo.ViewModels"
     FixTopPadding="False"
     mc:Ignorable="d"
     x:Class="RedCorners.Forms.GoogleMaps.Demo.Views.MyLocationPage">
     <ContentPage.BindingContext>
-        <rf:BindableModel />
+        <vm:MyLocationPageViewModel />
     </ContentPage.BindingContext>
 
     <rf:TitledContentView 
@@ -25,7 +26,11 @@
         </rf:TitledContentView.ToolBar>
 
         <Grid>
-            <map:Map BindingContext="{x:Reference myloc}" IsMyLocationButtonVisible="{Binding IsToggled}" MyLocationEnabled="{Binding IsToggled}"  />
+            <map:Map 
+                IsMyLocationButtonVisible="{Binding IsToggled, Source={Reference myloc}}" 
+                MyLocationEnabled="{Binding IsToggled}" 
+                RegionChangeAction="{Binding RegionChangeAction}"
+                ItemsSource="{Binding Items}" />
         </Grid>
     </rf:TitledContentView>
 </rf:ContentPage2>
