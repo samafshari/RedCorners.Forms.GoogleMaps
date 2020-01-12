@@ -54,6 +54,11 @@
     <MtouchSdkVersion>
     </MtouchSdkVersion>
     <MtouchExtraArgs>-v</MtouchExtraArgs>
+    <MtouchInterpreter>-all</MtouchInterpreter>
+    <MtouchNoSymbolStrip>true</MtouchNoSymbolStrip>
+    <MtouchFloat32>true</MtouchFloat32>
+    <MtouchFastDev>true</MtouchFastDev>
+    <MtouchLink>None</MtouchLink>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
     <DebugType>none</DebugType>
