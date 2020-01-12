@@ -14,6 +14,11 @@ namespace RedCorners.Forms.GoogleMaps
 
         public double Longitude { get; }
 
+        public override string ToString()
+        {
+            return $"({Latitude:N6}, {Longitude:N6})";
+        }
+
         public override bool Equals(object obj)
         {
             if (obj is null)
