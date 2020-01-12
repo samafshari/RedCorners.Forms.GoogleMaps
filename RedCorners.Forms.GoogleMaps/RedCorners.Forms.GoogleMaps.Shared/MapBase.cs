@@ -51,12 +51,12 @@ namespace RedCorners.Forms.GoogleMaps
             CameraUpdateFactory.NewPositionZoom(new Position(41.89, 12.49), 10),  // center on Rome by default
             propertyChanged: (bindable, oldValue, newValue) => 
             {
-                ((MapBase)bindable)._useMoveToRegisonAsInitialBounds = false;   
+                ((MapBase)bindable)._useMoveToRegionAsInitialBounds = false;   
             });
 
         public static new readonly BindableProperty PaddingProperty = BindableProperty.Create(nameof(PaddingProperty), typeof(Thickness), typeof(MapBase), default(Thickness));
 
-        bool _useMoveToRegisonAsInitialBounds = true;
+        bool _useMoveToRegionAsInitialBounds = true;
 
         public static readonly BindableProperty CameraPositionProperty = BindableProperty.Create(
             nameof(CameraPosition), typeof(CameraPosition), typeof(MapBase),
@@ -293,10 +293,10 @@ namespace RedCorners.Forms.GoogleMaps
             if (mapSpan == null)
                 throw new ArgumentNullException(nameof(mapSpan));
 
-            if (_useMoveToRegisonAsInitialBounds)
+            if (_useMoveToRegionAsInitialBounds)
             {
                 InitialCameraUpdate = CameraUpdateFactory.NewBounds(mapSpan.ToBounds(), 0);
-                _useMoveToRegisonAsInitialBounds = false;
+                _useMoveToRegionAsInitialBounds = false;
             }
 
             SendMoveToRegion(new MoveToRegionMessage(mapSpan, animate));
