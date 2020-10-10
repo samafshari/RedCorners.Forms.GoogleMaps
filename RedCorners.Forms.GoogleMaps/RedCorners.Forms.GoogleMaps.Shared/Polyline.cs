@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.Linq;
+
 using Xamarin.Forms;
 
 namespace RedCorners.Forms.GoogleMaps
 {
-    public sealed class Polyline : BindableObject
+    public sealed class Polyline : BindableObject, IMapObject
     {
         public static readonly BindableProperty StrokeWidthProperty = BindableProperty.Create(nameof(StrokeWidth), typeof(float), typeof(Polyline), 1f);
         public static readonly BindableProperty StrokeColorProperty = BindableProperty.Create(nameof(StrokeColor), typeof(Color), typeof(Polyline), Color.Blue);
@@ -78,6 +80,26 @@ namespace RedCorners.Forms.GoogleMaps
         void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             _positionsChangedHandler?.Invoke(this, e);
+        }
+
+        // IMapObject
+        public bool NeverCull { get; set; } = false;
+
+        public bool ShouldCull(MapRegion region)
+        {
+            if (Positions == null || Positions.Count == 0)
+                return true;
+
+            return Positions.All(x => !region.Contains(x));
+        }
+
+        public bool ShouldCull(Position position, Distance distance)
+        {
+            if (Positions == null || Positions.Count == 0)
+                return true;
+
+            return Positions.All(x =>
+                MapLocationSystem.CalculateDistance(position, x) > distance);
         }
     }
 }

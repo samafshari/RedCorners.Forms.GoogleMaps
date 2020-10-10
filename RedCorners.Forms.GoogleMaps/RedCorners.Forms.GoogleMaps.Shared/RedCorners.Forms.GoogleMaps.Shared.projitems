@@ -11,7 +11,7 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)AnimationStatus.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Assembly.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)BasicMapItemTemplate.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)BasicMapObjectTemplate.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)BitmapDescriptor.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)BitmapDescriptorFactory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)BitmapDescriptorType.cs" />
@@ -25,10 +25,12 @@
     <Compile Include="$(MSBuildThisFileDirectory)CameraUpdateFactory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Circle.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Distance.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\MapRegionExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\MapSpanExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Geocoder.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GroundOverlay.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\CameraUpdateConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IMapObject.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)InfoWindowClickedEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)InfoWindowLongClickedEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Internals\CameraUpdateMessage.cs" />

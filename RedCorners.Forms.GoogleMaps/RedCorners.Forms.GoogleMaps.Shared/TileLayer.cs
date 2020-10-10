@@ -4,7 +4,7 @@ using Xamarin.Forms;
 
 namespace RedCorners.Forms.GoogleMaps
 {
-    public sealed class TileLayer : BindableObject
+    public sealed class TileLayer : BindableObject, IMapObject
     {
         public static readonly BindableProperty ZIndexProperty = BindableProperty.Create(nameof(ZIndex), typeof(int), typeof(TileLayer), -1);
 
@@ -60,6 +60,19 @@ namespace RedCorners.Forms.GoogleMaps
         public static TileLayer FromAsyncImage(Func<int, int, int, Task<byte[]>> tileImageAsync, int tileSize = 256)
         {
             return new TileLayer(tileImageAsync, tileSize);
+        }
+
+        // IMapObject
+        public bool NeverCull { get; set; } = false;
+
+        public bool ShouldCull(MapRegion region)
+        {
+            return false;
+        }
+
+        public bool ShouldCull(Position position, Distance distance)
+        {
+            return false;
         }
     }
 }

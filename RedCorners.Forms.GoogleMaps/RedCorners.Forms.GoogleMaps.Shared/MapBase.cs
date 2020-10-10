@@ -19,7 +19,7 @@ namespace RedCorners.Forms.GoogleMaps
         public static readonly BindableProperty ItemsSourceProperty = BindableProperty.Create(nameof(IEnumerable), typeof(IEnumerable), typeof(MapBase), default(IEnumerable),
             propertyChanged: (b, o, n) => ((MapBase)b).OnItemsSourcePropertyChanged((IEnumerable)o, (IEnumerable)n));
 
-        public static readonly BindableProperty ItemTemplateProperty = BindableProperty.Create(nameof(ItemTemplate), typeof(DataTemplate), typeof(MapBase), new BasicMapItemTemplate(),
+        public static readonly BindableProperty ItemTemplateProperty = BindableProperty.Create(nameof(ItemTemplate), typeof(DataTemplate), typeof(MapBase), new BasicMapObjectTemplate(),
             propertyChanged: (b, o, n) => ((MapBase)b).OnItemTemplatePropertyChanged((DataTemplate)o, (DataTemplate)n));
 
         public static readonly BindableProperty MapTypeProperty = BindableProperty.Create(nameof(MapType), typeof(MapType), typeof(MapBase), default(MapType));
