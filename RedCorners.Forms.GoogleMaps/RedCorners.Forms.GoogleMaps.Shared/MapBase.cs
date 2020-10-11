@@ -497,38 +497,55 @@ namespace RedCorners.Forms.GoogleMaps
             _groundOverlays.Clear();
         }
 
+        readonly object lockCollectionChanged = new object();
+        volatile bool isCollectionChanging = false;
+        public bool IsCollectionChanging => isCollectionChanging;
+        public event EventHandler<bool> OnCollectionChanging;
         void OnItemsSourceCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            switch (e.Action)
+            try
             {
-                case NotifyCollectionChangedAction.Add:
-                    if (e.NewStartingIndex == -1)
-                        goto case NotifyCollectionChangedAction.Reset;
-                    foreach (object item in e.NewItems)
-                        CreateItem(item);
-                    break;
-                case NotifyCollectionChangedAction.Move:
-                    if (e.OldStartingIndex == -1 || e.NewStartingIndex == -1)
-                        goto case NotifyCollectionChangedAction.Reset;
-                    // Not tracking order
-                    break;
-                case NotifyCollectionChangedAction.Remove:
-                    if (e.OldStartingIndex == -1)
-                        goto case NotifyCollectionChangedAction.Reset;
-                    foreach (object item in e.OldItems)
-                        RemoveItem(item);
-                    break;
-                case NotifyCollectionChangedAction.Replace:
-                    if (e.OldStartingIndex == -1)
-                        goto case NotifyCollectionChangedAction.Reset;
-                    foreach (object item in e.OldItems)
-                        RemoveItem(item);
-                    foreach (object item in e.NewItems)
-                        CreateItem(item);
-                    break;
-                case NotifyCollectionChangedAction.Reset:
-                    ClearCollections();
-                    break;
+                lock (lockCollectionChanged)
+                {
+                    isCollectionChanging = true;
+                    OnCollectionChanging?.Invoke(this, IsCollectionChanging);
+                    switch (e.Action)
+                    {
+                        case NotifyCollectionChangedAction.Add:
+                            if (e.NewStartingIndex == -1)
+                                goto case NotifyCollectionChangedAction.Reset;
+                            foreach (object item in e.NewItems)
+                                CreateItem(item);
+                            break;
+                        case NotifyCollectionChangedAction.Move:
+                            if (e.OldStartingIndex == -1 || e.NewStartingIndex == -1)
+                                goto case NotifyCollectionChangedAction.Reset;
+                            // Not tracking order
+                            break;
+                        case NotifyCollectionChangedAction.Remove:
+                            if (e.OldStartingIndex == -1)
+                                goto case NotifyCollectionChangedAction.Reset;
+                            foreach (object item in e.OldItems)
+                                RemoveItem(item);
+                            break;
+                        case NotifyCollectionChangedAction.Replace:
+                            if (e.OldStartingIndex == -1)
+                                goto case NotifyCollectionChangedAction.Reset;
+                            foreach (object item in e.OldItems)
+                                RemoveItem(item);
+                            foreach (object item in e.NewItems)
+                                CreateItem(item);
+                            break;
+                        case NotifyCollectionChangedAction.Reset:
+                            ClearCollections();
+                            break;
+                    }
+                }
+            }
+            finally
+            {
+                isCollectionChanging = false;
+                OnCollectionChanging?.Invoke(this, IsCollectionChanging);
             }
         }
 
