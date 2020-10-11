@@ -54,6 +54,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)MapClickedEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MapLongClickedEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MapObject.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapObjectCollection.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapObjectCollectionBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MapRegion.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MapSpan.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MapType.cs" />
