@@ -109,6 +109,10 @@ namespace RedCorners.Forms.GoogleMaps
             return SouthWest.Longitude <= position.Longitude && position.Longitude <= NorthEast.Longitude
                     && SouthWest.Latitude <= position.Latitude && position.Latitude <= NorthEast.Latitude;
         }
+
+        public bool Intersects(Bounds bounds)
+        {
+        }
     }
 }
 

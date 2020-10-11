@@ -5,7 +5,7 @@ using Xamarin.Forms;
 
 namespace RedCorners.Forms.GoogleMaps
 {
-    public sealed class Pin : BindableObject, IMapObject
+    public sealed class Pin : MapObject
     {
         public static readonly BindableProperty TypeProperty = BindableProperty.Create(nameof(Type), typeof(PinType), typeof(Pin), default(PinType));
 
@@ -142,20 +142,6 @@ namespace RedCorners.Forms.GoogleMaps
         [Obsolete("Please use Map.PinClicked instead of this")]
         public event EventHandler Clicked;
 
-        public override bool Equals(object obj)
-        {
-            if (obj is null)
-                return false;
-            if (!ReferenceEquals(this, obj))
-            {
-                if (obj.GetType() != GetType())
-                    return false;
-                return Equals((Pin)obj);
-            }
-
-            return true;
-        }
-
         public override int GetHashCode()
         {
             unchecked
@@ -166,16 +152,6 @@ namespace RedCorners.Forms.GoogleMaps
                 hashCode = (hashCode * 397) ^ (Address?.GetHashCode() ?? 0);
                 return hashCode;
             }
-        }
-
-        public static bool operator ==(Pin left, Pin right)
-        {
-            return Equals(left, right);
-        }
-
-        public static bool operator !=(Pin left, Pin right)
-        {
-            return !Equals(left, right);
         }
 
         internal bool SendTap()
@@ -192,20 +168,12 @@ namespace RedCorners.Forms.GoogleMaps
             return true;
         }
 
-        bool Equals(Pin other)
-        {
-            return string.Equals(Label, other.Label) && Equals(Position, other.Position) && Type == other.Type && string.Equals(Address, other.Address);
-        }
-
-        // IMapObject
-        public bool NeverCull { get; set; } = false;
-
-        public bool ShouldCull(MapRegion region)
+        public override bool ShouldCull(MapRegion region)
         {
             return !region.Contains(Position);
         }
 
-        public bool ShouldCull(Position position, Distance distance)
+        public override bool ShouldCull(Position position, Distance distance)
         {
             return MapLocationSystem.CalculateDistance(position, Position) <= distance;
         }

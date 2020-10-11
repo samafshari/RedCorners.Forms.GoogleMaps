@@ -4,7 +4,7 @@ using Xamarin.Forms;
 
 namespace RedCorners.Forms.GoogleMaps
 {
-    public sealed class GroundOverlay : BindableObject, IMapObject
+    public sealed class GroundOverlay : MapObject
     {
         public static readonly BindableProperty IconProperty = BindableProperty.Create(nameof(Icon), typeof(BitmapDescriptor), typeof(GroundOverlay), default(BitmapDescriptor));
         public static readonly BindableProperty TransparencyProperty = BindableProperty.Create(nameof(Transparency), typeof(float), typeof(GroundOverlay), 0f);
@@ -72,15 +72,12 @@ namespace RedCorners.Forms.GoogleMaps
             return true;
         }
 
-        // IMapObject
-        public bool NeverCull { get; set; } = false;
-
-        public bool ShouldCull(MapRegion region)
+        public override bool ShouldCull(MapRegion region)
         {
             return !region.Contains(Bounds);
         }
 
-        public bool ShouldCull(Position position, Distance distance)
+        public override bool ShouldCull(Position position, Distance distance)
         {
             if (Bounds == null) return true;
             return MapLocationSystem.CalculateDistance(position, Bounds.Center) <= distance;

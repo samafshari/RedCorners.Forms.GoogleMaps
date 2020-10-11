@@ -7,7 +7,7 @@ using Xamarin.Forms;
 
 namespace RedCorners.Forms.GoogleMaps
 {
-    public sealed class Polygon : BindableObject, IMapObject
+    public sealed class Polygon : MapObject
     {
         public static readonly BindableProperty StrokeWidthProperty = BindableProperty.Create(nameof(StrokeWidth), typeof(float), typeof(Polygon), 1f);
         public static readonly BindableProperty StrokeColorProperty = BindableProperty.Create(nameof(StrokeColor), typeof(Color), typeof(Polygon), Color.Blue);
@@ -117,10 +117,7 @@ namespace RedCorners.Forms.GoogleMaps
             _holesChangedHandler?.Invoke(this, e);
         }
 
-        // IMapObject
-        public bool NeverCull { get; set; } = false;
-
-        public bool ShouldCull(MapRegion region)
+        public override bool ShouldCull(MapRegion region)
         {
             if (Positions == null || Positions.Count == 0)
                 return true;
@@ -128,7 +125,7 @@ namespace RedCorners.Forms.GoogleMaps
             return Positions.All(x => !region.Contains(x));
         }
 
-        public bool ShouldCull(Position position, Distance distance)
+        public override bool ShouldCull(Position position, Distance distance)
         {
             if (Positions == null || Positions.Count == 0)
                 return true;

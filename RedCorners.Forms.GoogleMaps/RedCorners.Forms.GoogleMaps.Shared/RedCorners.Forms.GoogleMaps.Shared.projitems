@@ -30,7 +30,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Geocoder.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GroundOverlay.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\CameraUpdateConverter.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)IMapObject.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)InfoWindowClickedEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)InfoWindowLongClickedEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Internals\CameraUpdateMessage.cs" />
@@ -54,6 +53,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)MapBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MapClickedEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MapLongClickedEventArgs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapObject.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MapRegion.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MapSpan.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MapType.cs" />

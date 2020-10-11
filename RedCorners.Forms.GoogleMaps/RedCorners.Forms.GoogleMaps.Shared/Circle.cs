@@ -6,7 +6,7 @@ using Xamarin.Forms;
 
 namespace RedCorners.Forms.GoogleMaps
 {
-    public sealed class Circle : BindableObject, IMapObject
+    public sealed class Circle : MapObject
     {
         public static readonly BindableProperty StrokeWidthProperty = BindableProperty.Create(nameof(StrokeWidth) , typeof(float), typeof(Circle), 1f);
         public static readonly BindableProperty StrokeColorProperty = BindableProperty.Create(nameof(StrokeColor), typeof(Color), typeof(Circle), Color.Blue);
@@ -107,15 +107,12 @@ namespace RedCorners.Forms.GoogleMaps
             return true;
         }
 
-        // IMapObject
-        public bool NeverCull { get; set; } = false;
-
-        public bool ShouldCull(MapRegion region)
+        public override bool ShouldCull(MapRegion region)
         {
             return !region.Contains(Center, Radius);
         }
 
-        public bool ShouldCull(Position position, Distance distance)
+        public override bool ShouldCull(Position position, Distance distance)
         {
             return MapLocationSystem.CalculateDistance(position, Center) <= distance;
         }
