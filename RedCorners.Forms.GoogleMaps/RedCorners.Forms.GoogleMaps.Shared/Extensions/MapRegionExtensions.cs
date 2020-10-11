@@ -8,12 +8,34 @@ namespace RedCorners.Forms.GoogleMaps
     public static class MapRegionExtensions
     {
         public static bool Contains(
-            this MapRegion region, 
-            Position position,
-            bool edgeIsInside = true)
+            this MapRegion region,
+            Position position)
         {
             if (region == null) return false;
+            return region.ToBounds().Contains(position);
+        }
 
+        public static bool Contains(
+            this MapRegion region,
+            Position center,
+            Distance _)
+        {
+            // TODO: Implement a better algorithm that uses Distance
+            return region.Contains(center);
+        }
+
+        public static bool Contains(
+            this MapRegion region,
+            Bounds bounds)
+        {
+            if (region == null || bounds == null)
+                return false;
+
+            return region.ToBounds().Intersects(bounds);
+        }
+
+        public static Bounds ToBounds(this MapRegion region)
+        {
             var points = new[]
             {
                 region.NearLeft,
@@ -30,35 +52,9 @@ namespace RedCorners.Forms.GoogleMaps
                 lat: points.Max(x => x.Latitude),
                 lng: points.Max(x => x.Longitude));
 
-            if (edgeIsInside)
-                return
-                    position.Latitude >= min.lat &&
-                    position.Longitude >= min.lng &&
-                    position.Latitude <= max.lat &&
-                    position.Longitude <= max.lng;
-            else
-                return
-                    position.Latitude > min.lat &&
-                    position.Longitude > min.lng &&
-                    position.Latitude < max.lat &&
-                    position.Longitude < max.lng;
-        }
-
-        public static bool Contains(
-            this MapRegion region,
-            Position center,
-            Distance radius,
-            bool edgeIsInside = true)
-        {
-            throw new NotImplementedException();
-        }
-
-        public static bool Contains(
-            this MapRegion region,
-            Bounds bounds,
-            bool edgeIsInside = true)
-        {
-            throw new NotImplementedException();
+            return new Bounds(
+                new Position(min.lat, min.lng),
+                new Position(max.lat, max.lng));
         }
     }
 }

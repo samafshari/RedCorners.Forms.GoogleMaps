@@ -112,6 +112,19 @@ namespace RedCorners.Forms.GoogleMaps
 
         public bool Intersects(Bounds bounds)
         {
+            var lat =
+                (bounds.NorthEast.Latitude - bounds.SouthWest.Latitude) +
+                (NorthEast.Latitude - SouthWest.Latitude) <=
+                (Math.Max(bounds.NorthEast.Latitude, NorthEast.Latitude) -
+                Math.Min(bounds.SouthWest.Latitude, SouthWest.Latitude));
+
+            var lng =
+                (bounds.NorthEast.Longitude - bounds.SouthWest.Longitude) +
+                (NorthEast.Longitude - SouthWest.Longitude) <=
+                (Math.Max(bounds.NorthEast.Longitude, NorthEast.Longitude) -
+                Math.Min(bounds.SouthWest.Longitude, SouthWest.Longitude));
+            
+            return lat && lng;
         }
     }
 }
