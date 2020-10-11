@@ -6,5 +6,6 @@ namespace RedCorners.Forms.GoogleMaps
 {
     public class MapObjectCollection : MapObjectCollectionBase
     {
+
     }
 }
