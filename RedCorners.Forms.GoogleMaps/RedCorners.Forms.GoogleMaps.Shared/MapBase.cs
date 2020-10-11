@@ -71,7 +71,7 @@ namespace RedCorners.Forms.GoogleMaps
         readonly ObservableCollection<Circle> _circles = new ObservableCollection<Circle>();
         readonly ObservableCollection<TileLayer> _tileLayers = new ObservableCollection<TileLayer>();
         readonly ObservableCollection<GroundOverlay> _groundOverlays = new ObservableCollection<GroundOverlay>();
-        readonly ObservableCollection<IEnumerable> _layers = new ObservableCollection<IEnumerable>();
+        readonly ObservableCollection<MapObjectCollection> _layers = new ObservableCollection<MapObjectCollection>();
 
         public event EventHandler<PinClickedEventArgs> PinClicked;
         public event EventHandler<SelectedPinChangedEventArgs> SelectedPinChanged;
@@ -254,7 +254,7 @@ namespace RedCorners.Forms.GoogleMaps
             get { return _groundOverlays; }
         }
 
-        public IList<IEnumerable> Layers => _layers;
+        public IList<MapObjectCollection> Layers => _layers;
 
         [Obsolete("Please use Map.Region instead of this")]
         public MapSpan VisibleRegion

@@ -12,22 +12,22 @@ namespace RedCorners.Forms.GoogleMaps
 
         public event CollectionChangeDelegate CollectionChanged;
 
-        public virtual Task<IEnumerable<MapObject>> GetItemsAsync()
+        public virtual IEnumerable<MapObject> GetItems()
         {
-            throw new Exception("Do not call base on GetItemsAsync()");
+            throw new Exception("Do not call base on GetItems()");
         }
 
-        public virtual async Task<IEnumerable<MapObject>> GetVisibleItemsAsync(MapRegion region)
+        public virtual IEnumerable<MapObject> GetVisibleItems(MapRegion region)
         {
             return 
-                (await GetItemsAsync())
+                GetItems()
                 .Where(x => x.NeverCull ||!x.ShouldCull(region));
         }
 
-        public virtual async Task<IEnumerable<MapObject>> GetVisibleItemsAsync(Position center, Distance distance)
+        public virtual IEnumerable<MapObject> GetVisibleItems(Position center, Distance distance)
         {
             return
-                (await GetItemsAsync())
+                GetItems()
                 .Where(x => x.NeverCull || !x.ShouldCull(center, distance));
         }
 

@@ -8,6 +8,7 @@ namespace RedCorners.Forms.GoogleMaps
 {
     public abstract class MapObject : BindableObject
     {
+        public MapObjectCollectionBase Owner { get; set; }
         public bool NeverCull { get; set; }
 
         public virtual bool ShouldCull(MapRegion region)
