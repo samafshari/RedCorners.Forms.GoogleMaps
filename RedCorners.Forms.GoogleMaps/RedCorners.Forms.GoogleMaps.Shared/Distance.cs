@@ -75,6 +75,25 @@ namespace RedCorners.Forms.GoogleMaps
         {
             return !left.Equals(right);
         }
+
+        public static bool operator <(Distance left, Distance right)
+        {
+            return left.Meters < right.Meters;
+        }
+        public static bool operator <=(Distance left, Distance right)
+        {
+            return left.Meters <= right.Meters;
+        }
+        
+        public static bool operator >(Distance left, Distance right)
+        {
+            return left.Meters > right.Meters;
+        }
+        
+        public static bool operator >=(Distance left, Distance right)
+        {
+            return left.Meters >= right.Meters;
+        }
     }
     public enum DistanceType { Kilometers, Meters, Miles }
 }

@@ -19,7 +19,7 @@ namespace RedCorners.Forms.GoogleMaps
         public static readonly BindableProperty ItemsSourceProperty = BindableProperty.Create(nameof(IEnumerable), typeof(IEnumerable), typeof(MapBase), default(IEnumerable),
             propertyChanged: (b, o, n) => ((MapBase)b).OnItemsSourcePropertyChanged((IEnumerable)o, (IEnumerable)n));
 
-        public static readonly BindableProperty ItemTemplateProperty = BindableProperty.Create(nameof(ItemTemplate), typeof(DataTemplate), typeof(MapBase), new BasicMapItemTemplate(),
+        public static readonly BindableProperty ItemTemplateProperty = BindableProperty.Create(nameof(ItemTemplate), typeof(DataTemplate), typeof(MapBase), new BasicMapObjectTemplate(),
             propertyChanged: (b, o, n) => ((MapBase)b).OnItemTemplatePropertyChanged((DataTemplate)o, (DataTemplate)n));
 
         public static readonly BindableProperty MapTypeProperty = BindableProperty.Create(nameof(MapType), typeof(MapType), typeof(MapBase), default(MapType));
@@ -71,6 +71,7 @@ namespace RedCorners.Forms.GoogleMaps
         readonly ObservableCollection<Circle> _circles = new ObservableCollection<Circle>();
         readonly ObservableCollection<TileLayer> _tileLayers = new ObservableCollection<TileLayer>();
         readonly ObservableCollection<GroundOverlay> _groundOverlays = new ObservableCollection<GroundOverlay>();
+        readonly ObservableCollection<IEnumerable> _layers = new ObservableCollection<IEnumerable>();
 
         public event EventHandler<PinClickedEventArgs> PinClicked;
         public event EventHandler<SelectedPinChangedEventArgs> SelectedPinChanged;
@@ -119,6 +120,7 @@ namespace RedCorners.Forms.GoogleMaps
             _circles.CollectionChanged += CirclesOnCollectionChanged;
             _tileLayers.CollectionChanged += TileLayersOnCollectionChanged;
             _groundOverlays.CollectionChanged += GroundOverlays_CollectionChanged;
+            _layers.CollectionChanged += Layers_CollectionChanged;
         }
 
         [Obsolete("Please use Map.UiSettings.ScrollGesturesEnabled instead of this")]
@@ -252,6 +254,8 @@ namespace RedCorners.Forms.GoogleMaps
             get { return _groundOverlays; }
         }
 
+        public IList<IEnumerable> Layers => _layers;
+
         [Obsolete("Please use Map.Region instead of this")]
         public MapSpan VisibleRegion
         {
@@ -367,6 +371,11 @@ namespace RedCorners.Forms.GoogleMaps
 
         void GroundOverlays_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
+        }
+
+        private void Layers_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+
         }
 
         internal void SendSelectedPinChanged(Pin selectedPin)
@@ -564,6 +573,19 @@ namespace RedCorners.Forms.GoogleMaps
 
         void CreateItem(object newItem)
         {
+            if (newItem is IEnumerable enumerable)
+            {
+                foreach (var item in enumerable)
+                {
+                    CreateItem(newItem);
+                }
+
+                if (newItem is INotifyCollectionChanged collection)
+                    collection.CollectionChanged += Layer_CollectionChanged;
+
+                return;
+            }
+
             if (ItemTemplate == null)
             {
                 return;
@@ -608,6 +630,20 @@ namespace RedCorners.Forms.GoogleMaps
 
         void RemoveItem(object itemToRemove)
         {
+            if (_layers.Contains(itemToRemove))
+            {
+                if (itemToRemove is INotifyCollectionChanged collection)
+                    collection.CollectionChanged -= Layer_CollectionChanged;
+
+                var enumerableToRemove = itemToRemove as IEnumerable;
+                _layers.Remove(enumerableToRemove);
+                foreach (var item in enumerableToRemove)
+                {
+                    RemoveItem(item);
+                }
+                return;
+            }
+
             foreach (var pin in _pins.Where(x => x.BindingContext?.Equals(itemToRemove) ?? false).ToList())
                 _pins.Remove(pin);
 
@@ -625,6 +661,42 @@ namespace RedCorners.Forms.GoogleMaps
 
             foreach (var groundOverlay in _groundOverlays.Where(x => x.BindingContext?.Equals(itemToRemove) ?? false).ToList())
                 _groundOverlays.Remove(groundOverlay);
+        }
+
+        private void Layer_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            switch (e.Action)
+            {
+                case NotifyCollectionChangedAction.Add:
+                    if (e.NewStartingIndex == -1)
+                        goto case NotifyCollectionChangedAction.Reset;
+                    foreach (object item in e.NewItems)
+                        CreateItem(item);
+                    break;
+                case NotifyCollectionChangedAction.Move:
+                    if (e.OldStartingIndex == -1 || e.NewStartingIndex == -1)
+                        goto case NotifyCollectionChangedAction.Reset;
+                    // Not tracking order
+                    break;
+                case NotifyCollectionChangedAction.Remove:
+                    if (e.OldStartingIndex == -1)
+                        goto case NotifyCollectionChangedAction.Reset;
+                    foreach (object item in e.OldItems)
+                        RemoveItem(item);
+                    break;
+                case NotifyCollectionChangedAction.Replace:
+                    if (e.OldStartingIndex == -1)
+                        goto case NotifyCollectionChangedAction.Reset;
+                    foreach (object item in e.OldItems)
+                        RemoveItem(item);
+                    foreach (object item in e.NewItems)
+                        CreateItem(item);
+                    break;
+                case NotifyCollectionChangedAction.Reset:
+                    RemoveItem(sender);
+                    CreateItem(sender);
+                    break;
+            }
         }
     }
 }

@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace RedCorners.Forms.GoogleMaps
 {
-    public sealed class Pin : BindableObject
+    public sealed class Pin : BindableObject, IMapObject
     {
         public static readonly BindableProperty TypeProperty = BindableProperty.Create(nameof(Type), typeof(PinType), typeof(Pin), default(PinType));
 
@@ -194,6 +195,19 @@ namespace RedCorners.Forms.GoogleMaps
         bool Equals(Pin other)
         {
             return string.Equals(Label, other.Label) && Equals(Position, other.Position) && Type == other.Type && string.Equals(Address, other.Address);
+        }
+
+        // IMapObject
+        public bool NeverCull { get; set; } = false;
+
+        public bool ShouldCull(MapRegion region)
+        {
+            return !region.Contains(Position);
+        }
+
+        public bool ShouldCull(Position position, Distance distance)
+        {
+            return MapLocationSystem.CalculateDistance(position, Position) <= distance;
         }
     }
 }
