@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using Xamarin.Forms;
+
 namespace RedCorners.Forms.GoogleMaps
 {
     public abstract class MapObjectCollectionBase : MapObject
@@ -12,9 +14,23 @@ namespace RedCorners.Forms.GoogleMaps
 
         public event CollectionChangeDelegate CollectionChanged;
 
+        bool _isVisible = true;
+        public bool IsVisible
+        {
+            get => _isVisible;
+            set
+            {
+                if (_isVisible != value)
+                {
+                    _isVisible = value;
+                    TriggerCollectionChange();
+                }
+            }
+        }
+
         public virtual IEnumerable<MapObject> GetItems()
         {
-            throw new Exception("Do not call base on GetItems()");
+            throw new Exception("Do not call base on GetItems(); override this.");
         }
 
         public virtual IEnumerable<MapObject> GetVisibleItems(MapRegion region)
@@ -33,7 +49,10 @@ namespace RedCorners.Forms.GoogleMaps
 
         public void TriggerCollectionChange()
         {
-            CollectionChanged?.Invoke(this);
+            Device.BeginInvokeOnMainThread(() =>
+            {
+                CollectionChanged?.Invoke(this);
+            });
         }
     }
 }

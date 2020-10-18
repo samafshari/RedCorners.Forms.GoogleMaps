@@ -71,7 +71,7 @@ namespace RedCorners.Forms.GoogleMaps
         readonly ObservableCollection<Circle> _circles = new ObservableCollection<Circle>();
         readonly ObservableCollection<TileLayer> _tileLayers = new ObservableCollection<TileLayer>();
         readonly ObservableCollection<GroundOverlay> _groundOverlays = new ObservableCollection<GroundOverlay>();
-        readonly ObservableCollection<MapObjectCollection> _layers = new ObservableCollection<MapObjectCollection>();
+        readonly ObservableCollection<MapObjectCollectionBase> _collections = new ObservableCollection<MapObjectCollectionBase>();
 
         public event EventHandler<PinClickedEventArgs> PinClicked;
         public event EventHandler<SelectedPinChangedEventArgs> SelectedPinChanged;
@@ -100,15 +100,7 @@ namespace RedCorners.Forms.GoogleMaps
 
         internal Action<TakeSnapshotMessage> OnSnapshot{ get; set; }
 
-        MapSpan _visibleRegion;
         MapRegion _region;
-
-        //// Simone Marra
-        //public static Position _TopLeft = new Position();
-        //public static Position _TopRight = new Position();
-        //public static Position _BottomLeft = new Position();
-        //public static Position _BottomRight = new Position();
-        //// End Simone Marra
 
         public MapBase()
         {
@@ -120,7 +112,7 @@ namespace RedCorners.Forms.GoogleMaps
             _circles.CollectionChanged += CirclesOnCollectionChanged;
             _tileLayers.CollectionChanged += TileLayersOnCollectionChanged;
             _groundOverlays.CollectionChanged += GroundOverlays_CollectionChanged;
-            _layers.CollectionChanged += Layers_CollectionChanged;
+            _collections.CollectionChanged += Layers_CollectionChanged;
         }
 
         [Obsolete("Please use Map.UiSettings.ScrollGesturesEnabled instead of this")]
@@ -224,51 +216,13 @@ namespace RedCorners.Forms.GoogleMaps
             set => SetValue(ItemTemplateProperty, value);
         }
 
-        public IList<Pin> Pins
-        {
-            get { return _pins; }
-        }
-
-        public IList<Polyline> Polylines
-        {
-            get { return _polylines; }
-        }
-
-        public IList<Polygon> Polygons
-        {
-            get { return _polygons; }
-        }
-
-        public IList<Circle> Circles
-        {
-            get { return _circles; }
-        }
-
-        public IList<TileLayer> TileLayers
-        {
-            get { return _tileLayers; }
-        }
-
-        public IList<GroundOverlay> GroundOverlays
-        {
-            get { return _groundOverlays; }
-        }
-
-        public IList<MapObjectCollection> Layers => _layers;
-
-        [Obsolete("Please use Map.Region instead of this")]
-        public MapSpan VisibleRegion
-        {
-            get { return _visibleRegion; }
-            internal set
-            {
-                if (_visibleRegion == value)
-                    return;
-                OnPropertyChanging();
-                _visibleRegion = value ?? throw new ArgumentNullException(nameof(value));
-                OnPropertyChanged();
-            }
-        }
+        public IList<Pin> Pins => _pins;
+        public IList<Polyline> Polylines => _polylines;
+        public IList<Polygon> Polygons => _polygons;
+        public IList<Circle> Circles => _circles;
+        public IList<TileLayer> TileLayers => _tileLayers;
+        public IList<GroundOverlay> GroundOverlays => _groundOverlays;
+        public IList<MapObjectCollectionBase> Collections => _collections;
 
         public MapRegion Region
         {
@@ -281,6 +235,7 @@ namespace RedCorners.Forms.GoogleMaps
                 _region = value ?? throw new ArgumentNullException(nameof(value));
                 OnPropertyChanged();
                 RegionChangeAction?.Invoke(Region);
+                SyncCollections();
             }
         }
 
@@ -571,18 +526,32 @@ namespace RedCorners.Forms.GoogleMaps
             }
         }
 
+        void SyncCollection(MapObjectCollectionBase collection)
+        {
+            var items = collection.GetVisibleItems(Region).ToList();
+            var existingItems = GetItemsFromOwner(collection).ToList();
+            var itemsToDelete = existingItems.Where(x => !items.Contains(x)).ToList();
+            var itemsToAdd = items.Where(x => !existingItems.Contains(x)).ToList();
+
+            for (int i = 0; i < itemsToDelete.Count; i++)
+                RemoveItem(itemsToDelete[i]);
+
+            for (int i = 0; i < itemsToAdd.Count; i++)
+                CreateItem(itemsToAdd[i]);
+        }
+
+        void SyncCollections()
+        {
+            foreach (var item in Collections)
+                SyncCollection(item);
+        }
+
         void CreateItem(object newItem)
         {
-            if (newItem is IEnumerable enumerable)
+            if (newItem is MapObjectCollectionBase collection)
             {
-                foreach (var item in enumerable)
-                {
-                    CreateItem(newItem);
-                }
-
-                if (newItem is INotifyCollectionChanged collection)
-                    collection.CollectionChanged += Layer_CollectionChanged;
-
+                collection.CollectionChanged += MapObjectCollection_CollectionChanged;
+                _collections.Add(collection);
                 return;
             }
 
@@ -628,19 +597,20 @@ namespace RedCorners.Forms.GoogleMaps
             }
         }
 
+        private void MapObjectCollection_CollectionChanged(MapObjectCollectionBase collection)
+        {
+            SyncCollection(collection);
+        }
+
         void RemoveItem(object itemToRemove)
         {
-            if (_layers.Contains(itemToRemove))
-            {
-                if (itemToRemove is INotifyCollectionChanged collection)
-                    collection.CollectionChanged -= Layer_CollectionChanged;
+            if (SelectedPin == itemToRemove)
+                SelectedPin = null;
 
-                var enumerableToRemove = itemToRemove as IEnumerable;
-                _layers.Remove(enumerableToRemove);
-                foreach (var item in enumerableToRemove)
-                {
-                    RemoveItem(item);
-                }
+            if (_collections.Contains(itemToRemove))
+            {
+                var collection = (MapObjectCollectionBase)itemToRemove;
+                _collections.Remove(collection);
                 return;
             }
 
@@ -662,41 +632,40 @@ namespace RedCorners.Forms.GoogleMaps
             foreach (var groundOverlay in _groundOverlays.Where(x => x.BindingContext?.Equals(itemToRemove) ?? false).ToList())
                 _groundOverlays.Remove(groundOverlay);
         }
-
-        private void Layer_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        
+        void RemoveItemsFromOwner(MapObjectCollectionBase owner)
         {
-            switch (e.Action)
-            {
-                case NotifyCollectionChangedAction.Add:
-                    if (e.NewStartingIndex == -1)
-                        goto case NotifyCollectionChangedAction.Reset;
-                    foreach (object item in e.NewItems)
-                        CreateItem(item);
-                    break;
-                case NotifyCollectionChangedAction.Move:
-                    if (e.OldStartingIndex == -1 || e.NewStartingIndex == -1)
-                        goto case NotifyCollectionChangedAction.Reset;
-                    // Not tracking order
-                    break;
-                case NotifyCollectionChangedAction.Remove:
-                    if (e.OldStartingIndex == -1)
-                        goto case NotifyCollectionChangedAction.Reset;
-                    foreach (object item in e.OldItems)
-                        RemoveItem(item);
-                    break;
-                case NotifyCollectionChangedAction.Replace:
-                    if (e.OldStartingIndex == -1)
-                        goto case NotifyCollectionChangedAction.Reset;
-                    foreach (object item in e.OldItems)
-                        RemoveItem(item);
-                    foreach (object item in e.NewItems)
-                        CreateItem(item);
-                    break;
-                case NotifyCollectionChangedAction.Reset:
-                    RemoveItem(sender);
-                    CreateItem(sender);
-                    break;
-            }
+            if (SelectedPin != null && SelectedPin.Owner == owner)
+                SelectedPin = null;
+
+            foreach (var pin in _pins.Where(x => x.Owner == owner).ToList())
+                _pins.Remove(pin);
+
+            foreach (var polyline in _polylines.Where(x => x.Owner == owner).ToList())
+                _polylines.Remove(polyline);
+
+            foreach (var polygon in _polygons.Where(x => x.Owner == owner).ToList())
+                _polygons.Remove(polygon);
+
+            foreach (var circle in _circles.Where(x => x.Owner == owner).ToList())
+                _circles.Remove(circle);
+
+            foreach (var tileLayer in _tileLayers.Where(x => x.Owner == owner).ToList())
+                _tileLayers.Remove(tileLayer);
+
+            foreach (var groundOverlay in _groundOverlays.Where(x => x.Owner == owner).ToList())
+                _groundOverlays.Remove(groundOverlay);
+        }
+
+        IEnumerable<MapObject> GetItemsFromOwner(MapObjectCollectionBase owner)
+        {
+            return
+                _pins.Where(x => x.Owner == owner).Cast<MapObject>()
+                .Union(_polylines.Where(x => x.Owner == owner).Cast<MapObject>())
+                .Union(_polygons.Where(x => x.Owner == owner).Cast<MapObject>())
+                .Union(_circles.Where(x => x.Owner == owner).Cast<MapObject>())
+                .Union(_tileLayers.Where(x => x.Owner == owner).Cast<MapObject>())
+                .Union(_groundOverlays.Where(x => x.Owner == owner).Cast<MapObject>());
         }
     }
 }

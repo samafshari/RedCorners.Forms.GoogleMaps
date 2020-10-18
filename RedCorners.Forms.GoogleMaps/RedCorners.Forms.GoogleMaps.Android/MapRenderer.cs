@@ -419,24 +419,6 @@ namespace RedCorners.Forms.GoogleMaps.Android
             if (map == null)
                 return;
             var projection = map.Projection;
-            var width = Control.Width;
-            var height = Control.Height;
-            var ul = projection.FromScreenLocation(new global::Android.Graphics.Point(0, 0));
-            var ur = projection.FromScreenLocation(new global::Android.Graphics.Point(width, 0));
-            var ll = projection.FromScreenLocation(new global::Android.Graphics.Point(0, height));
-            var lr = projection.FromScreenLocation(new global::Android.Graphics.Point(width, height));
-            var dlat = Math.Max(Math.Abs(ul.Latitude - lr.Latitude), Math.Abs(ur.Latitude - ll.Latitude));
-            var dlong = Math.Max(Math.Abs(ul.Longitude - lr.Longitude), Math.Abs(ur.Longitude - ll.Longitude));
-#pragma warning disable 618
-            Element.VisibleRegion = new MapSpan(
-                    new Position(
-                        pos.Latitude,
-                        pos.Longitude
-                    ),
-                dlat,
-                dlong
-            );
-#pragma warning restore 618
             Element.Region = projection.VisibleRegion.ToRegion();
         }
 
