@@ -17,7 +17,6 @@ namespace RedCorners.Forms.GoogleMaps
             foreach (var item in objects)
             {
                 any = true;
-                item.Owner = this;
                 this.Objects.Add(item);
             }
 
@@ -29,7 +28,6 @@ namespace RedCorners.Forms.GoogleMaps
         {
             if (o == null) return;
 
-            o.Owner = this;
             this.Objects.Add(o);
 
             TriggerCollectionChange();

@@ -24,12 +24,13 @@
     <Compile Include="$(MSBuildThisFileDirectory)CameraPosition.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CameraUpdate.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CameraUpdateFactory.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapObjects\AsyncMapObjectCollection.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MapObjects\Circle.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Distance.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\MapRegionExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\MapSpanExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Geocoder.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)GroundOverlay.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapObjects\GroundOverlay.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\CameraUpdateConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)InfoWindowClickedEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)InfoWindowLongClickedEventArgs.cs" />
@@ -75,8 +76,5 @@
     <Compile Include="$(MSBuildThisFileDirectory)Views\LocationPickerView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Map.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\MapDrawView.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)MapObjects\" />
   </ItemGroup>
 </Project>

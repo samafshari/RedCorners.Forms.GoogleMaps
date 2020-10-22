@@ -14,10 +14,34 @@
     <ContentPage.BindingContext>
         <vm:CollectionsViewModel />
     </ContentPage.BindingContext>
-    <Grid RowDefinitions="*, Auto">
-        <map:Map
-            ItemsSource="{Binding Items}" />
-        
-        <Label Text="Hello, CollectionsPage!" />
+    <Grid RowDefinitions="2*, *">
+        <map:Map ItemsSource="{Binding Items}" />
+        <rf:ListView2
+            Grid.Row="1"
+            ItemsSource="{Binding Items}"
+            HasUnevenRows="True">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid HeightRequest="70" ColumnDefinitions="Auto, *, Auto" Padding="10,0">
+                            <Image 
+                                Grid.Column="0"
+                                Source="{Binding ImageSource}"
+                                HeightRequest="24"
+                                WidthRequest="24"
+                                VerticalOptions="Center" />
+                            <Label
+                                Grid.Column="1"
+                                Text="{Binding Title}"
+                                VerticalOptions="Center" />
+                            <Switch
+                                Grid.Column="2"
+                                VerticalOptions="Center"
+                                IsToggled="{Binding IsVisible}" />
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </rf:ListView2>
     </Grid>
 </rf:ContentPage2>

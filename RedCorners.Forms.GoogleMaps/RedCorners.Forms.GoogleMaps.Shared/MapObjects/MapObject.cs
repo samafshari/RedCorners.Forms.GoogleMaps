@@ -9,7 +9,7 @@ namespace RedCorners.Forms.GoogleMaps
 {
     public abstract class MapObject : BindableObject
     {
-        public MapObjectCollectionBase Owner { get; set; }
+        //public MapObjectCollectionBase Owner { get; set; }
         public bool NeverCull { get; set; }
         public List<object> Tags { get; } = new List<object>();
 

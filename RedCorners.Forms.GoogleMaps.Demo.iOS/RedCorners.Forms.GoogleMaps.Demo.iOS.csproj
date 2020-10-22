@@ -161,7 +161,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\foodtruck%402x.png" />
+    <BundleResource Include="Resources\**\*.png" />
   </ItemGroup>
   <Import Project="..\RedCorners.Forms.GoogleMaps.Demo.Shared\RedCorners.Forms.GoogleMaps.Demo.Shared.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

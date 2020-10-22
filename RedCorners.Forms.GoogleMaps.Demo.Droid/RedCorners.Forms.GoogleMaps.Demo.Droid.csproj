@@ -79,6 +79,7 @@
     <AndroidResource Include="Resources\mipmap-mdpi\ic_launcher.png" />
     <AndroidResource Include="Resources\mipmap-mdpi\ic_launcher_foreground.png" />
     <AndroidResource Include="Resources\mipmap-mdpi\ic_launcher_round.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\**\*.png" />
     <AndroidResource Include="Resources\layout\Tabbar.axml" />
     <AndroidResource Include="Resources\layout\Toolbar.axml" />
     <AndroidResource Include="Resources\values\colors.xml" />
@@ -115,7 +116,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <AndroidAsset Include="Assets\foodtruck.png" />
+    <AndroidAsset Include="Assets\**\*.png" />
   </ItemGroup>
   <Import Project="..\RedCorners.Forms.GoogleMaps.Demo.Shared\RedCorners.Forms.GoogleMaps.Demo.Shared.projitems" Label="Shared" Condition="Exists('..\RedCorners.Forms.GoogleMaps.Demo.Shared\RedCorners.Forms.GoogleMaps.Demo.Shared.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />

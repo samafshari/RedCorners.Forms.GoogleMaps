@@ -10,15 +10,11 @@ using Xamarin.Forms;
 
 namespace RedCorners.Forms.GoogleMaps.Demo.ViewModels
 {
-    public class OverpassCollection : MapObjectCollection
+    public class OverpassCollection : AsyncMapObjectCollection
     {
         readonly OverpassClient client = new OverpassClient();
         readonly string[] amenities;
         readonly double radius; 
-
-        volatile bool isBusy = false;
-        Position? lastCenter;
-        MapRegion region; 
 
         public OverpassCollection(IEnumerable<string> amenities, double radius)
         {
@@ -26,46 +22,17 @@ namespace RedCorners.Forms.GoogleMaps.Demo.ViewModels
             this.radius = radius;
         }
 
-        public override void UpdateMapRegion(MapRegion region)
+        protected override async Task QueryAsync()
         {
-            base.UpdateMapRegion(region);
-            this.region = region;
-            Task.Run(FetchAsync);
-        }
-
-        async Task FetchAsync()
-        {
-            if (region == null) return;
-            if (isBusy) return;
-
-            var center = region.GetCenter();
-            try
+            var nodes = await client.SearchAmenityNodes(
+                amenities,
+                Center.Latitude,
+                Center.Longitude,
+                radius);
+                  
+            if (nodes != null)
             {
-                if (lastCenter != null && MapLocationSystem.CalculateDistance(center, lastCenter.Value) < Distance.FromMeters(50))
-                    return;
-
-                try
-                {
-                    isBusy = true;
-                    var nodes = await client.SearchAmenityNodes(
-                        amenities,
-                        center.Latitude,
-                        center.Longitude,
-                        radius);
-                    
-                    if (nodes != null)
-                    {
-                        AddNodes(nodes);
-                    }
-                }
-                finally
-                {
-                    isBusy = false;
-                }
-            }
-            finally
-            {
-                lastCenter = center;
+                AddNodes(nodes);
             }
         }
 

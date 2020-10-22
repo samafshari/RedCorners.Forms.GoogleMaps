@@ -22,11 +22,15 @@ namespace RedCorners.Forms.GoogleMaps.Demo.ViewModels
             const double Radius = 10;
             Items.Add(new OverpassCollection(new[] { "toilets" }, Radius)
             {
-                MakeIconFunc = _ => BitmapDescriptorFactory.DefaultMarker(Color.Green)
+                Title = "Toilets",
+                ImageSource = "em173",
+                MakeIconFunc = _ => BitmapCache.GetBitmap("em173.png")
             });
             Items.Add(new OverpassCollection(new[] { "recycling" }, Radius)
             {
-                MakeIconFunc = _ => BitmapDescriptorFactory.DefaultMarker(Color.Yellow)
+                Title = "Recycling",
+                ImageSource = "em157",
+                MakeIconFunc = _ => BitmapCache.GetBitmap("em157.png")
             });
         }
     }

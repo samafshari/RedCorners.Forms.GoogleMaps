@@ -8,7 +8,7 @@ namespace RedCorners.Forms.GoogleMaps
     {
         static readonly Dictionary<string, BitmapDescriptor> cachedBitmaps = new Dictionary<string, BitmapDescriptor>();
 
-        public static BitmapDescriptor GetBitmap(string icon, bool cache = false, string suffix = null)
+        public static BitmapDescriptor GetBitmap(string icon, bool cache = true, string suffix = null)
         {
             if (suffix.HasValue() && !icon.EndsWith(suffix))
                 icon += suffix;

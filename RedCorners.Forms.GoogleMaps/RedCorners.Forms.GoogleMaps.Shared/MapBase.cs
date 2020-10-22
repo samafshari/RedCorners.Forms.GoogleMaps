@@ -72,6 +72,7 @@ namespace RedCorners.Forms.GoogleMaps
         readonly ObservableCollection<TileLayer> _tileLayers = new ObservableCollection<TileLayer>();
         readonly ObservableCollection<GroundOverlay> _groundOverlays = new ObservableCollection<GroundOverlay>();
         readonly ObservableCollection<MapObjectCollectionBase> _collections = new ObservableCollection<MapObjectCollectionBase>();
+        readonly Dictionary<MapObject, MapObjectCollectionBase> _ownerships = new Dictionary<MapObject, MapObjectCollectionBase>();
 
         public event EventHandler<PinClickedEventArgs> PinClicked;
         public event EventHandler<SelectedPinChangedEventArgs> SelectedPinChanged;
@@ -98,7 +99,7 @@ namespace RedCorners.Forms.GoogleMaps
 
         internal Action<CameraUpdateMessage> OnAnimateCamera { get; set; }
 
-        internal Action<TakeSnapshotMessage> OnSnapshot{ get; set; }
+        internal Action<TakeSnapshotMessage> OnSnapshot { get; set; }
 
         MapRegion _region;
 
@@ -530,15 +531,21 @@ namespace RedCorners.Forms.GoogleMaps
         void SyncCollection(MapObjectCollectionBase collection)
         {
             var items = collection.GetVisibleItems(Region).ToList();
-            var existingItems = GetItemsFromOwner(collection).ToList();
+            var existingItems = GetObjectsFromOwner(collection).ToList();
             var itemsToDelete = existingItems.Where(x => !items.Contains(x)).ToList();
             var itemsToAdd = items.Where(x => !existingItems.Contains(x)).ToList();
 
             for (int i = 0; i < itemsToDelete.Count; i++)
+            {
+                _ownerships.Remove(itemsToDelete[i]);
                 RemoveItem(itemsToDelete[i]);
+            }
 
             for (int i = 0; i < itemsToAdd.Count; i++)
+            {
+                _ownerships[itemsToAdd[i]] = collection;
                 CreateItem(itemsToAdd[i]);
+            }
         }
 
         void UpdateCollectionsRegions()
@@ -637,39 +644,42 @@ namespace RedCorners.Forms.GoogleMaps
                 _groundOverlays.Remove(groundOverlay);
         }
         
-        void RemoveItemsFromOwner(MapObjectCollectionBase owner)
+        void RemoveObjectsFromOwner(MapObjectCollectionBase owner)
         {
-            if (SelectedPin != null && SelectedPin.Owner == owner)
+            if (SelectedPin != null && IsOwnedBy(SelectedPin, owner))
                 SelectedPin = null;
 
-            foreach (var pin in _pins.Where(x => x.Owner == owner).ToList())
+            foreach (var pin in _pins.Where(x => IsOwnedBy(x, owner)).ToList())
                 _pins.Remove(pin);
 
-            foreach (var polyline in _polylines.Where(x => x.Owner == owner).ToList())
+            foreach (var polyline in _polylines.Where(x => IsOwnedBy(x, owner)).ToList())
                 _polylines.Remove(polyline);
 
-            foreach (var polygon in _polygons.Where(x => x.Owner == owner).ToList())
+            foreach (var polygon in _polygons.Where(x => IsOwnedBy(x, owner)).ToList())
                 _polygons.Remove(polygon);
 
-            foreach (var circle in _circles.Where(x => x.Owner == owner).ToList())
+            foreach (var circle in _circles.Where(x => IsOwnedBy(x, owner)).ToList())
                 _circles.Remove(circle);
 
-            foreach (var tileLayer in _tileLayers.Where(x => x.Owner == owner).ToList())
+            foreach (var tileLayer in _tileLayers.Where(x => IsOwnedBy(x, owner)).ToList())
                 _tileLayers.Remove(tileLayer);
 
-            foreach (var groundOverlay in _groundOverlays.Where(x => x.Owner == owner).ToList())
+            foreach (var groundOverlay in _groundOverlays.Where(x => IsOwnedBy(x, owner)).ToList())
                 _groundOverlays.Remove(groundOverlay);
         }
 
-        IEnumerable<MapObject> GetItemsFromOwner(MapObjectCollectionBase owner)
+        bool IsOwnedBy(MapObject o, MapObjectCollectionBase c)
+        {
+            if (_ownerships.TryGetValue(o, out var collection) && collection == c)
+                return true;
+
+            return false;
+        }
+
+        IEnumerable<MapObject> GetObjectsFromOwner(MapObjectCollectionBase owner)
         {
             return
-                _pins.Where(x => x.Owner == owner).Cast<MapObject>()
-                .Union(_polylines.Where(x => x.Owner == owner).Cast<MapObject>())
-                .Union(_polygons.Where(x => x.Owner == owner).Cast<MapObject>())
-                .Union(_circles.Where(x => x.Owner == owner).Cast<MapObject>())
-                .Union(_tileLayers.Where(x => x.Owner == owner).Cast<MapObject>())
-                .Union(_groundOverlays.Where(x => x.Owner == owner).Cast<MapObject>());
+                _ownerships.Where(x => x.Value == owner).Select(x => x.Key);
         }
     }
 }
