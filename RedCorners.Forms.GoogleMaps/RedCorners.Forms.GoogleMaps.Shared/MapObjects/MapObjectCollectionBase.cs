@@ -78,10 +78,15 @@ namespace RedCorners.Forms.GoogleMaps
             if (MaxVisibleCount == null || MaxVisibleCount < 0)
                 return query;
 
+            var list = query.ToList();
+            
+            if (list.Count < MaxVisibleCount)
+                return list;
+
             var center = region.GetCenter();
 
             return
-                query.OrderBy(x =>
+                list.OrderBy(x =>
                 {
                     var relativePosition = x.GetRelativePosition(center);
                     if (relativePosition == null) return double.MaxValue;

@@ -88,7 +88,7 @@ namespace RedCorners.Forms.GoogleMaps
 
         protected override IEnumerable<MapObject> GetItems()
         {
-            return Objects;
+            return Objects.ToList();
         }
     }
 }
