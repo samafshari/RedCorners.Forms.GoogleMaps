@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<rf:ContentPage2
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:rf="clr-namespace:RedCorners.Forms;assembly=RedCorners.Forms"
+    xmlns:local="clr-namespace:RedCorners.Forms.GoogleMaps.Demo.Views"
+    xmlns:vm="clr-namespace:RedCorners.Forms.GoogleMaps.Demo.ViewModels"
+    xmlns:map="clr-namespace:RedCorners.Forms.GoogleMaps;assembly=RedCorners.Forms.GoogleMaps"
+    mc:Ignorable="d"
+    x:Class="RedCorners.Forms.GoogleMaps.Demo.Views.CollectionsPage"
+    FixBottomPadding="True">
+    <ContentPage.BindingContext>
+        <vm:CollectionsViewModel />
+    </ContentPage.BindingContext>
+    <Grid RowDefinitions="*, Auto">
+        <map:Map
+            ItemsSource="{Binding Items}" />
+        
+        <Label Text="Hello, CollectionsPage!" />
+    </Grid>
+</rf:ContentPage2>

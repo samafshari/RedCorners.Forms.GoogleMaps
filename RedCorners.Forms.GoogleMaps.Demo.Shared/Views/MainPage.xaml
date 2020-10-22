@@ -62,6 +62,14 @@
                     </rf:PageCommand>
                 </Button.Command>
             </Button>
+            
+            <Button Text="Collections Page">
+                <Button.Command>
+                    <rf:PageCommand>
+                        <views:CollectionsPage />
+                    </rf:PageCommand>
+                </Button.Command>
+            </Button>
         </StackLayout>
     </ScrollView>
 </rf:ContentPage2>

@@ -14,10 +14,16 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\BindingsViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\CollectionsViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\LocationPickerViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\MyLocationPageViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\OverpassCollection.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\PinsListViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\BindingsPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\CollectionsPage.xaml.cs">
+      <DependentUpon>CollectionsPage.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Views\HeavyPage.xaml.cs">
@@ -98,6 +104,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\MyLocationPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\CollectionsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>

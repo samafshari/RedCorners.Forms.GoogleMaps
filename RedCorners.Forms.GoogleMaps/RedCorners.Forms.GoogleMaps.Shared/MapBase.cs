@@ -235,7 +235,7 @@ namespace RedCorners.Forms.GoogleMaps
                 _region = value ?? throw new ArgumentNullException(nameof(value));
                 OnPropertyChanged();
                 RegionChangeAction?.Invoke(Region);
-                SyncCollections();
+                UpdateCollectionsRegions();
             }
         }
 
@@ -520,10 +520,11 @@ namespace RedCorners.Forms.GoogleMaps
                 return;
             }
 
+            List<object> items = new List<object>();
             foreach (object item in ItemsSource)
-            {
+                items.Add(item);
+            foreach (object item in items)
                 CreateItem(item);
-            }
         }
 
         void SyncCollection(MapObjectCollectionBase collection)
@@ -540,10 +541,12 @@ namespace RedCorners.Forms.GoogleMaps
                 CreateItem(itemsToAdd[i]);
         }
 
-        void SyncCollections()
+        void UpdateCollectionsRegions()
         {
-            foreach (var item in Collections)
-                SyncCollection(item);
+            foreach (var collection in Collections)
+            {
+                collection.UpdateMapRegion(Region);
+            }
         }
 
         void CreateItem(object newItem)
@@ -552,6 +555,7 @@ namespace RedCorners.Forms.GoogleMaps
             {
                 collection.CollectionChanged += MapObjectCollection_CollectionChanged;
                 _collections.Add(collection);
+                SyncCollection(collection);
                 return;
             }
 

@@ -83,8 +83,6 @@ namespace RedCorners.Forms.GoogleMaps
             set => SetValue(CommandParameterProperty, value);
         }
 
-        public object Tag { get; set; }
-
         public object NativeObject { get; internal set; }
 
         public event EventHandler Clicked;

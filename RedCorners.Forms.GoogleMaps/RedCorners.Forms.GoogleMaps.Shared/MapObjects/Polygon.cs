@@ -61,8 +61,6 @@ namespace RedCorners.Forms.GoogleMaps
             get { return _positions; }
         }
 
-        public object Tag { get; set; }
-
         public object NativeObject { get; internal set; }
 
         public event EventHandler Clicked;

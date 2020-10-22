@@ -12,6 +12,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)AnimationStatus.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Assembly.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)BasicMapObjectTemplate.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)BitmapCache.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)BitmapDescriptor.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)BitmapDescriptorFactory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)BitmapDescriptorType.cs" />
@@ -23,7 +24,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)CameraPosition.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CameraUpdate.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CameraUpdateFactory.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Circle.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapObjects\Circle.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Distance.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\MapRegionExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\MapSpanExtensions.cs" />
@@ -53,26 +54,29 @@
     <Compile Include="$(MSBuildThisFileDirectory)MapBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MapClickedEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MapLongClickedEventArgs.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)MapObject.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)MapObjectCollection.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)MapObjectCollectionBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapObjects\MapObject.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapObjects\MapObjectCollection.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapObjects\MapObjectCollectionBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MapRegion.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MapSpan.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MapType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MyLocationButtonClickedEventArgs.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Pin.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapObjects\Pin.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PinClickedEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PinDragEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PinType.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Polygon.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Polyline.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapObjects\Polygon.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapObjects\Polyline.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Position.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SelectedPinChangedEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Systems\MapLocationSystem.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)TileLayer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapObjects\TileLayer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UiSettings.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\LocationPickerView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Map.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\MapDrawView.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)MapObjects\" />
   </ItemGroup>
 </Project>

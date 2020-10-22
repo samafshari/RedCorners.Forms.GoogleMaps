@@ -19,8 +19,6 @@ namespace RedCorners.Forms.GoogleMaps
 
         public int TileSize { get; } = 256;
 
-        public object Tag { get; set; }
-
         public object NativeObject { get; internal set; }
 
         public int ZIndex

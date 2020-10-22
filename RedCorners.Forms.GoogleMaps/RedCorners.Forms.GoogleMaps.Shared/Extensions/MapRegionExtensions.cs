@@ -56,5 +56,12 @@ namespace RedCorners.Forms.GoogleMaps
                 new Position(min.lat, min.lng),
                 new Position(max.lat, max.lng));
         }
+
+        public static Position GetCenter(this MapRegion region)
+        {
+            var centerLat = 0.5 * (region.NearLeft.Latitude + region.FarRight.Latitude);
+            var centerLng = 0.5 * (region.NearLeft.Longitude + region.FarRight.Longitude);
+            return new Position(centerLat, centerLng);
+        }
     }
 }
