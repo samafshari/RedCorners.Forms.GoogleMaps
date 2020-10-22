@@ -34,5 +34,10 @@ namespace RedCorners.Forms.GoogleMaps
         {
             return false;
         }
+
+        internal virtual Position? GetRelativePosition(Position reference)
+        {
+            return reference;
+        }
     }
 }

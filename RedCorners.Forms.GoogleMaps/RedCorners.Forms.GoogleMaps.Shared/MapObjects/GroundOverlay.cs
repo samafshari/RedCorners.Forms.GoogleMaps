@@ -1,5 +1,7 @@
 ﻿
 using System;
+using System.Linq;
+
 using Xamarin.Forms;
 
 namespace RedCorners.Forms.GoogleMaps
@@ -56,8 +58,6 @@ namespace RedCorners.Forms.GoogleMaps
             set { SetValue(IsVisibleProperty, value); }
         }
 
-        public object Tag { get; set; }
-
         public object NativeObject { get; internal set; }
 
         public event EventHandler Clicked;
@@ -81,6 +81,20 @@ namespace RedCorners.Forms.GoogleMaps
         {
             if (Bounds == null) return true;
             return MapLocationSystem.CalculateDistance(position, Bounds.Center) <= distance;
+        }
+
+        internal override Position? GetRelativePosition(Position reference)
+        {
+            return new Position[]
+            {
+                Bounds.NorthEast,
+                Bounds.NorthWest,
+                Bounds.SouthEast,
+                Bounds.SouthWest,
+                Bounds.Center
+            }
+            .OrderBy(x => MapLocationSystem.CalculateDistance(reference, x))
+            .First();
         }
     }
 }

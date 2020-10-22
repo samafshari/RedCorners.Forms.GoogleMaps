@@ -7,7 +7,8 @@ namespace RedCorners.Forms.GoogleMaps
 {
     public class AsyncMapObjectCollection : MapObjectCollection
     {
-        public Distance QueryThreshold { get; set; } = Distance.FromMeters(50);
+        public Distance QueryThreshold { get; set; } = Distance.FromMeters(100);
+        public Distance CullUpdateThreshold { get; set; } = Distance.FromMeters(50);
         protected MapRegion Region { get; private set; }
         protected Position Center { get; private set; }
         protected int? MaxRunningTasks { get; set; } = 1;
@@ -24,13 +25,23 @@ namespace RedCorners.Forms.GoogleMaps
                 return;
 
             Center = region.GetCenter();
+
+            if (lastCenter.HasValue && CullUpdateThreshold.Meters > 0 &&
+                MapLocationSystem.CalculateDistance(Center, lastCenter.Value) < CullUpdateThreshold)
+                return;
             
             if (MaxRunningTasks.HasValue && activeTasksCount >= MaxRunningTasks)
+            {
+                Push();
                 return;
+            }
 
             if (lastCenter.HasValue && QueryThreshold.Meters > 0 &&
                 MapLocationSystem.CalculateDistance(Center, lastCenter.Value) < QueryThreshold)
+            {
+                Push();
                 return;
+            }
 
             if (!IsVisible)
                 return;
@@ -49,12 +60,19 @@ namespace RedCorners.Forms.GoogleMaps
             finally
             {
                 activeTasksCount--;
+                Push();
             }
         }
 
         protected virtual Task QueryAsync()
         {
             return Task.CompletedTask;
+        }
+
+        void Push()
+        {
+            if (Objects.Count > 0)
+                TriggerCollectionChange();
         }
     }
 }

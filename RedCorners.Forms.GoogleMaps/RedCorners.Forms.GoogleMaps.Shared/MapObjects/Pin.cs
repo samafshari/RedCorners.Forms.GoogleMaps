@@ -175,5 +175,10 @@ namespace RedCorners.Forms.GoogleMaps
         {
             return MapLocationSystem.CalculateDistance(position, Position) <= distance;
         }
+
+        internal override Position? GetRelativePosition(Position reference)
+        {
+            return Position;
+        }
     }
 }

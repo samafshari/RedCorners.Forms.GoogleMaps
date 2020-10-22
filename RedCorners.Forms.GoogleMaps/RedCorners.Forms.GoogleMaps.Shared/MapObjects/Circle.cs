@@ -114,6 +114,11 @@ namespace RedCorners.Forms.GoogleMaps
         {
             return MapLocationSystem.CalculateDistance(position, Center) <= distance;
         }
+
+        internal override Position? GetRelativePosition(Position reference)
+        {
+            return Center;
+        }
     }
 }
 

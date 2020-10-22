@@ -47,9 +47,6 @@ namespace RedCorners.Forms.GoogleMaps.Demo.ViewModels
                 pin.Tags.Add(node.Id);
                 Objects.Add(pin);
             }
-
-            if (nodes.Length > 0)
-                TriggerCollectionChange();
         }
 
         protected string GetTitle(AmenityNode node)

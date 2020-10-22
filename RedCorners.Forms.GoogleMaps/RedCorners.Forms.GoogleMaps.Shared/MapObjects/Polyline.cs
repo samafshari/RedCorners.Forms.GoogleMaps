@@ -96,6 +96,16 @@ namespace RedCorners.Forms.GoogleMaps
             return Positions.All(x =>
                 MapLocationSystem.CalculateDistance(position, x) > distance);
         }
+
+        internal override Position? GetRelativePosition(Position reference)
+        {
+            if (Positions == null || Positions.Count == 0)
+                return null;
+
+            return Positions
+                .OrderBy(x => MapLocationSystem.CalculateDistance(reference, x))
+                .First();
+        }
     }
 }
 

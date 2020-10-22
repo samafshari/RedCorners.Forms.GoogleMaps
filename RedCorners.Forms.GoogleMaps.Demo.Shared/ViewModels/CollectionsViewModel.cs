@@ -24,13 +24,15 @@ namespace RedCorners.Forms.GoogleMaps.Demo.ViewModels
             {
                 Title = "Toilets",
                 ImageSource = "em173",
-                MakeIconFunc = _ => BitmapCache.GetBitmap("em173.png")
+                MakeIconFunc = _ => BitmapCache.GetBitmap("em173.png"),
+                MaxVisibleCount = 4
             });
             Items.Add(new OverpassCollection(new[] { "recycling" }, Radius)
             {
                 Title = "Recycling",
                 ImageSource = "em157",
-                MakeIconFunc = _ => BitmapCache.GetBitmap("em157.png")
+                MakeIconFunc = _ => BitmapCache.GetBitmap("em157.png"),
+                MaxVisibleCount = 4
             });
         }
     }

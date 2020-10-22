@@ -24,16 +24,7 @@ namespace RedCorners.Forms.GoogleMaps
             typeof(bool),
             typeof(MapObjectCollectionBase),
             true,
-            propertyChanged: (bindable, oldVal, newVal) =>
-            {
-                if (bindable is MapObjectCollectionBase collection)
-                {
-                    if (oldVal != newVal)
-                    {
-                        collection.TriggerCollectionChange();
-                    }
-                }
-            });
+            propertyChanged: ConsiderUpdate);
 
         public string Title
         {
@@ -57,6 +48,19 @@ namespace RedCorners.Forms.GoogleMaps
             typeof(ImageSource),
             typeof(MapObjectCollectionBase));
 
+        public int? MaxVisibleCount
+        {
+            get => (int?)GetValue(MaxVisibleCountProperty);
+            set => SetValue(MaxVisibleCountProperty, value);
+        }
+
+        public static readonly BindableProperty MaxVisibleCountProperty = BindableProperty.Create(
+            nameof(MaxVisibleCount),
+            typeof(int?),
+            typeof(MapObjectCollectionBase),
+            defaultValue: default(int?),
+            propertyChanged: ConsiderUpdate);
+
         protected virtual IEnumerable<MapObject> GetItems()
         {
             throw new Exception("Do not call base on GetItems(); override this.");
@@ -64,12 +68,25 @@ namespace RedCorners.Forms.GoogleMaps
 
         public IEnumerable<MapObject> GetVisibleItems(MapRegion region)
         {
-            if (!IsVisible)
+            if (region == null || !IsVisible)
                 return Enumerable.Empty<MapObject>();
 
-            return 
+            var query = 
                 GetItems()
                 .Where(x => x.NeverCull ||!x.ShouldCull(region));
+
+            if (MaxVisibleCount == null || MaxVisibleCount < 0)
+                return query;
+
+            var center = region.GetCenter();
+
+            return
+                query.OrderBy(x =>
+                {
+                    var relativePosition = x.GetRelativePosition(center);
+                    if (relativePosition == null) return double.MaxValue;
+                    return MapLocationSystem.CalculateDistance(relativePosition.Value, center).Meters;
+                }).Take(MaxVisibleCount.Value);
         }
 
         //public IEnumerable<MapObject> GetVisibleItems(Position center, Distance distance)
@@ -90,6 +107,17 @@ namespace RedCorners.Forms.GoogleMaps
         public virtual void UpdateMapRegion(MapRegion region)
         {
 
+        }
+
+        static void ConsiderUpdate(object bindable, object oldVal, object newVal)
+        {
+            if (bindable is MapObjectCollectionBase collection)
+            {
+                if (oldVal != newVal)
+                {
+                    collection.TriggerCollectionChange();
+                }
+            }
         }
     }
 }
