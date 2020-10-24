@@ -9,6 +9,23 @@ namespace RedCorners.Forms.GoogleMaps
     {
         protected readonly HashSet<MapObject> Objects = new HashSet<MapObject>();
 
+        protected void Subscribe(MapObject o)
+        {
+            if (o is MapObjectCollectionBase collection)
+                collection.CollectionChanged += Collection_CollectionChanged;
+        }
+
+        protected void Unsubscribe(MapObject o)
+        {
+            if (o is MapObjectCollectionBase collection)
+                collection.CollectionChanged -= Collection_CollectionChanged;
+        }
+
+        void Collection_CollectionChanged(MapObjectCollectionBase collection)
+        {
+            TriggerCollectionChange();
+        }
+
         public void Add(IEnumerable<MapObject> objects)
         {
             if (objects == null) return;
@@ -18,6 +35,7 @@ namespace RedCorners.Forms.GoogleMaps
             {
                 any = true;
                 this.Objects.Add(item);
+                Subscribe(item);
             }
 
             if (any)
@@ -29,7 +47,7 @@ namespace RedCorners.Forms.GoogleMaps
             if (o == null) return;
 
             this.Objects.Add(o);
-
+            Subscribe(o);
             TriggerCollectionChange();
         }
 
@@ -39,7 +57,7 @@ namespace RedCorners.Forms.GoogleMaps
                 return;
 
             Objects.Remove(o);
-
+            Unsubscribe(o);
             TriggerCollectionChange();
         }
 
@@ -55,6 +73,7 @@ namespace RedCorners.Forms.GoogleMaps
                 {
                     any = true;
                     this.Objects.Remove(item);
+                    Unsubscribe(item);
                 }
             }
 
@@ -71,6 +90,7 @@ namespace RedCorners.Forms.GoogleMaps
                 {
                     any = true;
                     this.Objects.Remove(o);
+                    Unsubscribe(o);
                 }
             }
             if (toAdd != null)
@@ -79,6 +99,7 @@ namespace RedCorners.Forms.GoogleMaps
                 {
                     any = true;
                     this.Objects.Add(o);
+                    Subscribe(o);
                 }
             }
 

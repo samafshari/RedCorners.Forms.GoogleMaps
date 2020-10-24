@@ -39,5 +39,10 @@ namespace RedCorners.Forms.GoogleMaps
         {
             return reference;
         }
+
+        internal virtual int Count(MapRegion region)
+        {
+            return 1;
+        }
     }
 }

@@ -10,6 +10,9 @@ namespace RedCorners.Forms.GoogleMaps
 {
     public abstract class MapObjectCollectionBase : MapObject
     {
+        MapRegion lastRegion;
+        IEnumerable<MapObject> lastVisibleItems;
+
         public delegate void CollectionChangeDelegate(MapObjectCollectionBase collection);
         public event CollectionChangeDelegate CollectionChanged;
 
@@ -66,32 +69,69 @@ namespace RedCorners.Forms.GoogleMaps
             throw new Exception("Do not call base on GetItems(); override this.");
         }
 
-        public IEnumerable<MapObject> GetVisibleItems(MapRegion region)
+        public IEnumerable<MapObject> GetVisibleItems(MapRegion region, bool flatten = false)
         {
             if (region == null || !IsVisible)
-                return Enumerable.Empty<MapObject>();
+            {
+                lastVisibleItems = Enumerable.Empty<MapObject>();
+                return lastVisibleItems;
+            }
+
+            if (region == lastRegion && lastVisibleItems != null)
+                return lastVisibleItems;
+
+            lastRegion = region;
 
             var query = 
                 GetItems()
                 .Where(x => x.NeverCull ||!x.ShouldCull(region));
 
+            if (flatten)
+            {
+                var originalQuery = query;
+                foreach (var o in originalQuery.Where(x => x is MapObjectCollectionBase))
+                {
+                    var collection = o as MapObjectCollectionBase;
+                    query = query.Union(collection.GetVisibleItems(region, true));
+                }
+                query = query.Where(x => !(x is MapObjectCollectionBase));
+            }
+
             if (MaxVisibleCount == null || MaxVisibleCount < 0)
+            {
+                lastVisibleItems = query;
                 return query;
+            }
 
             var list = query.ToList();
-            
+
             if (list.Count < MaxVisibleCount)
+            {
+                lastVisibleItems = list;
                 return list;
+            }
 
             var center = region.GetCenter();
 
-            return
+            var result =
                 list.OrderBy(x =>
                 {
                     var relativePosition = x.GetRelativePosition(center);
                     if (relativePosition == null) return double.MaxValue;
                     return MapLocationSystem.CalculateDistance(relativePosition.Value, center).Meters;
                 }).Take(MaxVisibleCount.Value);
+            lastVisibleItems = result;
+            return result;
+        }
+
+        override internal int Count(MapRegion region)
+        {
+            var visibleItems = GetVisibleItems(region);
+            
+            if (visibleItems == null)
+                return 0;
+
+            return visibleItems.Sum(x => x.Count(region));
         }
 
         //public IEnumerable<MapObject> GetVisibleItems(Position center, Distance distance)
@@ -105,13 +145,18 @@ namespace RedCorners.Forms.GoogleMaps
         {
             Device.BeginInvokeOnMainThread(() =>
             {
+                lastRegion = null;
+                lastVisibleItems = null;
                 CollectionChanged?.Invoke(this);
             });
         }
 
         public virtual void UpdateMapRegion(MapRegion region)
         {
-
+            foreach (var collection in GetVisibleItems(region, false).Where(x => x is MapObjectCollectionBase))
+            {
+                ((MapObjectCollectionBase)collection).UpdateMapRegion(region);
+            }
         }
 
         static void ConsiderUpdate(object bindable, object oldVal, object newVal)

@@ -15,10 +15,10 @@
         <vm:CollectionsViewModel />
     </ContentPage.BindingContext>
     <Grid RowDefinitions="2*, *">
-        <map:Map ItemsSource="{Binding Items}" />
+        <map:Map ItemsSource="{Binding MapObjects}" />
         <rf:ListView2
             Grid.Row="1"
-            ItemsSource="{Binding Items}"
+            ItemsSource="{Binding Collections}"
             HasUnevenRows="True">
             <ListView.ItemTemplate>
                 <DataTemplate>

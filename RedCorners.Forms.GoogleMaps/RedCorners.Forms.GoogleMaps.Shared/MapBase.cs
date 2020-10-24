@@ -530,7 +530,7 @@ namespace RedCorners.Forms.GoogleMaps
 
         void SyncCollection(MapObjectCollectionBase collection)
         {
-            var items = collection.GetVisibleItems(Region).ToList();
+            var items = collection.GetVisibleItems(Region, true).ToList();
             var existingItems = GetObjectsFromOwner(collection).ToList();
             var itemsToDelete = existingItems.Where(x => !items.Contains(x)).ToList();
             var itemsToAdd = items.Where(x => !existingItems.Contains(x)).ToList();
