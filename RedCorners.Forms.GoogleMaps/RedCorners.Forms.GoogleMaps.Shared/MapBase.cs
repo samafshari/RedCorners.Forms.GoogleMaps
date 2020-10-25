@@ -42,6 +42,12 @@ namespace RedCorners.Forms.GoogleMaps
 
         public static readonly BindableProperty SelectedPinProperty = BindableProperty.Create(nameof(SelectedPin), typeof(Pin), typeof(MapBase), default(Pin), defaultBindingMode: BindingMode.TwoWay);
 
+        public static readonly BindableProperty IsSelectedPinStickyProperty = BindableProperty.Create(nameof(IsSelectedPinSticky), typeof(bool), typeof(MapBase), false, propertyChanged:
+            (bindable, oldVal, newVal) =>
+            {
+                if (bindable is MapBase map)
+                    map.SyncCollections();
+            });
         public static readonly BindableProperty IsTrafficEnabledProperty = BindableProperty.Create(nameof(IsTrafficEnabled), typeof(bool), typeof(MapBase), false);
 
         public static readonly BindableProperty IndoorEnabledProperty = BindableProperty.Create(nameof(IsIndoorEnabled), typeof(bool), typeof(MapBase), true);
@@ -178,6 +184,12 @@ namespace RedCorners.Forms.GoogleMaps
         {
             get { return (Pin)GetValue(SelectedPinProperty); }
             set { SetValue(SelectedPinProperty, value); }
+        }
+
+        public bool IsSelectedPinSticky
+        {
+            get => (bool)GetValue(IsSelectedPinStickyProperty);
+            set => SetValue(IsSelectedPinStickyProperty, value);
         }
 
         [Xamarin.Forms.TypeConverter(typeof(CameraUpdateConverter))]
@@ -528,6 +540,14 @@ namespace RedCorners.Forms.GoogleMaps
                 CreateItem(item);
         }
 
+        void SyncCollections()
+        {
+            foreach (var item in Collections)
+            {
+                SyncCollection(item);
+            }
+        }
+
         void SyncCollection(MapObjectCollectionBase collection)
         {
             var items = collection.GetVisibleItems(Region, true).ToList();
@@ -537,6 +557,9 @@ namespace RedCorners.Forms.GoogleMaps
 
             for (int i = 0; i < itemsToDelete.Count; i++)
             {
+                if (IsSelectedPinSticky && itemsToDelete[i] == SelectedPin)
+                    continue;
+
                 _ownerships.Remove(itemsToDelete[i]);
                 RemoveItem(itemsToDelete[i]);
             }

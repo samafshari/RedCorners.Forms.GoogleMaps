@@ -8,7 +8,8 @@ namespace RedCorners.Forms.GoogleMaps
     public class MapObjectCollection : MapObjectCollectionBase
     {
         protected readonly HashSet<MapObject> Objects = new HashSet<MapObject>();
-
+        public IEnumerable<MapObject> Items => GetItems();
+        
         protected void Subscribe(MapObject o)
         {
             if (o is MapObjectCollectionBase collection)
