@@ -7,13 +7,14 @@ namespace RedCorners.Forms.GoogleMaps
 {
     public class AsyncMapObjectCollection : MapObjectCollection
     {
-        public Distance QueryThreshold { get; set; } = Distance.FromMeters(100);
-        public Distance CullUpdateThreshold { get; set; } = Distance.FromMeters(50);
+        public Distance QueryThreshold { get; set; } = Distance.FromMeters(200);
+        public Distance CullUpdateThreshold { get; set; } = Distance.FromMeters(100);
+
         protected MapRegion Region { get; private set; }
         protected Position Center { get; private set; }
         protected int? MaxRunningTasks { get; set; } = 1;
 
-        Position? lastCenter;
+        Position? lastQueryCenter, lastCullCenter;
         volatile int activeTasksCount = 0;
 
         public override void UpdateMapRegion(MapRegion region)
@@ -24,29 +25,30 @@ namespace RedCorners.Forms.GoogleMaps
             if (region == null)
                 return;
 
+            if (!IsVisible)
+                return;
+
+
             Center = region.GetCenter();
 
-            if (lastCenter.HasValue && CullUpdateThreshold.Meters > 0 &&
-                MapLocationSystem.CalculateDistance(Center, lastCenter.Value) < CullUpdateThreshold)
+            if (lastCullCenter.HasValue && CullUpdateThreshold.Meters > 0 &&
+                MapLocationSystem.CalculateDistance(Center, lastCullCenter.Value) < CullUpdateThreshold)
                 return;
-            
+
             if (MaxRunningTasks.HasValue && activeTasksCount >= MaxRunningTasks)
             {
                 Push();
                 return;
             }
 
-            if (lastCenter.HasValue && QueryThreshold.Meters > 0 &&
-                MapLocationSystem.CalculateDistance(Center, lastCenter.Value) < QueryThreshold)
+            if (lastQueryCenter.HasValue && QueryThreshold.Meters > 0 &&
+                MapLocationSystem.CalculateDistance(Center, lastQueryCenter.Value) < QueryThreshold)
             {
                 Push();
                 return;
             }
 
-            if (!IsVisible)
-                return;
-
-            lastCenter = Center;
+            lastQueryCenter = Center;
             Task.Run(DoAsync);
         }
 
@@ -71,6 +73,7 @@ namespace RedCorners.Forms.GoogleMaps
 
         void Push()
         {
+            lastCullCenter = Center;
             if (Objects.Count > 0)
                 TriggerCollectionChange();
         }

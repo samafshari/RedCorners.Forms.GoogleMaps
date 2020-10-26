@@ -211,7 +211,7 @@ namespace RedCorners.Forms.GoogleMaps
                 var minPos = new Position(Positions.Min(x => x.Latitude), Positions.Min(x => x.Longitude));
                 var maxPos = new Position(Positions.Max(x => x.Latitude), Positions.Max(x => x.Longitude));
                 cameraUpdate = CameraUpdateFactory.NewBounds(new Bounds(minPos, maxPos), 10);
-                distance = MapLocationSystem.GetDistance(minPos.Latitude, minPos.Longitude, maxPos.Latitude, maxPos.Longitude) * 0.5;
+                distance = MapLocationSystem.CalculateDistance(minPos.Latitude, minPos.Longitude, maxPos.Latitude, maxPos.Longitude).Kilometers * 0.5;
                 distance = Math.Max(1.0, distance);
             }
 

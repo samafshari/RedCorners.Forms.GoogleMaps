@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace RedCorners.Forms.GoogleMaps
 {
     public class MapObjectCollection : MapObjectCollectionBase
     {
+
         protected readonly HashSet<MapObject> Objects = new HashSet<MapObject>();
         public IEnumerable<MapObject> Items => GetItems();
         
@@ -24,7 +26,7 @@ namespace RedCorners.Forms.GoogleMaps
 
         void Collection_CollectionChanged(MapObjectCollectionBase collection)
         {
-            TriggerCollectionChange();
+            Push();
         }
 
         public void Add(IEnumerable<MapObject> objects)
@@ -40,7 +42,7 @@ namespace RedCorners.Forms.GoogleMaps
             }
 
             if (any)
-                TriggerCollectionChange();
+                Push();
         }
 
         public void Add(MapObject o)
@@ -49,7 +51,7 @@ namespace RedCorners.Forms.GoogleMaps
 
             this.Objects.Add(o);
             Subscribe(o);
-            TriggerCollectionChange();
+            Push();
         }
 
         public void Remove(MapObject o)
@@ -59,7 +61,7 @@ namespace RedCorners.Forms.GoogleMaps
 
             Objects.Remove(o);
             Unsubscribe(o);
-            TriggerCollectionChange();
+            Push();
         }
 
         public void Remove(IEnumerable<MapObject> objects)
@@ -79,7 +81,7 @@ namespace RedCorners.Forms.GoogleMaps
             }
 
             if (any)
-                TriggerCollectionChange();
+                Push();
         }
 
         public void Sync(IEnumerable<MapObject> toRemove, IEnumerable<MapObject> toAdd)
@@ -105,12 +107,17 @@ namespace RedCorners.Forms.GoogleMaps
             }
 
             if (any)
-                TriggerCollectionChange();
+                Push();
         }
 
         protected override IEnumerable<MapObject> GetItems()
         {
             return Objects.ToList();
+        }
+
+        void Push()
+        {
+            TriggerCollectionChange();
         }
     }
 }

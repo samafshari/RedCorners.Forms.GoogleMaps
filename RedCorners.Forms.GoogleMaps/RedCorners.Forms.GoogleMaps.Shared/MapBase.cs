@@ -346,6 +346,11 @@ namespace RedCorners.Forms.GoogleMaps
 
         }
 
+        internal bool HasPin(Pin pin)
+        {
+            return _pins.Contains(pin);
+        }
+
         internal void SendSelectedPinChanged(Pin selectedPin)
         {
             SelectedPinChanged?.Invoke(this, new SelectedPinChangedEventArgs(selectedPin));

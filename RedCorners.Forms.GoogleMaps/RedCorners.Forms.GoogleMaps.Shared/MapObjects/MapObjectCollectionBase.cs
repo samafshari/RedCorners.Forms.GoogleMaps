@@ -12,9 +12,12 @@ namespace RedCorners.Forms.GoogleMaps
     {
         MapRegion lastRegion;
         IEnumerable<MapObject> lastVisibleItems;
+        public TimeSpan SettleThreshold { get; set; } = TimeSpan.FromSeconds(0.2);
 
         public delegate void CollectionChangeDelegate(MapObjectCollectionBase collection);
         public event CollectionChangeDelegate CollectionChanged;
+
+        public bool LockUpdate = false;
 
         public bool IsVisible
         {
@@ -141,7 +144,28 @@ namespace RedCorners.Forms.GoogleMaps
         //        .Where(x => x.NeverCull || !x.ShouldCull(center, distance));
         //}
 
+        volatile uint lastRequestId = 0;
         public void TriggerCollectionChange()
+        {
+            if (LockUpdate) return;
+            if (SettleThreshold == TimeSpan.Zero)
+                Push();
+            else
+            {
+                Task.Run(async () =>
+                {
+                    var requestId = ++lastRequestId;
+                    await Task.Delay(SettleThreshold);
+                    if (requestId == lastRequestId)
+                    {
+                        Push();
+                        lastRequestId = 0;
+                    }
+                });
+            }
+        }
+
+        void Push()
         {
             Device.BeginInvokeOnMainThread(() =>
             {

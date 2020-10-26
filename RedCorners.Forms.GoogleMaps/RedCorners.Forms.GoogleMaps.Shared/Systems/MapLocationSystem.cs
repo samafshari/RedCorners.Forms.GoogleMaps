@@ -13,21 +13,6 @@ namespace RedCorners.Forms.GoogleMaps
 
         public event EventHandler<Position> OnMapLocationChanged;
 
-        /// <summary>
-        /// Returns distance in kilometers
-        /// </summary>
-        [Obsolete("Use CalculateDistance instead.")]
-        public static double GetDistance(double lat1, double lng1, double lat2, double lng2)
-        {
-            return GetDistance(
-                new Position (lat1, lng1),
-                new Position (lat2, lng2));
-        }
-
-        [Obsolete("Use CalculateDistance instead.")]
-        public static double GetDistance(Position p1, Position p2) =>
-            CalculateDistanceInMeters(p1, p2) / 1000.0;
-
         public static Distance CalculateDistance(Position p1, Position p2)
         {
             return Distance.FromMeters(CalculateDistanceInMeters(p1, p2));
@@ -114,14 +99,14 @@ namespace RedCorners.Forms.GoogleMaps
                 OnMapLocationChanged?.Invoke(this, Model);
         }
 
-        public double GetDistance(double lat, double lng)
+        public Distance CalculateDistance(double lat, double lng)
         {
-            return GetDistance(lat, lng, Latitude.GetValueOrDefault(), Longitude.GetValueOrDefault());
+            return CalculateDistance(lat, lng, Latitude.GetValueOrDefault(), Longitude.GetValueOrDefault());
         }
 
-        public double GetDistance(Position p)
+        public Distance CalculateDistance(Position p)
         {
-            return GetDistance(p, new Position (Latitude.GetValueOrDefault(), Longitude.GetValueOrDefault()));
+            return CalculateDistance(p, new Position (Latitude.GetValueOrDefault(), Longitude.GetValueOrDefault()));
         }
     }
 }

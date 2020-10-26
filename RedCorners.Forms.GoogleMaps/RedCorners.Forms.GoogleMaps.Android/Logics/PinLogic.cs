@@ -247,6 +247,9 @@ namespace RedCorners.Forms.GoogleMaps.Logics.Android
         {
             if (e.PropertyName == MapBase.SelectedPinProperty.PropertyName)
             {
+                if (Map.SelectedPin != null && !Map.HasPin(Map.SelectedPin))
+                    Map.SelectedPin = null;
+
                 if (!_onMarkerEvent)
                     UpdateSelectedPin(Map.SelectedPin);
                 Map.SendSelectedPinChanged(Map.SelectedPin);
