@@ -78,6 +78,12 @@ namespace RedCorners.Forms.GoogleMaps
             }
         }
 
+        public double DefaultLatitude { get; set; } = 41.89;
+        public double DefaultLongitude { get; set; } = 12.49;
+        public int DefaultZoom { get; set; } = 10;
+
+        public double CurrentOrDefaultLatitude => Latitude ?? CurrentOrDefaultLatitude;
+        public double CurrentOrDefaultLongitude => Longitude ?? CurrentOrDefaultLongitude;
 
         public void InjectModel(Position position)
         {

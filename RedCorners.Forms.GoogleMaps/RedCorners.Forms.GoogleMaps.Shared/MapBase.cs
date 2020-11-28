@@ -54,7 +54,10 @@ namespace RedCorners.Forms.GoogleMaps
 
         public static readonly BindableProperty InitialCameraUpdateProperty = BindableProperty.Create(
             nameof(InitialCameraUpdate), typeof(CameraUpdate), typeof(MapBase),
-            CameraUpdateFactory.NewPositionZoom(new Position(41.89, 12.49), 10),  // center on Rome by default
+            CameraUpdateFactory.NewPositionZoom(new Position(
+                MapLocationSystem.Instance.CurrentOrDefaultLatitude,
+                MapLocationSystem.Instance.CurrentOrDefaultLongitude), 
+                MapLocationSystem.Instance.DefaultZoom), 
             propertyChanged: (bindable, oldValue, newValue) => 
             {
                 ((MapBase)bindable)._useMoveToRegionAsInitialBounds = false;   
