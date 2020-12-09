@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace RedCorners.Forms.GoogleMaps
 {
@@ -74,7 +75,7 @@ namespace RedCorners.Forms.GoogleMaps
         void Push()
         {
             lastCullCenter = Center;
-            if (Objects.Count > 0)
+            if (Items.Count() > 0)
                 TriggerCollectionChange();
         }
     }

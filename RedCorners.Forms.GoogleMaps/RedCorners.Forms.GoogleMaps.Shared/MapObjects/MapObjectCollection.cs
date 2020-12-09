@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,8 +9,8 @@ namespace RedCorners.Forms.GoogleMaps
 {
     public class MapObjectCollection : MapObjectCollectionBase
     {
+        readonly ConcurrentDictionary<MapObject, int> items = new ConcurrentDictionary<MapObject, int>();
 
-        protected readonly HashSet<MapObject> Objects = new HashSet<MapObject>();
         public IEnumerable<MapObject> Items => GetItems();
         
         protected void Subscribe(MapObject o)
@@ -29,7 +30,7 @@ namespace RedCorners.Forms.GoogleMaps
             Push();
         }
 
-        public void Add(IEnumerable<MapObject> objects)
+        public void Add(IEnumerable<MapObject> objects, bool triggerUpdate = true)
         {
             if (objects == null) return;
 
@@ -37,34 +38,34 @@ namespace RedCorners.Forms.GoogleMaps
             foreach (var item in objects)
             {
                 any = true;
-                this.Objects.Add(item);
+                items.TryAdd(item, 0);
                 Subscribe(item);
             }
 
-            if (any)
+            if (any && triggerUpdate)
                 Push();
         }
 
-        public void Add(MapObject o)
+        public void Add(MapObject o, bool triggerUpdate = true)
         {
             if (o == null) return;
 
-            this.Objects.Add(o);
+            items.TryAdd(o, 0);
             Subscribe(o);
-            Push();
+            if (triggerUpdate) Push();
         }
 
-        public void Remove(MapObject o)
+        public void Remove(MapObject o, bool triggerUpdate = true)
         {
-            if (o == null || !Objects.Contains(o))
+            if (o == null)
                 return;
 
-            Objects.Remove(o);
+            items.TryRemove(o, out var _);
             Unsubscribe(o);
-            Push();
+            if (triggerUpdate) Push();
         }
-
-        public void Remove(IEnumerable<MapObject> objects)
+        
+        public void Remove(IEnumerable<MapObject> objects, bool triggerUpdate = true)
         {
             if (objects == null)
                 return;
@@ -72,19 +73,18 @@ namespace RedCorners.Forms.GoogleMaps
             bool any = false;
             foreach (var item in objects)
             {
-                if (this.Objects.Contains(item))
+                if (this.items.ContainsKey(item))
                 {
                     any = true;
-                    this.Objects.Remove(item);
-                    Unsubscribe(item);
+                    Remove(item, false);
                 }
             }
 
-            if (any)
+            if (any && triggerUpdate)
                 Push();
         }
 
-        public void Sync(IEnumerable<MapObject> toRemove, IEnumerable<MapObject> toAdd)
+        public void Sync(IEnumerable<MapObject> toRemove, IEnumerable<MapObject> toAdd, bool triggerUpdate = true)
         {
             bool any = false;
             if (toRemove != null)
@@ -92,7 +92,7 @@ namespace RedCorners.Forms.GoogleMaps
                 foreach (var o in toRemove.ToList())
                 {
                     any = true;
-                    this.Objects.Remove(o);
+                    Remove(o, false);
                     Unsubscribe(o);
                 }
             }
@@ -101,18 +101,18 @@ namespace RedCorners.Forms.GoogleMaps
                 foreach (var o in toAdd)
                 {
                     any = true;
-                    this.Objects.Add(o);
+                    Add(o, false);
                     Subscribe(o);
                 }
             }
 
-            if (any)
+            if (any && triggerUpdate)
                 Push();
         }
 
         protected override IEnumerable<MapObject> GetItems()
         {
-            return Objects.ToList();
+            return items.Keys.ToList();
         }
 
         void Push()
