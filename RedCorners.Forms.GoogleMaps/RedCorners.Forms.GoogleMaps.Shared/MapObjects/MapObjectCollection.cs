@@ -110,6 +110,13 @@ namespace RedCorners.Forms.GoogleMaps
                 Push();
         }
 
+        public void Clear(bool triggerUpdate = true)
+        {
+            if (items.Count == 0) return;
+            items.Clear();
+            if (triggerUpdate) Push();
+        }
+
         protected override IEnumerable<MapObject> GetItems()
         {
             return items.Keys.ToList();
