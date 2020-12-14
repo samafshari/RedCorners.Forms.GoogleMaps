@@ -1,9 +1,10 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using RedCorners.Forms.GoogleMaps.Internals;
 
 namespace RedCorners.Forms.GoogleMaps
 {
-    public struct Distance
+    public struct Distance : IComparable
     {
         const double MetersPerMile = GeoConstants.MetersPerMile;
         const double MetersPerKilometer = GeoConstants.MetersPerKilometer;
@@ -64,6 +65,11 @@ namespace RedCorners.Forms.GoogleMaps
         public override int GetHashCode()
         {
             return Meters.GetHashCode();
+        }
+
+        public int CompareTo(object obj)
+        {
+            return Meters.CompareTo(obj);
         }
 
         public static bool operator ==(Distance left, Distance right)
