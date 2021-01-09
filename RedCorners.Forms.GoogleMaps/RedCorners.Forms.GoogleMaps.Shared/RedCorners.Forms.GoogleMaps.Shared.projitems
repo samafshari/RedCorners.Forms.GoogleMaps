@@ -68,7 +68,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)PinType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MapObjects\Polygon.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MapObjects\Polyline.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Position.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SelectedPinChangedEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Systems\MapLocationSystem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MapObjects\TileLayer.cs" />

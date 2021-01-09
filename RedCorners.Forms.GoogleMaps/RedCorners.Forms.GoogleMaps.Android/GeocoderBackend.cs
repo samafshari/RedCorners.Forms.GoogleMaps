@@ -2,6 +2,9 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Android.Content;
+
+using Neat.Map.Models;
+
 using AGeocoder = Android.Locations.Geocoder;
 
 namespace RedCorners.Forms.GoogleMaps.Android

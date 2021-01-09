@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Neat.Map.Models;
+
+using System;
 using System.Collections.Generic;
 using System.Windows.Input;
 using Xamarin.Forms;

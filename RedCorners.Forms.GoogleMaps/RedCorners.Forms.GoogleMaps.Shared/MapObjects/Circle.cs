@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Xamarin.Forms;
+using Neat.Map.Models;
 
 namespace RedCorners.Forms.GoogleMaps
 {

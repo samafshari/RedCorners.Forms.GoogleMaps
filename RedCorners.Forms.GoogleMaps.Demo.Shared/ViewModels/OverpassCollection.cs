@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using Neat.Map.Models;
+
 using RedCorners.Components;
 using RedCorners.Forms.GoogleMaps;
 using Xamarin.Forms;

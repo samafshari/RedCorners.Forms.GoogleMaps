@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+
+using Neat.Map.Models;
+
 using RedCorners.Forms.GoogleMaps.Internals;
 
 namespace RedCorners.Forms.GoogleMaps

@@ -6,6 +6,7 @@ using RedCorners.Models;
 using System.Collections.Generic;
 using Xamarin.Forms;
 using System.Collections.ObjectModel;
+using Neat.Map.Models;
 
 namespace RedCorners.Forms.GoogleMaps.Demo.ViewModels
 {

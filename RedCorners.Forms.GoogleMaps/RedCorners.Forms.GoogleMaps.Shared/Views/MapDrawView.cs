@@ -6,6 +6,7 @@ using System.Windows.Input;
 using Xamarin.Forms;
 using System.Linq;
 using RedCorners.Forms.Systems;
+using Neat.Map.Models;
 
 namespace RedCorners.Forms.GoogleMaps
 {

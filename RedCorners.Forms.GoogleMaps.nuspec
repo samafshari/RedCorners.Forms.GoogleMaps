@@ -3,11 +3,11 @@
 	<metadata minClientVersion="2.8.3">
 		<id>RedCorners.Forms.GoogleMaps</id>
 		<title>RedCorners.Forms.GoogleMaps</title>
-		<version>8.50.34</version>
+		<version>8.59.36-alpha</version>
 		<releaseNotes>	</releaseNotes>
 		<authors>NeatCapital OÜ</authors>
 		<owners>NeatCapital OÜ</owners>
-		<copyright>Copyright 2019-2020 NeatCapital OÜ</copyright>
+		<copyright>Copyright 2019-2021 NeatCapital OÜ</copyright>
 		<iconUrl>http://ooze.redcorners.com/redcorners_forms_googlemaps_logo.png</iconUrl>
 		<icon>redcorners_forms_googlemaps_logo.png</icon>
 		<license type="file">LICENSE.txt</license>
@@ -17,16 +17,17 @@
 		<tags>xamarin forms maps xamarinforms xamarinformsmaps xamarin.forms.maps xamarinformsgooglemaps RedCorners.Forms.GoogleMaps google googlemap redcorners</tags>
 	<dependencies>
       <group>
-        <dependency id="Xamarin.Forms" version="4.8.0.1560" />
+        <dependency id="Xamarin.Forms" version="5.0.0.1874" />
 		<dependency id="RedCorners" version="8.0.0" />
-		<dependency id="RedCorners.Forms" version="8.50.0" />
+		<dependency id="RedCorners.Forms" version="8.59.0" />
+		<dependency id="Neat.Map.Models" version="1.0.1" />
       </group>
-      <group targetFramework="MonoAndroid80">
+      <group targetFramework="MonoAndroid100">
         <dependency id="Xamarin.GooglePlayServices.Maps" version="117.0.0"/>
       </group>
       <group targetFramework="Xamarin.iOS10">
 		<dependency id="Xamarin.Build.Download" version="0.10.0" />
-        <dependency id="Xamarin.Google.iOS.Maps" version="3.7.0.1" />
+        <dependency id="Xamarin.Google.iOS.Maps" version="3.9.0" />
       </group>
 	</dependencies>
 	</metadata>
@@ -38,7 +39,7 @@
     	<!--Xamarin.Android-->
 		<file 
 			src="RedCorners.Forms.GoogleMaps\RedCorners.Forms.GoogleMaps.Android\bin\Release\RedCorners.Forms.GoogleMaps.dll" 
-			target="lib\MonoAndroid80\RedCorners.Forms.GoogleMaps.dll" />
+			target="lib\MonoAndroid100\RedCorners.Forms.GoogleMaps.dll" />
 
 		<!--Xamarin.iOS-->
 		<file 
@@ -47,8 +48,8 @@
 
 		
 		<file 
-			src="RedCorners.Forms.GoogleMaps.Standard\bin\Release\netstandard2.0\RedCorners.Forms.GoogleMaps.dll" 
-			target="lib\netstandard2.0\RedCorners.Forms.GoogleMaps.dll" />
+			src="RedCorners.Forms.GoogleMaps.Standard\bin\Release\netstandard2.1\RedCorners.Forms.GoogleMaps.dll" 
+			target="lib\netstandard2.1\RedCorners.Forms.GoogleMaps.dll" />
 			
 	</files>
 </package>

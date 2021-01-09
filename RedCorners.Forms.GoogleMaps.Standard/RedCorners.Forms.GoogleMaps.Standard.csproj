@@ -1,16 +1,17 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netstandard2.1</TargetFramework>
     <AssemblyName>RedCorners.Forms.GoogleMaps</AssemblyName>
   </PropertyGroup>
 
   <Import Project="..\RedCorners.Forms.GoogleMaps\RedCorners.Forms.GoogleMaps.Shared\RedCorners.Forms.GoogleMaps.Shared.projitems" Label="Shared" />
 
   <ItemGroup>
+    <PackageReference Include="Neat.Map.Models" Version="1.0.1" />
     <PackageReference Include="RedCorners" Version="8.0.0" />
-    <PackageReference Include="RedCorners.Forms" Version="8.50.0" />
-    <PackageReference Include="Xamarin.Forms" Version="4.8.0.1560" />
+    <PackageReference Include="RedCorners.Forms" Version="8.59.0" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.1874" />
   </ItemGroup>
 
 </Project>

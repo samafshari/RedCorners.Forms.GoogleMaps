@@ -30,9 +30,9 @@
             TabBarBackgroundColor="#FEFEFE"
             BackgroundColor="#FFFFFF"
             TabBarPadding="0,5,0,10">
-            <rf:TabbedContentView.Background>
+            <rf:TabbedContentView.BackgroundView>
                 <rf:TitledContentView />
-            </rf:TabbedContentView.Background>
+            </rf:TabbedContentView.BackgroundView>
 
             <rf:TitledContentView Title="Page 1" Icon="icon">
                 <Grid>

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using Android.Gms.Maps.Model;
 using System.Linq;
+using Neat.Map.Models;
+
 namespace RedCorners.Forms.GoogleMaps.Android
 {
     internal static class PositionExtensions

@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using Google.Maps;
 
+using Neat.Map.Models;
+
 namespace RedCorners.Forms.GoogleMaps.iOS.Extensions
 {
     internal static class EnumerableExtensions

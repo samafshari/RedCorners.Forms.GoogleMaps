@@ -1,4 +1,6 @@
-﻿using RedCorners.Forms.Systems;
+﻿using Neat.Map.Models;
+
+using RedCorners.Forms.Systems;
 using System;
 using System.Collections.Generic;
 using System.Text;

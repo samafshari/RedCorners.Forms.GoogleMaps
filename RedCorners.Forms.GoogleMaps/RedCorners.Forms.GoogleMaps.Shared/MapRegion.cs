@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Neat.Map.Models;
+
+using System;
 namespace RedCorners.Forms.GoogleMaps
 {
     public sealed class MapRegion : IEquatable<MapRegion>

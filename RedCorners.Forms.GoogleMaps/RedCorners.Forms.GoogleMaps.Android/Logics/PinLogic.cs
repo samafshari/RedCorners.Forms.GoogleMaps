@@ -11,6 +11,7 @@ using Android.Content;
 using RedCorners.Forms.GoogleMaps.Android.Factories;
 using Xamarin.Forms.Platform.Android;
 using Xamarin.Forms;
+using Neat.Map.Models;
 
 namespace RedCorners.Forms.GoogleMaps.Logics.Android
 {

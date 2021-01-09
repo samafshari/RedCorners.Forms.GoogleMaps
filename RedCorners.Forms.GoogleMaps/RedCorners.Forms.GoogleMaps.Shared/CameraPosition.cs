@@ -1,3 +1,5 @@
+using Neat.Map.Models;
+
 using System;
 
 using Xamarin.Forms;

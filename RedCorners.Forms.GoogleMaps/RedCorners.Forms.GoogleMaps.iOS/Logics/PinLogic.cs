@@ -7,6 +7,7 @@ using Google.Maps;
 using UIKit;
 using RedCorners.Forms.GoogleMaps.iOS.Extensions;
 using RedCorners.Forms.GoogleMaps.iOS.Factories;
+using Neat.Map.Models;
 
 namespace RedCorners.Forms.GoogleMaps.Logics.iOS
 {

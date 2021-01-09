@@ -12,6 +12,7 @@ using MonoTouch.CoreLocation;
 using RectangleF = CoreGraphics.CGRect;
 using SizeF = CoreGraphics.CGSize;
 using PointF = CoreGraphics.CGPoint;
+using Neat.Map.Models;
 
 #else
 using nfloat=global::System.Single;

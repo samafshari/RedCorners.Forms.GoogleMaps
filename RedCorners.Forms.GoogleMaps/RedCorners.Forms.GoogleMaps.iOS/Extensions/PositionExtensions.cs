@@ -1,6 +1,8 @@
 ﻿using System;
 using CoreLocation;
 
+using Neat.Map.Models;
+
 namespace RedCorners.Forms.GoogleMaps.iOS.Extensions
 {
     internal static class PositionExtensions

@@ -6,6 +6,7 @@ using RedCorners.Forms.GoogleMaps.Internals;
 
 using GCameraUpdate = Google.Maps.CameraUpdate;
 using CoreAnimation;
+using Neat.Map.Models;
 
 namespace RedCorners.Forms.GoogleMaps.Logics.iOS
 {
