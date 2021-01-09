@@ -42,12 +42,12 @@ namespace RedCorners.Forms.GoogleMaps.Demo.ViewModels
         {
             foreach (var node in nodes)
             {
-                if (Objects.Any(x => x.Tags.Contains(node.Id)))
+                if (Items.Any(x => x.Tags.Contains(node.Id)))
                     continue;
 
                 var pin = MakePin(node);
                 pin.Tags.Add(node.Id);
-                Objects.Add(pin);
+                Add(pin);
             }
         }
 
