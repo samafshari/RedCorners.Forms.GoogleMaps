@@ -314,8 +314,6 @@ namespace RedCorners.Forms.GoogleMaps.Android
             Map.UiSettings.MyLocationButtonEnabled = Map.IsMyLocationButtonVisible;
         }
 
-        public static bool ShowZoomControls = false;
-
         private void UpdateHasScrollEnabled(bool? initialScrollGesturesEnabled = null)
         {
 #pragma warning disable 618
@@ -328,7 +326,7 @@ namespace RedCorners.Forms.GoogleMaps.Android
             bool? initialZoomGesturesEnabled = null)
         {
 #pragma warning disable 618
-            NativeMap.UiSettings.ZoomControlsEnabled = ShowZoomControls && (initialZoomControlsEnabled ?? true) && Map.HasZoomEnabled;
+            //NativeMap.UiSettings.ZoomControlsEnabled = (initialZoomControlsEnabled ?? true) && Map.HasZoomEnabled;
             NativeMap.UiSettings.ZoomGesturesEnabled = (initialZoomGesturesEnabled ?? true) && Map.HasZoomEnabled;
 #pragma warning restore 618
         }

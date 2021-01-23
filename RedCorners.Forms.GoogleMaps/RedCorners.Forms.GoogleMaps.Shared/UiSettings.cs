@@ -54,7 +54,7 @@ namespace RedCorners.Forms.GoogleMaps
         }
 
         public static readonly BindableProperty ZoomControlsEnabledProperty = BindableProperty.Create(
-            nameof(ZoomControlsEnabled), typeof(bool), typeof(UiSettings), true);
+            nameof(ZoomControlsEnabled), typeof(bool), typeof(UiSettings), false);
         public bool ZoomControlsEnabled
         {
             get { return (bool)GetValue(ZoomControlsEnabledProperty); }
