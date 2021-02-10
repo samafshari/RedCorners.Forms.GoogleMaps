@@ -8,8 +8,19 @@ using Xamarin.Forms;
 
 namespace RedCorners.Forms.GoogleMaps
 {
+    public enum MapObjectCollectionTakeAlgorithm
+    {
+        Center,
+        Top,
+        Bottom,
+        Random,
+        Ignore
+    }
+
     public abstract class MapObjectCollectionBase : MapObject
     {
+        static readonly Random Random = new Random();
+
         MapRegion lastRegion;
         IEnumerable<MapObject> lastVisibleItems;
         public TimeSpan SettleThreshold { get; set; } = TimeSpan.FromSeconds(0.2);
@@ -53,7 +64,6 @@ namespace RedCorners.Forms.GoogleMaps
             nameof(ImageSource),
             typeof(ImageSource),
             typeof(MapObjectCollectionBase));
-
         public int? MaxVisibleCount
         {
             get => (int?)GetValue(MaxVisibleCountProperty);
@@ -66,6 +76,17 @@ namespace RedCorners.Forms.GoogleMaps
             typeof(MapObjectCollectionBase),
             defaultValue: default(int?),
             propertyChanged: ConsiderUpdate);
+
+        public MapObjectCollectionTakeAlgorithm TakeAlgorithm
+        {
+            get => (MapObjectCollectionTakeAlgorithm)GetValue(TakeAlgorithmProperty);
+            set => SetValue(TakeAlgorithmProperty, value);
+        }
+        
+        public static readonly BindableProperty TakeAlgorithmProperty = BindableProperty.Create(
+            nameof(TakeAlgorithm),
+            typeof(MapObjectCollectionTakeAlgorithm),
+            typeof(MapObjectCollectionBase));
 
         protected virtual IEnumerable<MapObject> GetItems()
         {
@@ -116,13 +137,32 @@ namespace RedCorners.Forms.GoogleMaps
 
             var center = region.GetCenter();
 
-            var result =
-                list.OrderBy(x =>
-                {
-                    var relativePosition = x.GetRelativePosition(center);
-                    if (relativePosition == null) return double.MaxValue;
-                    return MapLocationSystem.CalculateDistance(relativePosition.Value, center).Meters;
-                }).Take(MaxVisibleCount.Value);
+            IEnumerable<MapObject> result = null;
+            if (TakeAlgorithm == MapObjectCollectionTakeAlgorithm.Center)
+            {
+                result =
+                    list.OrderBy(x =>
+                    {
+                        var relativePosition = x.GetRelativePosition(center);
+                        if (relativePosition == null) return double.MaxValue;
+                        return MapLocationSystem.CalculateDistance(relativePosition.Value, center).Meters;
+                    }).Take(MaxVisibleCount.Value);
+            }
+            else if (TakeAlgorithm == MapObjectCollectionTakeAlgorithm.Top)
+            {
+                result = list.Take(MaxVisibleCount.Value);
+            }
+            else if (TakeAlgorithm == MapObjectCollectionTakeAlgorithm.Bottom)
+            {
+                result = list.TakeLast(MaxVisibleCount.Value);
+            }
+            else if (TakeAlgorithm == MapObjectCollectionTakeAlgorithm.Random)
+            {
+                result = list.OrderBy(x => Random.NextDouble()).Take(MaxVisibleCount.Value);
+            }
+            else 
+                result = list;
+
             lastVisibleItems = result;
             return result;
         }
