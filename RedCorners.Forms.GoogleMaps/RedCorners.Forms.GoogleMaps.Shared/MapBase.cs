@@ -700,6 +700,32 @@ namespace RedCorners.Forms.GoogleMaps
                 _groundOverlays.Remove(groundOverlay);
         }
 
+        public void RemoveObjectsByTag(object tag)
+        {
+            bool NeedsDeletion(MapObject o) => o.Tag == tag || (o.Tags != null && o.Tags.Contains(tag));
+
+            if (SelectedPin != null && (SelectedPin.Tag == tag || (SelectedPin.Tags != null && SelectedPin.Tags.Contains(tag))))
+                SelectedPin = null;
+
+            foreach (var pin in _pins.Where(x => NeedsDeletion(x)).ToList())
+                _pins.Remove(pin);
+
+            foreach (var polyline in _polylines.Where(x => NeedsDeletion(x)).ToList())
+                _polylines.Remove(polyline);
+
+            foreach (var polygon in _polygons.Where(x => NeedsDeletion(x)).ToList())
+                _polygons.Remove(polygon);
+
+            foreach (var circle in _circles.Where(x => NeedsDeletion(x)).ToList())
+                _circles.Remove(circle);
+
+            foreach (var tileLayer in _tileLayers.Where(x => NeedsDeletion(x)).ToList())
+                _tileLayers.Remove(tileLayer);
+
+            foreach (var groundOverlay in _groundOverlays.Where(x => NeedsDeletion(x)).ToList())
+                _groundOverlays.Remove(groundOverlay);
+        }
+
         bool IsOwnedBy(MapObject o, MapObjectCollectionBase c)
         {
             if (_ownerships.TryGetValue(o, out var collection) && collection == c)

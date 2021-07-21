@@ -10,8 +10,8 @@
   <ItemGroup>
     <PackageReference Include="Neat.Map.Models" Version="1.0.1" />
     <PackageReference Include="RedCorners" Version="8.0.0" />
-    <PackageReference Include="RedCorners.Forms" Version="8.59.0" />
-    <PackageReference Include="Xamarin.Forms" Version="5.0.0.1874" />
+    <PackageReference Include="RedCorners.Forms" Version="63.0.2" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2083" />
   </ItemGroup>
 
 </Project>

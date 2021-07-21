@@ -3,7 +3,7 @@
 	<metadata minClientVersion="2.8.3">
 		<id>RedCorners.Forms.GoogleMaps</id>
 		<title>RedCorners.Forms.GoogleMaps</title>
-		<version>8.59.39</version>
+		<version>8.59.40</version>
 		<releaseNotes>	</releaseNotes>
 		<authors>NeatCapital OÜ</authors>
 		<owners>NeatCapital OÜ</owners>
@@ -17,17 +17,25 @@
 		<tags>xamarin forms maps xamarinforms xamarinformsmaps xamarin.forms.maps xamarinformsgooglemaps RedCorners.Forms.GoogleMaps google googlemap redcorners</tags>
 	<dependencies>
       <group>
-        <dependency id="Xamarin.Forms" version="5.0.0.1874" />
+        <dependency id="Xamarin.Forms" version="5.0.0.2083" />
 		<dependency id="RedCorners" version="8.0.0" />
-		<dependency id="RedCorners.Forms" version="8.59.0" />
+		<dependency id="RedCorners.Forms" version="63.0.2" />
 		<dependency id="Neat.Map.Models" version="1.0.1" />
       </group>
       <group targetFramework="MonoAndroid100">
-        <dependency id="Xamarin.GooglePlayServices.Maps" version="117.0.0"/>
+        <dependency id="Xamarin.GooglePlayServices.Maps" version="117.0.1"/>
+        <dependency id="Xamarin.Forms" version="5.0.0.2083" />
+		<dependency id="RedCorners" version="8.0.0" />
+		<dependency id="RedCorners.Forms" version="63.0.2" />
+		<dependency id="Neat.Map.Models" version="1.0.1" />
       </group>
       <group targetFramework="Xamarin.iOS10">
 		<dependency id="Xamarin.Build.Download" version="0.10.0" />
         <dependency id="Xamarin.Google.iOS.Maps" version="3.9.0" />
+        <dependency id="Xamarin.Forms" version="5.0.0.2083" />
+		<dependency id="RedCorners" version="8.0.0" />
+		<dependency id="RedCorners.Forms" version="63.0.2" />
+		<dependency id="Neat.Map.Models" version="1.0.1" />
       </group>
 	</dependencies>
 	</metadata>
