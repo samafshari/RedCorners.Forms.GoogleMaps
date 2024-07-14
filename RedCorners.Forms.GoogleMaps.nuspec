@@ -3,11 +3,11 @@
 	<metadata minClientVersion="2.8.3">
 		<id>RedCorners.Forms.GoogleMaps</id>
 		<title>RedCorners.Forms.GoogleMaps</title>
-		<version>8.59.40</version>
+		<version>90.0.0</version>
 		<releaseNotes>	</releaseNotes>
 		<authors>NeatCapital OÜ</authors>
 		<owners>NeatCapital OÜ</owners>
-		<copyright>Copyright 2019-2021 NeatCapital OÜ</copyright>
+		<copyright>Copyright 2019-2024 NeatCapital OÜ</copyright>
 		<iconUrl>http://ooze.redcorners.com/redcorners_forms_googlemaps_logo.png</iconUrl>
 		<icon>redcorners_forms_googlemaps_logo.png</icon>
 		<license type="file">LICENSE.txt</license>
@@ -16,17 +16,20 @@
 		<summary>Advanced Google Maps for Xamarin Forms (iOS and Android).</summary>
 		<tags>xamarin forms maps xamarinforms xamarinformsmaps xamarin.forms.maps xamarinformsgooglemaps RedCorners.Forms.GoogleMaps google googlemap redcorners</tags>
 	<dependencies>
-      <group>
-        <dependency id="Xamarin.Forms" version="5.0.0.2083" />
-		<dependency id="RedCorners" version="8.0.0" />
-		<dependency id="RedCorners.Forms" version="63.0.2" />
+	  <group targetFramework="net9.0-android34.0">
+        <dependency id="Xamarin.GooglePlayServices.Maps" version="118.2.0.4"/>
+        <dependency id="Xamarin.Forms" version="5.0.0.2662" />
+		<dependency id="RedCorners" version="18.0.0" />
+		<dependency id="RedCorners.Forms" version="90.0.0" />
 		<dependency id="Neat.Map.Models" version="1.0.1" />
-      </group>
-      <group targetFramework="MonoAndroid100">
-        <dependency id="Xamarin.GooglePlayServices.Maps" version="117.0.1"/>
-        <dependency id="Xamarin.Forms" version="5.0.0.2083" />
-		<dependency id="RedCorners" version="8.0.0" />
-		<dependency id="RedCorners.Forms" version="63.0.2" />
+		<dependency id="Xamarin.AndroidX.RecyclerView" version="1.3.2.6" />
+		<dependency id="Xamarin.AndroidX.Core" version="1.13.1.3" />
+		<dependency id="Xamarin.AndroidX.Lifecycle.Common" version="2.8.3.1" />
+	  </group>
+      <group>
+        <dependency id="Xamarin.Forms" version="5.0.0.2662" />
+		<dependency id="RedCorners" version="18.0.0" />
+		<dependency id="RedCorners.Forms" version="90.0.0" />
 		<dependency id="Neat.Map.Models" version="1.0.1" />
       </group>
       <group targetFramework="Xamarin.iOS10">
@@ -46,9 +49,14 @@
 
     	<!--Xamarin.Android-->
 		<file 
-			src="RedCorners.Forms.GoogleMaps\RedCorners.Forms.GoogleMaps.Android\bin\Release\RedCorners.Forms.GoogleMaps.dll" 
-			target="lib\MonoAndroid100\RedCorners.Forms.GoogleMaps.dll" />
-
+			src="RedCorners.Forms.GoogleMaps.Net\bin\Release\net9.0-android34.0\RedCorners.Forms.GoogleMaps.dll" 
+			target="lib\net9.0-android34.0\RedCorners.Forms.GoogleMaps.dll" />
+<file 
+			src="RedCorners.Forms.GoogleMaps.Net\bin\Release\net9.0-android34.0\RedCorners.Forms.GoogleMaps.aar" 
+			target="lib\net9.0-android34.0\RedCorners.Forms.GoogleMaps.aar" />
+			<file 
+			src="RedCorners.Forms.GoogleMaps.Net\bin\Release\net9.0-android34.0\RedCorners.Forms.GoogleMaps.pdb" 
+			target="lib\net9.0-android34.0\RedCorners.Forms.GoogleMaps.pdb" />
 		<!--Xamarin.iOS-->
 		<file 
 			src="RedCorners.Forms.GoogleMaps\RedCorners.Forms.GoogleMaps.iOS\bin\Release\RedCorners.Forms.GoogleMaps.dll" 
